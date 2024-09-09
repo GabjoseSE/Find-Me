@@ -371,7 +371,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1036875932}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68e34fafd78320b428f5f9976647ed70, type: 3}
+  m_Script: {fileID: 11500000, guid: 6ef7c8e81239b6e4494fd219fec16038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1123072085
@@ -633,7 +633,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1036875936}
-        m_TargetAssemblyTypeName: backToMenu, Assembly-CSharp
+        m_TargetAssemblyTypeName: MainMenu, Assembly-CSharp
         m_MethodName: back
         m_Mode: 1
         m_Arguments:
