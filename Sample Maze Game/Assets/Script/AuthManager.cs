@@ -11,8 +11,8 @@ public class AuthManager : MonoBehaviour
     public InputField passwordInput;
 
     // URL to your PHP files
-    private string signUpURL = "http://localhost/add_player.php"; // Adjust according to your setup
-    private string loginURL = "http://localhost/login_player.php"; // You'll create this login PHP file
+    private string signUpURL = "http://localhost/FindMe/add_player.php"; // Adjust according to your setup
+    private string loginURL = "http://localhost/FindMe/login_player.php"; // You'll create this login PHP file
 
     // Signup Button
     public void SignUp()
@@ -70,7 +70,7 @@ public class AuthManager : MonoBehaviour
             else
             {
                 Debug.Log("Login Success: " + www.downloadHandler.text);
-                SceneManager.LoadSceneAsync(2);
+                
             }
         }
     }
