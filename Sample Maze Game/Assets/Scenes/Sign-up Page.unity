@@ -1302,7 +1302,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1335731391}
-  - component: {fileID: 1335731390}
+  - component: {fileID: 1335731392}
+  - component: {fileID: 1335731393}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -1310,21 +1311,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1335731390
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1335731389}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69066f3ac5f59b4458721e0891c88f4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  usernameInput: {fileID: 208075789}
-  emailInput: {fileID: 638865173}
-  passwordInput: {fileID: 544801013}
 --- !u!4 &1335731391
 Transform:
   m_ObjectHideFlags: 0
@@ -1340,6 +1326,33 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1335731392
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335731389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69066f3ac5f59b4458721e0891c88f4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  usernameInput: {fileID: 208075789}
+  emailInput: {fileID: 638865173}
+  passwordInput: {fileID: 544801013}
+--- !u!114 &1335731393
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1335731389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82b39ac9497c9ff4793c139ada1b66b1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1474632161
 GameObject:
   m_ObjectHideFlags: 0
@@ -1502,7 +1515,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1335731390}
+      - m_Target: {fileID: 1335731392}
         m_TargetAssemblyTypeName: AuthManager, Assembly-CSharp
         m_MethodName: SignUp
         m_Mode: 1

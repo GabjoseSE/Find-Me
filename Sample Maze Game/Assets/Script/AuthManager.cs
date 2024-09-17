@@ -1,77 +1,105 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.Networking;
 using UnityEngine.UI;
+using Mono.Data.Sqlite; // SQLite support
+using System.Data;
 using UnityEngine.SceneManagement;
+
 public class AuthManager : MonoBehaviour
 {
-    // Input fields
     public InputField usernameInput;
-    public InputField emailInput;   // Only for signup
+    public InputField emailInput; // For signup
     public InputField passwordInput;
+    
+    private string dbPath;
 
-    // URL to your PHP files
-    private string signUpURL = "http://localhost/FindMe/add_player.php"; // Adjust according to your setup
-    private string loginURL = "http://localhost/FindMe/login_player.php"; // You'll create this login PHP file
+    void Start()
+    {
+        dbPath = "URI=file:" + Application.persistentDataPath + "/findme.db";
+    }
 
-    // Signup Button
+    // Signup Logic
     public void SignUp()
     {
-        StartCoroutine(SignUpUser(usernameInput.text, emailInput.text, passwordInput.text));
-        
+        string username = usernameInput.text;
+        string email = emailInput.text;
+        string password = passwordInput.text;
+
+        if (InsertNewPlayer(username, email, password))
+        {
+            Debug.Log("Signup Success! User created.");
+            SceneManager.LoadSceneAsync(0);
+
+
+        }
+        else
+        {
+            Debug.LogError("Signup Failed! Username already exists.");
+        }
     }
 
-    // Login Button
+    private bool InsertNewPlayer(string username, string email, string password)
+    {
+        using (var connection = new SqliteConnection(dbPath))
+        {
+            connection.Open();
+
+            using (var command = connection.CreateCommand())
+            {
+                // Check if username exists
+                command.CommandText = "SELECT COUNT(*) FROM players WHERE username=@username";
+                command.Parameters.AddWithValue("@username", username);
+                int userExists = System.Convert.ToInt32(command.ExecuteScalar());
+
+                if (userExists > 0)
+                {
+                    return false; // Username already exists
+                }
+
+                // Insert new player
+                command.CommandText = "INSERT INTO players (username, email, password) VALUES (@username, @email, @password)";
+                command.Parameters.AddWithValue("@username", username);
+                command.Parameters.AddWithValue("@email", email);
+                command.Parameters.AddWithValue("@password", password);
+                command.ExecuteNonQuery();
+            }
+        }
+        return true; // Signup success
+    }
     public void Login()
-    {
-        StartCoroutine(LoginUser(usernameInput.text, passwordInput.text));
+{
+    string username = usernameInput.text;
+    string password = passwordInput.text;
 
+    if (AuthenticatePlayer(username, password))
+    {
+        Debug.Log("Login Success! Welcome, " + username);
+        SceneManager.LoadSceneAsync(2);
     }
-
-    // Coroutine for signup
-    private IEnumerator SignUpUser(string username, string email, string password)
+    else
     {
-        WWWForm form = new WWWForm();
-        form.AddField("username", username);
-        form.AddField("email", email);
-        form.AddField("password", password);
+        Debug.LogError("Login Failed! Invalid credentials.");
+    }
+}
 
-        using (UnityWebRequest www = UnityWebRequest.Post(signUpURL, form))
+private bool AuthenticatePlayer(string username, string password)
+{
+    using (var connection = new SqliteConnection(dbPath))
+    {
+        connection.Open();
+
+        using (var command = connection.CreateCommand())
         {
-            yield return www.SendWebRequest();
+            // Verify player credentials
+            command.CommandText = "SELECT COUNT(*) FROM players WHERE username=@username AND password=@password";
+            command.Parameters.AddWithValue("@username", username);
+            command.Parameters.AddWithValue("@password", password);
 
-            if (www.result != UnityWebRequest.Result.Success)
-            {
-                Debug.LogError("Sign Up Error: " + www.error);
-            }
-            else
-            {
-                Debug.Log("Sign Up Success: " + www.downloadHandler.text);
-                SceneManager.LoadSceneAsync(0);
-            }
+            int isValidUser = System.Convert.ToInt32(command.ExecuteScalar());
+
+            return isValidUser > 0; // Return true if user exists
         }
     }
+}
 
-    // Coroutine for login
-    private IEnumerator LoginUser(string username, string password)
-    {
-        WWWForm form = new WWWForm();
-        form.AddField("username", username);
-        form.AddField("password", password);
-
-        using (UnityWebRequest www = UnityWebRequest.Post(loginURL, form))
-        {
-            yield return www.SendWebRequest();
-
-            if (www.result != UnityWebRequest.Result.Success)
-            {
-                Debug.LogError("Login Error: " + www.error);
-            }
-            else
-            {
-                Debug.Log("Login Success: " + www.downloadHandler.text);
-                
-            }
-        }
-    }
 }
