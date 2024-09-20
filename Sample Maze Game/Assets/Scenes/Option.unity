@@ -254,7 +254,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 26.991467
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -325,17 +325,24 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 419855133}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -66}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 936366606}
+  m_Father: {fileID: 1256386189}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< Updated upstream:Sample Maze Game/Assets/Scenes/Option.unity
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -732, y: 399}
   m_SizeDelta: {x: 200, y: 100}
+=======
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 139.00244, y: -113.87494}
+  m_SizeDelta: {x: 100, y: 100}
+>>>>>>> Stashed changes:Sample Maze Game/Assets/Scenes/Store.unity
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &419855135
 MonoBehaviour:
@@ -547,10 +554,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
+  m_UiScaleMode: 1
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
+<<<<<<< Updated upstream:Sample Maze Game/Assets/Scenes/Option.unity
   m_ReferenceResolution: {x: 800, y: 600}
+=======
+  m_ReferenceResolution: {x: 1980, y: 1080}
+>>>>>>> Stashed changes:Sample Maze Game/Assets/Scenes/Store.unity
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -594,8 +605,11 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 158958714}
+<<<<<<< Updated upstream:Sample Maze Game/Assets/Scenes/Option.unity
   - {fileID: 1256386189}
   - {fileID: 419855134}
+=======
+>>>>>>> Stashed changes:Sample Maze Game/Assets/Scenes/Store.unity
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -632,13 +646,21 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1.60833, y: 1.60833, z: 1.60833}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 419855134}
   m_Father: {fileID: 936366606}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+<<<<<<< Updated upstream:Sample Maze Game/Assets/Scenes/Option.unity
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1193.8, y: 671.5}
+=======
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: -0.10998535}
+  m_SizeDelta: {x: 0, y: -0.19995117}
+>>>>>>> Stashed changes:Sample Maze Game/Assets/Scenes/Store.unity
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1256386190
 MonoBehaviour:
