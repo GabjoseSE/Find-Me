@@ -21,7 +21,7 @@ public class DatabaseManager : MonoBehaviour
             using (var command = connection.CreateCommand())
             {
                 // Create Players table if it doesn't exist
-                command.CommandText = "CREATE TABLE IF NOT EXISTS players (player_id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, email TEXT, password TEXT);";
+                command.CommandText = "CREATE TABLE IF NOT EXISTS players (player_id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT, password TEXT);";
                 command.ExecuteNonQuery();
             }
         }
