@@ -12,6 +12,7 @@ public class AuthManager : MonoBehaviour
     public InputField confirmPasswordInput;
     public Text errorMessageText;
     
+    
     private string dbPath;
 
     void Start()
@@ -62,7 +63,7 @@ public class AuthManager : MonoBehaviour
                 }
 
                 // Insert new player
-                command.CommandText = "INSERT INTO players (username,password) VALUES (@username, @password)";
+                command.CommandText = "INSERT INTO players (username, password, coins, total_games_played, total_wins) VALUES (@username, @password, 0 ,0 ,0)";
                 command.Parameters.AddWithValue("@username", username);
                 command.Parameters.AddWithValue("@password", password);
                 command.ExecuteNonQuery();
@@ -70,6 +71,8 @@ public class AuthManager : MonoBehaviour
         }
         return true; // Signup success
     }
+
+    public static string currentUsername;
     public void Login()
 {
     string username = usernameInput.text;
@@ -77,6 +80,7 @@ public class AuthManager : MonoBehaviour
 
     if (AuthenticatePlayer(username, password))
     {
+        currentUsername = username;
         Debug.Log("Login Success! Welcome, " + username);
         SceneManager.LoadSceneAsync(2);
     }
