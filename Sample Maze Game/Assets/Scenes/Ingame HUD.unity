@@ -253,22 +253,22 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 0217b887e5402b04fae0a79663b43b84,
         type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.7420126
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0217b887e5402b04fae0a79663b43b84,
         type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0217b887e5402b04fae0a79663b43b84,
         type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.67038596
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0217b887e5402b04fae0a79663b43b84,
         type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0217b887e5402b04fae0a79663b43b84,
         type: 3}
@@ -278,7 +278,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 0217b887e5402b04fae0a79663b43b84,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
-      value: -84.194
+      value: 192.00002
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 0217b887e5402b04fae0a79663b43b84,
         type: 3}
@@ -311,6 +311,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 601875230}
+    - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 0217b887e5402b04fae0a79663b43b84,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 601875231}
   m_SourcePrefab: {fileID: 100100000, guid: 0217b887e5402b04fae0a79663b43b84, type: 3}
 --- !u!1 &16789016
 GameObject:
@@ -2920,6 +2924,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinValue: 1
+--- !u!111 &601875231
+Animation:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 601875224}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Animation: {fileID: 7400000, guid: 3dc359e32e53eea4e9828c733a954803, type: 2}
+  m_Animations:
+  - {fileID: 7400000, guid: 3dc359e32e53eea4e9828c733a954803, type: 2}
+  m_WrapMode: 0
+  m_PlayAutomatically: 1
+  m_AnimatePhysics: 0
+  m_CullingType: 0
 --- !u!1 &640641730
 GameObject:
   m_ObjectHideFlags: 0
