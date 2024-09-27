@@ -562,10 +562,10 @@ RectTransform:
   - {fileID: 244392676}
   m_Father: {fileID: 567355006}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.011962891, y: -0.009460449}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0.000019073, y: -0.00038147}
+  m_SizeDelta: {x: 1476.742, y: 714.9563}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &266741588
 MonoBehaviour:
@@ -1157,9 +1157,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 981889558}
-  - component: {fileID: 981889559}
-  - component: {fileID: 981889560}
-  - component: {fileID: 981889561}
+  - component: {fileID: 981889557}
   m_Layer: 0
   m_Name: Database
   m_TagString: Untagged
@@ -1205,23 +1203,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 981889556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82b39ac9497c9ff4793c139ada1b66b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &981889561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 981889556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6afea0a9061b40498288c05ca14355b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1182.9159, y: 136.12242, z: 1.3819141}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1031383530
 GameObject:
   m_ObjectHideFlags: 0
@@ -2018,7 +2007,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 981889559}
+      - m_Target: {fileID: 981889557}
         m_TargetAssemblyTypeName: AuthManager, Assembly-CSharp
         m_MethodName: Login
         m_Mode: 1
