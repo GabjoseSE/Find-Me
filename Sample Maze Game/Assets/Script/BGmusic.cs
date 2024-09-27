@@ -1,19 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class MainMenuBG : MonoBehaviour
 {
-    public static MainMenuBG instance;
-
-    void Awake()
+    private void Awake()
     {
-        if (instance != null)
-            Destroy(gameObject);
-        else
+
+        GameObject[] musicObj = GameObject.FindGameObjectsWithTag("GameMusic");
+        if (musicObj.Length > 1)
         {
-            instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            Destroy(this.gameObject);
         }
+        DontDestroyOnLoad(this.gameObject);
+
     }
+
 }
