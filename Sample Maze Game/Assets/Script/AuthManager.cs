@@ -3,38 +3,23 @@ using UnityEngine;
 using UnityEngine.Networking;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
-<<<<<<< Updated upstream
-=======
 using System;
 
->>>>>>> Stashed changes
 public class AuthManager : MonoBehaviour
 {
     // Input fields
     public InputField usernameInput;
-    public InputField emailInput;   // Only for signup
     public InputField passwordInput;
-<<<<<<< Updated upstream
-
-    // URL to your PHP files
-    private string signUpURL = "http://localhost/add_player.php"; // Adjust according to your setup
-    private string loginURL = "http://localhost/login_player.php"; // You'll create this login PHP file
-=======
     public InputField confirmPasswordInput;
      public Text errorMessageText;
 
     // URL to your PHP files
     private string signUpURL = "http://192.168.1.248/UnityFindME/add_player.php"; // Adjust according to your setup
     private string loginURL = "http://192.168.1.248/UnityFindME/login_player.php?"; // You'll create this login PHP file
->>>>>>> Stashed changes
 
     // Signup Button
     public void SignUp()
     {
-<<<<<<< Updated upstream
-        StartCoroutine(SignUpUser(usernameInput.text, emailInput.text, passwordInput.text));
-        
-=======
         if (passwordInput.text != confirmPasswordInput.text)
     {
         Debug.LogError("Signup Failed! Password and Confirm Password do not match.");
@@ -42,61 +27,11 @@ public class AuthManager : MonoBehaviour
         return; // Exit the method if the passwords don't match
     }
         StartCoroutine(SignUpUser(usernameInput.text, passwordInput.text));
->>>>>>> Stashed changes
     }
 
     // Login Button
     public void Login()
     {
-<<<<<<< Updated upstream
-        StartCoroutine(LoginUser(usernameInput.text, passwordInput.text));
-
-    }
-
-    // Coroutine for signup
-    private IEnumerator SignUpUser(string username, string email, string password)
-    {
-        WWWForm form = new WWWForm();
-        form.AddField("username", username);
-        form.AddField("email", email);
-        form.AddField("password", password);
-
-        using (UnityWebRequest www = UnityWebRequest.Post(signUpURL, form))
-        {
-            yield return www.SendWebRequest();
-
-            if (www.result != UnityWebRequest.Result.Success)
-            {
-                Debug.LogError("Sign Up Error: " + www.error);
-            }
-            else
-            {
-                Debug.Log("Sign Up Success: " + www.downloadHandler.text);
-                SceneManager.LoadSceneAsync(0);
-            }
-        }
-    }
-
-    // Coroutine for login
-    private IEnumerator LoginUser(string username, string password)
-    {
-        WWWForm form = new WWWForm();
-        form.AddField("username", username);
-        form.AddField("password", password);
-
-        using (UnityWebRequest www = UnityWebRequest.Post(loginURL, form))
-        {
-            yield return www.SendWebRequest();
-
-            if (www.result != UnityWebRequest.Result.Success)
-            {
-                Debug.LogError("Login Error: " + www.error);
-            }
-            else
-            {
-                Debug.Log("Login Success: " + www.downloadHandler.text);
-                SceneManager.LoadSceneAsync(2);
-=======
         if (string.IsNullOrEmpty(usernameInput.text) || string.IsNullOrEmpty(passwordInput.text))
     {
         ShowErrorMessage("Username and password cannot be empty!"); // Display error message for empty fields
@@ -195,13 +130,10 @@ public class AuthManager : MonoBehaviour
             catch (Exception e)
             {
                 Debug.LogError("JSON Parsing Error: " + e.Message);
->>>>>>> Stashed changes
             }
         }
     }
 }
-<<<<<<< Updated upstream
-=======
 
 
     private void ShowErrorMessage(string message)
@@ -209,4 +141,3 @@ public class AuthManager : MonoBehaviour
         errorMessageText.text = message; // Display the error message
     }
 }
->>>>>>> Stashed changes
