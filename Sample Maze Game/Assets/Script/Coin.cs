@@ -1,20 +1,27 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Coin : MonoBehaviour
 {
-    private bool isCollected = false;
-    public int coinValue = 1;  // Amount of coins collected when this coin is picked up
+    // Reference to the CoinManager
+    private CoinManager coinManager;
 
+    private void Start()
+    {
+        // Find the CoinManager in the scene
+        coinManager = FindObjectOfType<CoinManager>();
+    }
+
+    // Trigger event when player collides with the coin
     private void OnTriggerEnter(Collider other)
     {
-        if (!isCollected && other.CompareTag("Player"))  // Assuming your player has the tag "Player"
+        if (other.CompareTag("Player")) // Check if the colliding object is the player
         {
-            isCollected = true;
-            Debug.Log("Coin collected!");
+            // Call the CoinManager to increment the coin count
+            coinManager.CollectCoin();
+            Debug.Log("Coin collected! Total coins: " + coinManager.coinCount);
+
+            // Destroy the coin object after collection
+            Destroy(gameObject);
         }
     }
 }
-
-

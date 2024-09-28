@@ -13,12 +13,17 @@ public class AuthManager : MonoBehaviour
      public Text errorMessageText;
 
     // URL to your PHP files
-    private string signUpURL = "http://192.168.175.205/UnityFindME/add_player.php"; // Adjust according to your setup
-    private string loginURL = "http://192.168.175.205/UnityFindME/login_player.php?"; // You'll create this login PHP file
+    private string signUpURL = "http://192.168.1.248/UnityFindME/add_player.php"; // Adjust according to your setup
+    private string loginURL = "http://192.168.1.248/UnityFindME/login_player.php?"; // You'll create this login PHP file
 
     // Signup Button
     public void SignUp()
     {
+        if (string.IsNullOrEmpty(usernameInput.text) || string.IsNullOrEmpty(passwordInput.text))
+    {
+        ShowErrorMessage("Username and password cannot be empty!"); // Display error message for empty fields
+        return; // Exit the method if fields are empty
+    }
         if (passwordInput.text != confirmPasswordInput.text)
     {
         Debug.LogError("Signup Failed! Password and Confirm Password do not match.");
@@ -91,48 +96,60 @@ public class AuthManager : MonoBehaviour
 
     // Coroutine for login
     private IEnumerator LoginUser(string username, string password)
-{
-    WWWForm form = new WWWForm();
-    form.AddField("username", username);
-    form.AddField("password", password);
-
-    using (UnityWebRequest www = UnityWebRequest.Post(loginURL, form))
     {
-        yield return www.SendWebRequest();
+        WWWForm form = new WWWForm();
+        form.AddField("username", username);
+        form.AddField("password", password);
 
-        if (www.result != UnityWebRequest.Result.Success)
+        using (UnityWebRequest www = UnityWebRequest.Post(loginURL, form))
         {
-            Debug.LogError("Login Error: " + www.error);
-            ShowErrorMessage("Login failed! Please check your username and password.");
-        }
-        else
-        {
-            // Log the raw response
-            string responseText = www.downloadHandler.text;
-            Debug.Log("Raw Response: " + responseText); // Log the response
+            yield return www.SendWebRequest();
 
-            // Try parsing the JSON
-            try
+            if (www.result != UnityWebRequest.Result.Success)
             {
-                LoginResponse loginResponse = JsonUtility.FromJson<LoginResponse>(responseText);
-
-                if (loginResponse.status == "success")
-                {
-                    Debug.Log("Login Success: " + loginResponse.message);
-                    SceneManager.LoadSceneAsync(2);
-                }
-                else
-                {
-                    ShowErrorMessage(loginResponse.message); // Display error message
-                }
+                ShowErrorMessage("Login failed! Please check your username and password.");
             }
-            catch (Exception e)
+            else
             {
-                Debug.LogError("JSON Parsing Error: " + e.Message);
+                string responseText = www.downloadHandler.text;
+                Debug.Log("Login Response: " + responseText);
+
+                try
+                {
+                    LoginResponse loginResponse = JsonUtility.FromJson<LoginResponse>(responseText);
+
+                    // Inside the LoginUser coroutine after a successful login
+                    if (loginResponse.status == "success")
+{
+    // Save the logged-in username for later use
+    PlayerPrefs.SetString("LoggedInUser", username); // Save username to PlayerPrefs
+
+    // Get the CoinManager and set the username
+    CoinManager coinManager = FindObjectOfType<CoinManager>();
+    if (coinManager != null)
+    {
+        coinManager.SetUsername(username); // Set the username in CoinManager
+    }
+
+    Debug.Log("Login Success! User: " + username);
+
+    // Load the next scene (e.g., the game scene)
+    SceneManager.LoadSceneAsync(2);
+}
+
+
+                    else
+                    {
+                        ShowErrorMessage(loginResponse.message);
+                    }
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError("JSON Parsing Error: " + e.Message);
+                }
             }
         }
     }
-}
 
 
     private void ShowErrorMessage(string message)

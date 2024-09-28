@@ -13,3 +13,10 @@ public class SignUpResponse
     public string status;
     public string message;
 }
+
+[System.Serializable]
+public class ServerResponse
+{
+    public string status;
+    public string message;
+}
