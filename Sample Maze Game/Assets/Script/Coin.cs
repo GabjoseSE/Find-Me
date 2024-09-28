@@ -13,8 +13,6 @@ public class Coin : MonoBehaviour
         {
             isCollected = true;
             Debug.Log("Coin collected!");
-            GameManager.instance.AddCoins(coinValue);  // Add coins to the player's total
-            Destroy(gameObject);  // Remove the coin from the scene
         }
     }
 }

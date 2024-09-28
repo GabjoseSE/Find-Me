@@ -1,39 +1,47 @@
-using System.Data;
-using Mono.Data.Sqlite;
 using UnityEngine;
+using UnityEngine.Networking;
+using System.Collections;
 
 public class DatabaseManager : MonoBehaviour
 {
-    private string dbPath;
-
-    void Start()
+    // Register a new player
+    public IEnumerator RegisterPlayer(string username, string password)
     {
-        dbPath = "URI=file:" + Application.persistentDataPath + "/findme.db"; // Path to save the database file.
-        CreateDatabase();
-    }
+        WWWForm form = new WWWForm();
+        form.AddField("username", username);
+        form.AddField("password", password);
 
-    void CreateDatabase()
-{
-    using (var connection = new SqliteConnection(dbPath))
-    {
-        connection.Open();
-
-        using (var command = connection.CreateCommand())
+        using (UnityWebRequest www = UnityWebRequest.Post("http://192.168.175.205/UnityFindME/add_player.php", form))
         {
-            // Create Players table if it doesn't exist, including the coins column
-            command.CommandText = @"
-                CREATE TABLE IF NOT EXISTS players (
-                    player_id INTEGER PRIMARY KEY AUTOINCREMENT, 
-                    username TEXT UNIQUE, 
-                    password TEXT, 
-                    coins INT DEFAULT 0,
-                    total_games_played INT DEFAULT 0,
-                    total_wins INT DEFAULT 0,
-                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-                );";
-            command.ExecuteNonQuery();
+            yield return www.SendWebRequest();
+
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError("Error: " + www.error);
+            }
+            else
+            {
+                Debug.Log("Player registered: " + www.downloadHandler.text);
+            }
         }
     }
-}
 
+    // Fetch player data by username
+    public IEnumerator GetPlayerData(string username)
+    {
+        using (UnityWebRequest www = UnityWebRequest.Get("http://192.168.175.205/UnityFindME/get_player.php?username=" + username))
+        {
+            yield return www.SendWebRequest();
+
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError("Error: " + www.error);
+            }
+            else
+            {
+                Debug.Log("Player Data: " + www.downloadHandler.text);
+                // Process the JSON data if necessary
+            }
+        }
+    }
 }

@@ -1157,9 +1157,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 981889558}
-  - component: {fileID: 981889559}
   - component: {fileID: 981889560}
-  - component: {fileID: 981889561}
+  - component: {fileID: 981889559}
   m_Layer: 0
   m_Name: Database
   m_TagString: Untagged
@@ -1191,13 +1190,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 981889556}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69066f3ac5f59b4458721e0891c88f4b, type: 3}
+  m_Script: {fileID: 11500000, guid: 82b39ac9497c9ff4793c139ada1b66b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  usernameInput: {fileID: 1080854180}
-  passwordInput: {fileID: 151104037}
-  confirmPasswordInput: {fileID: 0}
-  errorMessageText: {fileID: 376190461}
 --- !u!114 &981889560
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1207,21 +1202,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 981889556}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82b39ac9497c9ff4793c139ada1b66b1, type: 3}
+  m_Script: {fileID: 11500000, guid: 69066f3ac5f59b4458721e0891c88f4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &981889561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 981889556}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6afea0a9061b40498288c05ca14355b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  usernameInput: {fileID: 1080854180}
+  passwordInput: {fileID: 151104037}
+  confirmPasswordInput: {fileID: 0}
+  errorMessageText: {fileID: 376190461}
 --- !u!1 &1031383530
 GameObject:
   m_ObjectHideFlags: 0
@@ -2018,7 +2005,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 981889559}
+      - m_Target: {fileID: 981889560}
         m_TargetAssemblyTypeName: AuthManager, Assembly-CSharp
         m_MethodName: Login
         m_Mode: 1
