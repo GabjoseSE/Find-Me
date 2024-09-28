@@ -1,47 +1,39 @@
+using System.Data;
+using Mono.Data.Sqlite;
 using UnityEngine;
-using UnityEngine.Networking;
-using System.Collections;
 
 public class DatabaseManager : MonoBehaviour
 {
-    // Register a new player
-    public IEnumerator RegisterPlayer(string username, string password)
+    private string dbPath;
+
+    void Start()
     {
-        WWWForm form = new WWWForm();
-        form.AddField("username", username);
-        form.AddField("password", password);
-
-        using (UnityWebRequest www = UnityWebRequest.Post("http://127.0.0.1/UnityFindME/add_player.php", form))
-        {
-            yield return www.SendWebRequest();
-
-            if (www.result != UnityWebRequest.Result.Success)
-            {
-                Debug.LogError("Error: " + www.error);
-            }
-            else
-            {
-                Debug.Log("Player registered: " + www.downloadHandler.text);
-            }
-        }
+        dbPath = "URI=file:" + Application.persistentDataPath + "/findme.db"; // Path to save the database file.
+        CreateDatabase();
     }
 
-    // Fetch player data by username
-    public IEnumerator GetPlayerData(string username)
+    void CreateDatabase()
+{
+    using (var connection = new SqliteConnection(dbPath))
     {
-        using (UnityWebRequest www = UnityWebRequest.Get("http://192.168.1.248/UnityFindME/get_player.php?username=" + username))
-        {
-            yield return www.SendWebRequest();
+        connection.Open();
 
-            if (www.result != UnityWebRequest.Result.Success)
-            {
-                Debug.LogError("Error: " + www.error);
-            }
-            else
-            {
-                Debug.Log("Player Data: " + www.downloadHandler.text);
-                // Process the JSON data if necessary
-            }
+        using (var command = connection.CreateCommand())
+        {
+            // Create Players table if it doesn't exist, including the coins column
+            command.CommandText = @"
+                CREATE TABLE IF NOT EXISTS players (
+                    player_id INTEGER PRIMARY KEY AUTOINCREMENT, 
+                    username TEXT UNIQUE, 
+                    password TEXT, 
+                    coins INT DEFAULT 0,
+                    total_games_played INT DEFAULT 0,
+                    total_wins INT DEFAULT 0,
+                    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+                );";
+            command.ExecuteNonQuery();
         }
     }
+}
+
 }

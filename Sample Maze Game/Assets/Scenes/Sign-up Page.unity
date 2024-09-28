@@ -1562,15 +1562,6 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 1335731391}
-<<<<<<< Updated upstream
-  - component: {fileID: 1335731390}
-=======
-  - component: {fileID: 1335731393}
-  - component: {fileID: 1335731392}
->>>>>>> Stashed changes
-  m_Layer: 0
-  m_Name: GameObject
   - component: {fileID: 1594040359}
   - component: {fileID: 1594040362}
   - component: {fileID: 1594040361}
@@ -1664,49 +1655,6 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1335731389}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1139.9989, y: 540, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-<<<<<<< Updated upstream
---- !u!1 &1474632161
-=======
---- !u!114 &1335731392
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1335731389}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69066f3ac5f59b4458721e0891c88f4b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  usernameInput: {fileID: 208075789}
-  passwordInput: {fileID: 544801013}
-  confirmPasswordInput: {fileID: 62221585}
-  errorMessageText: {fileID: 1547316689}
-  coinUIText: {fileID: 0}
---- !u!114 &1335731393
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1335731389}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82b39ac9497c9ff4793c139ada1b66b1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!1 &1402839098
->>>>>>> Stashed changes
   m_GameObject: {fileID: 1594040358}
   m_Enabled: 1
   m_EditorHideFlags: 0
