@@ -8,26 +8,32 @@ public class MainMenu : MonoBehaviour
     public void difficulty() //it will go to difficulty tab
     {
         SceneManager.LoadSceneAsync(3);
+        Debug.Log("Clicked start");
     }
     public void option()//it will go to option tab
     {
         SceneManager.LoadSceneAsync(4);
+        Debug.Log("Clicked option");
     }
     public void about()//it will go to about tab
     {
         SceneManager.LoadSceneAsync(5);
+        Debug.Log("Clicked about");
     }
     public void quit()//it will exit application
     {
         Application.Quit();
+        Debug.Log("Clicked quit");
     }
     public void back()
     {
         SceneManager.LoadSceneAsync(2);
+        Debug.Log("Clicked back");
     }
     public void login()
     {
         SceneManager.LoadSceneAsync(0);
+
     }
     public void signup()
     {
