@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
-    private string[] easyLevelMaps = { "easylevelmap1", "easylevelmap2", "easylevelmap3", "easylevelmap4", "easylevelmap5" };
+    private string[] easyLevelMaps = { "easylevelmap1", "easylevelmap2", "Ingame HUD" };
     public void difficulty() //it will go to difficulty tab
     {
         SceneManager.LoadSceneAsync(3);
