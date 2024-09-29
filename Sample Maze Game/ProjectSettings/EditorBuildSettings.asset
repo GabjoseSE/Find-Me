@@ -27,8 +27,11 @@ EditorBuildSettings:
     path: Assets/Scenes/Ingame HUD.unity
     guid: c850ee8c3b14cc8459e7e186857cf567
   - enabled: 1
-    path: Assets/Scenes/Options.unity
-    guid: fb5e79e5345439542874718aacc6dec5
+    path: Assets/Scenes/easylevelmap1.unity
+    guid: 54cab60551f3a50459035bcb4b648899
+  - enabled: 1
+    path: Assets/Scenes/easylevelmap2.unity
+    guid: 7dc3f811f9f13564a9e649bafd6ac245
   m_configObjects:
     com.unity.adaptiveperformance.google.android.provider_settings: {fileID: 11400000,
       guid: 1c60b8e770995524ba4c0b3d11e49b0b, type: 2}
@@ -38,3 +41,5 @@ EditorBuildSettings:
       guid: f81d83ce41ef3fd40b80363d88ac5f78, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000,
       guid: 90a00c73f792b2f4ca4c1d1b02d4bdd8, type: 2}
+    com.unity.xr.management.loader_settings: {fileID: 11400000, guid: c7d54e11bfc43c04ea12e79860cd74c3,
+      type: 2}
