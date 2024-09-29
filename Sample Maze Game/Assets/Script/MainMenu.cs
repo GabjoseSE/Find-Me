@@ -11,10 +11,10 @@ public class MainMenu : MonoBehaviour
         SceneManager.LoadSceneAsync(3);
         Debug.Log("Clicked start");
     }
-    public void option()//it will go to option tab
+    public void store()//it will go to option tab
     {
         SceneManager.LoadSceneAsync(4);
-        Debug.Log("Clicked option");
+        Debug.Log("Clicked store");
     }
     public void about()//it will go to about tab
     {
@@ -44,11 +44,15 @@ public class MainMenu : MonoBehaviour
     {
         SceneManager.LoadSceneAsync(6);
     }
+    public void option()
+    {
+        SceneManager.LoadSceneAsync(7);
+    }
     public void LoadEasyLevel()
     {
         // Randomly select a map from the easyLevelMaps array
         int randomMapIndex = Random.Range(0, easyLevelMaps.Length);
-        
+
         // Load the selected map scene
         SceneManager.LoadScene(easyLevelMaps[randomMapIndex]);
     }
