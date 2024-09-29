@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class MainMenu : MonoBehaviour
 {
+    private string[] easyLevelMaps = { "easylevelmap1", "easylevelmap2", "easylevelmap3", "easylevelmap4", "easylevelmap5" };
     public void difficulty() //it will go to difficulty tab
     {
         SceneManager.LoadSceneAsync(3);
@@ -42,5 +43,13 @@ public class MainMenu : MonoBehaviour
     public void easy()
     {
         SceneManager.LoadSceneAsync(6);
+    }
+    public void LoadEasyLevel()
+    {
+        // Randomly select a map from the easyLevelMaps array
+        int randomMapIndex = Random.Range(0, easyLevelMaps.Length);
+        
+        // Load the selected map scene
+        SceneManager.LoadScene(easyLevelMaps[randomMapIndex]);
     }
 }
