@@ -10,7 +10,7 @@ public class FirstPersonController : MonoBehaviour
 
     // Player settings
     [SerializeField] private float cameraSensitivity;
-    [SerializeField] private float moveSpeed;
+    public float moveSpeed = 5f;
     [SerializeField] private float moveInputDeadZone;
 
     // Touch detection
@@ -46,7 +46,8 @@ public class FirstPersonController : MonoBehaviour
         GetTouchInput();
 
 
-        if (rightFingerId != -1) {
+        if (rightFingerId != -1)
+        {
             // Ony look around if the right finger is being tracked
             Debug.Log("Rotating");
             LookAround();
@@ -60,7 +61,8 @@ public class FirstPersonController : MonoBehaviour
         }
     }
 
-    void GetTouchInput() {
+    void GetTouchInput()
+    {
         // Iterate through all the detected touches
         for (int i = 0; i < Input.touchCount; i++)
         {
@@ -111,7 +113,8 @@ public class FirstPersonController : MonoBehaviour
                     {
                         lookInput = t.deltaPosition * cameraSensitivity * Time.deltaTime;
                     }
-                    else if (t.fingerId == leftFingerId) {
+                    else if (t.fingerId == leftFingerId)
+                    {
 
                         // calculating the position delta from the start position
                         moveInput = t.position - moveTouchStartPosition;
@@ -129,7 +132,8 @@ public class FirstPersonController : MonoBehaviour
         }
     }
 
-    void LookAround() {
+    void LookAround()
+    {
 
         // vertical (pitch) rotation
         cameraPitch = Mathf.Clamp(cameraPitch - lookInput.y, -90f, 90f);
@@ -139,7 +143,8 @@ public class FirstPersonController : MonoBehaviour
         transform.Rotate(transform.up, lookInput.x);
     }
 
-    void Move() {
+    void Move()
+    {
 
         // Don't move if the touch delta is shorter than the designated dead zone
         if (moveInput.sqrMagnitude <= moveInputDeadZone) return;
@@ -149,5 +154,11 @@ public class FirstPersonController : MonoBehaviour
         // Move relatively to the local transform's direction
         characterController.Move(transform.right * movementDirection.x + transform.forward * movementDirection.y);
     }
+
+    public void SetMoveSpeed(float newSpeed)
+    {
+        moveSpeed = newSpeed;
+    }
+
 
 }

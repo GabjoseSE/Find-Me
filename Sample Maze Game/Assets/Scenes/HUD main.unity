@@ -1203,7 +1203,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: LetterWall, Assembly-CSharp
-        m_MethodName: OnCollectButtonClick
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3193,7 +3193,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 698055908}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2064725996}
+        m_TargetAssemblyTypeName: Speed, Assembly-CSharp
+        m_MethodName: OnActivation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &698055908
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5340,9 +5352,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 467f216b05140d5438d2198f2bae6708, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  collectedLettersText: {fileID: 869949699}
-  targetWord: 
-  targetWordText: {fileID: 1518503188}
 --- !u!114 &1040286761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5658,7 +5667,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1082472096}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 2064725995}
+        m_TargetAssemblyTypeName: Invisible, Assembly-CSharp
+        m_MethodName: IgnoreUnitCollisionForTime
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1082472096
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9596,6 +9617,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2064725994}
+  - component: {fileID: 2064725995}
+  - component: {fileID: 2064725996}
   m_Layer: 0
   m_Name: Powerups Manager
   m_TagString: Untagged
@@ -9619,6 +9642,36 @@ Transform:
   - {fileID: 1914155525}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2064725995
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2064725993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0d845fc71fed594f8ea084b12db81e3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCollider: {fileID: 1040286764}
+  enemyTag: Zombie
+  IgnoreCollisionDuration: 10
+--- !u!114 &2064725996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2064725993}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f865ad1cffb9d204ebdb7bdb037dd23c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerController: {fileID: 1040286763}
+  boostSpeed: 10
+  boostDuration: 8
 --- !u!1 &2081583852
 GameObject:
   m_ObjectHideFlags: 0

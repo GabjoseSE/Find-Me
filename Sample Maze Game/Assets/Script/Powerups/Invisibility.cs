@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Invisible : MonoBehaviour
 {
@@ -9,7 +10,6 @@ public class Invisible : MonoBehaviour
     public string enemyTag = "Zombie";
     public float IgnoreCollisionDuration = 10f;
     private bool isIgnoringCollisions = false;
-
     void Start()
     {
         if (playerCollider == null)
@@ -22,6 +22,7 @@ public class Invisible : MonoBehaviour
         if (!isIgnoringCollisions)
         {
             StartCoroutine(IgnoreCollisionsTemporarily());
+            Debug.Log("You're Now INVISIBLE.");
         }
     }
     private IEnumerator IgnoreCollisionsTemporarily()
@@ -48,11 +49,13 @@ public class Invisible : MonoBehaviour
         isIgnoringCollisions = false;
     }
 
-    void OnTriggerEnter(Collider other)
+    //For when picking up a powerup NOT FOR BUTTONS
+    public void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("Zombie"))
+        if (other.gameObject.CompareTag("Player"))
         {
             IgnoreUnitCollisionForTime();
+            Debug.Log("YOU ARE NOW INVISIBLE!!!");
         }
     }
 }
