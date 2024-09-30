@@ -589,6 +589,7 @@ MonoBehaviour:
   - {fileID: 2800000, guid: f05c773bc40d5124181cbee712ad9ec3, type: 3}
   - {fileID: 2800000, guid: 9b986772bb0cfbe438a0e72a58103208, type: 3}
   wallTag: LetterWall
+  collectedLettersText: {fileID: 1891364330}
 --- !u!4 &88796695
 Transform:
   m_ObjectHideFlags: 0
@@ -1003,54 +1004,6 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
---- !u!1 &196127970
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 196127972}
-  - component: {fileID: 196127971}
-  m_Layer: 0
-  m_Name: GameObject
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &196127971
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 196127970}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4522898d2069f8343949646fc5c1bfcb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  assignedLetter: 46
-  collectButton: {fileID: 0}
-  collectRadius: 5
-  buttonText: {fileID: 0}
---- !u!4 &196127972
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 196127970}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 862.94635, y: 499.9999, z: 14.655985}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &198495106
 GameObject:
   m_ObjectHideFlags: 0
@@ -1897,9 +1850,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 196127971}
+      - m_Target: {fileID: 1715110499}
         m_TargetAssemblyTypeName: LetterWall, Assembly-CSharp
-        m_MethodName: OnCollectButtonClick
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3587,10 +3540,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4522898d2069f8343949646fc5c1bfcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assignedLetter: 0
-  collectButton: {fileID: 359261537}
-  collectRadius: 3
-  buttonText: {fileID: 819861346}
+  assignedLetter: 100
+  isCollected: 0
+  collectButton: {fileID: 359261538}
 --- !u!1 &640641730
 GameObject:
   m_ObjectHideFlags: 0
@@ -4799,10 +4751,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4522898d2069f8343949646fc5c1bfcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assignedLetter: 46
-  collectButton: {fileID: 359261537}
-  collectRadius: 3
-  buttonText: {fileID: 819861346}
+  assignedLetter: 429
+  isCollected: 0
+  collectButton: {fileID: 359261538}
 --- !u!1 &948670445 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2898676738937588697, guid: f4d3358954e7cf5458646181614bbf62,
@@ -6866,10 +6817,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4522898d2069f8343949646fc5c1bfcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assignedLetter: 511
-  collectButton: {fileID: 359261537}
-  collectRadius: 3
-  buttonText: {fileID: 819861346}
+  assignedLetter: 431
+  isCollected: 0
+  collectButton: {fileID: 359261538}
 --- !u!1 &1565762074
 GameObject:
   m_ObjectHideFlags: 0
@@ -7577,6 +7527,51 @@ RectTransform:
   m_AnchoredPosition: {x: -0, y: -197}
   m_SizeDelta: {x: 646.3907, y: 99.35602}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1715110499
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1715110501}
+  - component: {fileID: 1715110500}
+  m_Layer: 0
+  m_Name: GameObject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1715110500
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1715110499}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1e650eac9b53d445bc38e089439f75b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  letterWall: {fileID: 0}
+--- !u!4 &1715110501
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1715110499}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -2.4420714, y: 4.9818196, z: -18.592344}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1732003902
 GameObject:
   m_ObjectHideFlags: 0
@@ -8690,10 +8685,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4522898d2069f8343949646fc5c1bfcb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  assignedLetter: 511
-  collectButton: {fileID: 359261537}
-  collectRadius: 3
-  buttonText: {fileID: 819861346}
+  assignedLetter: 99
+  isCollected: 0
+  collectButton: {fileID: 359261538}
 --- !u!1 &2015126701
 GameObject:
   m_ObjectHideFlags: 0
@@ -9280,4 +9274,4 @@ SceneRoots:
   - {fileID: 943973355}
   - {fileID: 607475021}
   - {fileID: 2003704611}
-  - {fileID: 196127972}
+  - {fileID: 1715110501}
