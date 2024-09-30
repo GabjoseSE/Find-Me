@@ -8,7 +8,6 @@ public class Invisible : MonoBehaviour
     public Collider playerCollider;
     public string enemyTag = "Zombie";
     public float IgnoreCollisionDuration = 10f;
-
     private bool isIgnoringCollisions = false;
 
     void Start()
