@@ -5,7 +5,7 @@ public class LetterWall : MonoBehaviour
 {
     public char assignedLetter; // Assigned letter for this wall
     public GameObject collectButton; // UI Button
-    public float collectRadius = 5f; // Radius for detection
+    public float collectRadius = 3f; // Radius for detection
     private Transform player; // Reference to the player Transform
     public Text buttonText; // Reference to the Text component on the button
 
@@ -20,7 +20,7 @@ public class LetterWall : MonoBehaviour
         if (player == null)
         {
             Debug.LogError("Player object not found. Make sure the player is tagged as 'Player'.");
-            return; 
+            return;
         }
 
         // Get the PlayerInventory component from the player
@@ -29,7 +29,7 @@ public class LetterWall : MonoBehaviour
         if (playerInventory == null)
         {
             Debug.LogError("PlayerInventory component not found on the player.");
-            return; 
+            return;
         }
 
         if (collectButton == null)
@@ -38,7 +38,7 @@ public class LetterWall : MonoBehaviour
         }
         else
         {
-            collectButton.SetActive(false); 
+            collectButton.SetActive(false);
         }
     }
 
@@ -46,7 +46,7 @@ public class LetterWall : MonoBehaviour
     {
         if (player == null || playerInventory == null)
         {
-            return; 
+            return;
         }
 
         // Check if the player is within the collect radius
@@ -60,7 +60,7 @@ public class LetterWall : MonoBehaviour
                 collectButton.SetActive(true);
                 buttonText.text = $"Collect {assignedLetter}";
                 Debug.Log($"Collect button shown. Letter to collect: {assignedLetter}");
-                isButtonShown = true; 
+                isButtonShown = true;
             }
         }
         else
@@ -70,7 +70,7 @@ public class LetterWall : MonoBehaviour
             {
                 collectButton.SetActive(false);
                 Debug.Log("Collect button hidden.");
-                isButtonShown = false; 
+                isButtonShown = false;
             }
         }
     }
@@ -84,34 +84,34 @@ public class LetterWall : MonoBehaviour
 
     // Collect the letter
     public void CollectLetter()
-{
-    Debug.Log($"Attempting to collect letter: {assignedLetter}"); // Log the letter being collected
-
-    // Add the collected letter to the player's inventory
-    if (playerInventory != null)
     {
-        Debug.Log("Adding letter to player inventory."); // Log that the letter is being added
-        playerInventory.AddLetter(assignedLetter); // Call the method to add the letter
-        Debug.Log($"Letter {assignedLetter} collected successfully."); // Confirm successful collection
-    }
-    else
-    {
-        Debug.LogError("PlayerInventory is null! Cannot collect letter."); // Log error if PlayerInventory is null
-    }
+        Debug.Log($"Attempting to collect letter: {assignedLetter}"); // Log the letter being collected
 
-    // Hide the collect button after collecting the letter
-    if (collectButton != null)
-    {
-        collectButton.SetActive(false);
-        Debug.Log("Collect button hidden after collection."); // Log that the button is hidden
-    }
-    
-    isButtonShown = false;
+        // Add the collected letter to the player's inventory
+        if (playerInventory != null)
+        {
+            Debug.Log("Adding letter to player inventory."); // Log that the letter is being added
+            playerInventory.AddLetter(assignedLetter); // Call the method to add the letter
+            Debug.Log($"Letter {assignedLetter} collected successfully."); // Confirm successful collection
+        }
+        else
+        {
+            Debug.LogError("PlayerInventory is null! Cannot collect letter."); // Log error if PlayerInventory is null
+        }
 
-    // Destroy the letter wall after collecting the letter
-    Destroy(gameObject); // You may want to destroy or deactivate the wall
-    Debug.Log("Letter wall destroyed after collection."); // Log that the wall is destroyed
-}
+        // Hide the collect button after collecting the letter
+        if (collectButton != null)
+        {
+            collectButton.SetActive(false);
+            Debug.Log("Collect button hidden after collection."); // Log that the button is hidden
+        }
+
+        isButtonShown = false;
+
+        // Destroy the letter wall after collecting the letter
+        // Destroy(gameObject); // You may want to destroy or deactivate the wall
+        Debug.Log("Letter wall destroyed after collection."); // Log that the wall is destroyed
+    }
 
 
 

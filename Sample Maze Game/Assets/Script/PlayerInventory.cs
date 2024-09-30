@@ -26,18 +26,18 @@ public class PlayerInventory : MonoBehaviour
 
     // Method to add a letter to the player's inventory
     public void AddLetter(char letter)
-{
-    if (!collectedLetters.Contains(letter)) // Prevent duplicate letters
     {
-        collectedLetters.Add(letter);
-        UpdateCollectedLettersUI();
-        CheckForCompletion(); // Check if the word is complete
+        if (!collectedLetters.Contains(letter)) // Prevent duplicate letters
+        {
+            collectedLetters.Add(letter);
+            UpdateCollectedLettersUI();
+            CheckForCompletion(); // Check if the word is complete
+        }
+        else
+        {
+            Debug.Log($"Letter {letter} already collected.");
+        }
     }
-    else
-    {
-        Debug.Log($"Letter {letter} already collected.");
-    }
-}
 
 
     // Update the collected letters UI
@@ -55,20 +55,20 @@ public class PlayerInventory : MonoBehaviour
         Debug.Log("Updated collected letters UI: " + collectedLettersString);
     }
     public void CheckForCompletion()
-{
-    // Create a string from the collected letters
-    string collectedString = new string(collectedLetters.ToArray());
+    {
+        // Create a string from the collected letters
+        string collectedString = new string(collectedLetters.ToArray());
 
-    // Check if it matches the target word
-    if (collectedString == targetWord)
-    {
-        Debug.Log("Target word collected!"); 
-        // Here you could trigger a win condition or end the game
+        // Check if it matches the target word
+        if (collectedString == targetWord)
+        {
+            Debug.Log("Target word collected!");
+            // Here you could trigger a win condition or end the game
+        }
+        else
+        {
+            Debug.Log("Keep collecting letters!");
+        }
     }
-    else
-    {
-        Debug.Log("Keep collecting letters!");
-    }
-}
 
 }

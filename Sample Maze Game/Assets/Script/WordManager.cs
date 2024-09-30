@@ -17,70 +17,70 @@ public class WordManager : MonoBehaviour
 
     // Selects a random word from the list
     // In WordManager.cs
-private void SelectRandomWord()
-{
-    selectedWord = wordList[Random.Range(0, wordList.Count)];
-    
-    // Set the target word in PlayerInventory
-    PlayerInventory playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
-    if (playerInventory != null)
+    private void SelectRandomWord()
     {
-        playerInventory.targetWord = selectedWord; // Set the target word for the player
+        selectedWord = wordList[Random.Range(0, wordList.Count)];
+
+        // Set the target word in PlayerInventory
+        PlayerInventory playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
+        if (playerInventory != null)
+        {
+            playerInventory.targetWord = selectedWord; // Set the target word for the player
+        }
     }
-}
 
 
     // Spawns letters on random tagged walls
-   private void SpawnLetters()
-{
-    char[] letters = selectedWord.ToCharArray();
-    
-    GameObject[] walls = GameObject.FindGameObjectsWithTag(wallTag);
-    List<GameObject> usedWalls = new List<GameObject>();
-
-    for (int i = 0; i < letters.Length; i++)
+    private void SpawnLetters()
     {
-        if (usedWalls.Count >= walls.Length)
+        char[] letters = selectedWord.ToCharArray();
+
+        GameObject[] walls = GameObject.FindGameObjectsWithTag(wallTag);
+        List<GameObject> usedWalls = new List<GameObject>();
+
+        for (int i = 0; i < letters.Length; i++)
         {
-            Debug.LogWarning("Not enough walls to place all letters!");
-            return;
-        }
-
-        GameObject randomWall;
-        do
-        {
-            randomWall = walls[Random.Range(0, walls.Length)];
-        } while (usedWalls.Contains(randomWall));
-
-        usedWalls.Add(randomWall);
-
-        // Calculate random position and change wall material as before
-        Vector3 randomPosition = GetRandomPositionOnWall(randomWall);
-
-        // Change the material of the wall to display the letter texture
-        Renderer wallRenderer = randomWall.GetComponent<Renderer>();
-        if (wallRenderer != null)
-        {
-            Material wallMaterial = wallRenderer.material;
-
-            int letterIndex = GetLetterIndex(letters[i]);
-            if (letterIndex >= 0 && letterIndex < letterTextures.Length)
+            if (usedWalls.Count >= walls.Length)
             {
-                wallMaterial.mainTexture = letterTextures[letterIndex];
+                Debug.LogWarning("Not enough walls to place all letters!");
+                return;
             }
 
-            // Get the LetterWall component and assign the letter
-            LetterWall letterWall = randomWall.GetComponent<LetterWall>();
-            if (letterWall != null)
+            GameObject randomWall;
+            do
             {
-            letterWall.SetAssignedLetter(letters[i]); // Assign letter to the wall
-            Debug.Log($"Letter {letters[i]} assigned to wall {randomWall.name}"); // Confirm assignment
+                randomWall = walls[Random.Range(0, walls.Length)];
+            } while (usedWalls.Contains(randomWall));
+
+            usedWalls.Add(randomWall);
+
+            // Calculate random position and change wall material as before
+            Vector3 randomPosition = GetRandomPositionOnWall(randomWall);
+
+            // Change the material of the wall to display the letter texture
+            Renderer wallRenderer = randomWall.GetComponent<Renderer>();
+            if (wallRenderer != null)
+            {
+                Material wallMaterial = wallRenderer.material;
+
+                int letterIndex = GetLetterIndex(letters[i]);
+                if (letterIndex >= 0 && letterIndex < letterTextures.Length)
+                {
+                    wallMaterial.mainTexture = letterTextures[letterIndex];
+                }
+
+                // Get the LetterWall component and assign the letter
+                LetterWall letterWall = randomWall.GetComponent<LetterWall>();
+                if (letterWall != null)
+                {
+                    letterWall.SetAssignedLetter(letters[i]); // Assign letter to the wall
+                    Debug.Log($"Letter {letters[i]} assigned to wall {randomWall.name}"); // Confirm assignment
+                }
             }
+            assignedLetter = letters[i].ToString(); // Ensure this line is present
+            Debug.Log($"Assigned letter: {assignedLetter} to wall {randomWall.name}"); // Log the assigned letter
         }
-        assignedLetter = letters[i].ToString(); // Ensure this line is present
-        Debug.Log($"Assigned letter: {assignedLetter} to wall {randomWall.name}"); // Log the assigned letter
     }
-}
 
 
 
