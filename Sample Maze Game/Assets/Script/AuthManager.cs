@@ -13,8 +13,8 @@ public class AuthManager : MonoBehaviour
      public Text errorMessageText;
 
     // URL to your PHP files
-    private string signUpURL = "http://192.168.1.248/UnityFindME/add_player.php"; // Adjust according to your setup
-    private string loginURL = "http://192.168.1.248/UnityFindME/login_player.php?"; // You'll create this login PHP file
+    private string signUpURL = "http://192.168.0.14/UnityFindME/add_player.php"; // Adjust according to your setup
+    private string loginURL = "http://192.168.0.14/UnityFindME/login_player.php?"; // You'll create this login PHP file
 
     // Signup Button
     public void SignUp()

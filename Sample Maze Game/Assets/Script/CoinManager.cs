@@ -8,7 +8,7 @@ public class CoinManager : MonoBehaviour
     public int coinCount = 0; // Total coins collected
     public Text coinText; // Reference to the UI Text to display the coin count
     public string username; // Username of the logged-in player
-    private string updateCoinsURL = "http://192.168.1.248/UnityFindME/update_coins.php"; // Change to your actual PHP URL
+    private string updateCoinsURL = "http://192.168.0.14/UnityFindME/update_coins.php"; // Change to your actual PHP URL
 
     private void Start()
     {
