@@ -83,7 +83,7 @@ public class LetterWall : MonoBehaviour
     }
 
     // Collect the letter
-    private void CollectLetter()
+    public void CollectLetter()
 {
     Debug.Log($"Attempting to collect letter: {assignedLetter}"); // Log the letter being collected
 
@@ -109,9 +109,10 @@ public class LetterWall : MonoBehaviour
     isButtonShown = false;
 
     // Destroy the letter wall after collecting the letter
-    Destroy(gameObject);
+    Destroy(gameObject); // You may want to destroy or deactivate the wall
     Debug.Log("Letter wall destroyed after collection."); // Log that the wall is destroyed
 }
+
 
 
 
@@ -119,5 +120,6 @@ public class LetterWall : MonoBehaviour
     public void SetAssignedLetter(char letter)
     {
         assignedLetter = letter;
+        Debug.Log($"Assigned letter set to: {assignedLetter}"); // Log the assigned letter
     }
 }

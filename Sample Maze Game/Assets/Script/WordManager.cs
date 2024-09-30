@@ -7,6 +7,7 @@ public class WordManager : MonoBehaviour
     public string selectedWord;
     public Texture[] letterTextures; // Array for letter textures
     public string wallTag = "LetterWall"; // Tag for walls
+    private string assignedLetter;
 
     private void Start()
     {
@@ -72,9 +73,12 @@ private void SelectRandomWord()
             LetterWall letterWall = randomWall.GetComponent<LetterWall>();
             if (letterWall != null)
             {
-                letterWall.SetAssignedLetter(letters[i]); // Assign letter to the wall
+            letterWall.SetAssignedLetter(letters[i]); // Assign letter to the wall
+            Debug.Log($"Letter {letters[i]} assigned to wall {randomWall.name}"); // Confirm assignment
             }
         }
+        assignedLetter = letters[i].ToString(); // Ensure this line is present
+        Debug.Log($"Assigned letter: {assignedLetter} to wall {randomWall.name}"); // Log the assigned letter
     }
 }
 
