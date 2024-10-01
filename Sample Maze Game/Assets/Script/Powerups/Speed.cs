@@ -7,6 +7,8 @@ public class Speed : MonoBehaviour
     public FirstPersonController playerController;
     public float boostSpeed = 100f;
     public float boostDuration = 8f;
+    private float remainingBoostTime;
+    private bool isBoostActive = false;
     void Start()
     {
         if (playerController == null)
@@ -16,15 +18,26 @@ public class Speed : MonoBehaviour
     }
     public void OnActivation()
     {
-        StartCoroutine(ApplySpeedBoost());
+        if (!isBoostActive)
+        {
+            StartCoroutine(ApplySpeedBoost());
+        }
+        remainingBoostTime = boostDuration;
+        Debug.Log("8 Seconds Boost");
     }
 
     private IEnumerator ApplySpeedBoost()
     {
+        isBoostActive = true;
         float originalSpeed = playerController.moveSpeed;
         playerController.SetMoveSpeed(boostSpeed);
-        yield return new WaitForSeconds(boostDuration);
+        while (remainingBoostTime > 0)
+        {
+            remainingBoostTime -= Time.deltaTime;
+            yield return null;
+        }
         playerController.SetMoveSpeed(originalSpeed);
+        isBoostActive = false;
     }
 
     //For powerups NOT FOR BUTTONS
@@ -33,7 +46,11 @@ public class Speed : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            StartCoroutine(ApplySpeedBoost());
+            if (!isBoostActive)
+            {
+                StartCoroutine(ApplySpeedBoost());
+            }
+            remainingBoostTime = boostDuration;
             Destroy(gameObject); // Destroy the powerup after use
         }
     }

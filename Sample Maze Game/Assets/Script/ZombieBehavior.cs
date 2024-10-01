@@ -7,7 +7,7 @@ public class ZombieAI : MonoBehaviour
     public Transform player;             // Reference to the player
     public float detectionRange = 10f;   // Range within which the zombie can detect the player
     public float attackRange = 2f;       // Distance from which the zombie can attack the player
-    public float attackCooldown = 1f;    // Time between attacks
+    public float attackCooldown = 3f;    // Time between attacks
 
     private int currentWaypoint = 0;
     private NavMeshAgent agent;
@@ -102,5 +102,9 @@ public class ZombieAI : MonoBehaviour
         // Attack range
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
+    public void SetAttackRange(float newRange)
+    {
+        attackRange = newRange;
     }
 }
