@@ -103,8 +103,12 @@ public class ZombieAI : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
-    public void SetAttackRange(float newRange)
+    public void SetAttackRange(float newAttack)
     {
-        attackRange = newRange;
+        attackRange = newAttack;
+    }
+    public void SetDetectionRange(float newDetection)
+    {
+        detectionRange = newDetection;
     }
 }

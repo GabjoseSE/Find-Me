@@ -5,56 +5,52 @@ using UnityEngine.UI;
 
 public class Invisible : MonoBehaviour
 {
+    public ZombieAI zombieBehaviour;
+    public float invisDetect = 0f;
+    public float invisAttack = 0f;
+    public float invisibilityDuration = 10f;
+    public Button invisButton;
 
-    public Collider playerCollider;
-    public string enemyTag = "Zombie";
-    public float IgnoreCollisionDuration = 10f;
-    private bool isIgnoringCollisions = false;
     void Start()
     {
-        if (playerCollider == null)
+        if (zombieBehaviour == null)
         {
-            playerCollider = GetComponent<Collider>();
+            zombieBehaviour = GameObject.FindWithTag("Zombie").GetComponent<ZombieAI>();
         }
     }
-    public void IgnoreUnitCollisionForTime()
+    public void OnActivation()
     {
-        if (!isIgnoringCollisions)
-        {
-            StartCoroutine(IgnoreCollisionsTemporarily());
-            Debug.Log("You're Now INVISIBLE.");
-        }
+        StartCoroutine(ActivateInvisibility());
+        StartCoroutine(ButtonCooldownRoutine());
+        Debug.Log("You're Now INVISIBLE.");
     }
-    private IEnumerator IgnoreCollisionsTemporarily()
+    private IEnumerator ActivateInvisibility()
     {
-        isIgnoringCollisions = true;
-        GameObject[] units = GameObject.FindGameObjectsWithTag(enemyTag);
-        foreach (GameObject unit in units)
-        {
-            Collider unitCollider = unit.GetComponent<Collider>();
-            if (unitCollider != null)
-            {
-                Physics.IgnoreCollision(playerCollider, unitCollider, true);
-            }
-        }
-        yield return new WaitForSeconds(IgnoreCollisionDuration);
-        foreach (GameObject unit in units)
-        {
-            Collider unitCollider = unit.GetComponent<Collider>();
-            if (unitCollider != null)
-            {
-                Physics.IgnoreCollision(playerCollider, unitCollider, false);
-            }
-        }
-        isIgnoringCollisions = false;
+        float originalDetect = zombieBehaviour.detectionRange;
+        float originalAttack = zombieBehaviour.attackRange;
+        zombieBehaviour.SetAttackRange(invisAttack);
+        zombieBehaviour.SetDetectionRange(invisDetect);
+        Debug.Log("You are now Invisible");
+        yield return new WaitForSeconds(invisibilityDuration);
+        Debug.Log("You are no longer Invisible");
+        zombieBehaviour.SetAttackRange(originalAttack);
+        zombieBehaviour.SetDetectionRange(originalDetect);
+
     }
+    private IEnumerator ButtonCooldownRoutine()
+    {
+        invisButton.interactable = false;
+        yield return new WaitForSeconds(invisibilityDuration);
+        invisButton.interactable = true;
+    }
+
 
     //For when picking up a powerup NOT FOR BUTTONS
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            IgnoreUnitCollisionForTime();
+            ActivateInvisibility();
             Debug.Log("YOU ARE NOW INVISIBLE!!!");
         }
     }

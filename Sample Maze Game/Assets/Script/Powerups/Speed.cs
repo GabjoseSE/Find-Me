@@ -1,14 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Speed : MonoBehaviour
 {
     public FirstPersonController playerController;
+    public Button speedBoostButton;
     public float boostSpeed = 100f;
     public float boostDuration = 8f;
     private float remainingBoostTime;
-    private bool isBoostActive = false;
+
     void Start()
     {
         if (playerController == null)
@@ -18,26 +20,26 @@ public class Speed : MonoBehaviour
     }
     public void OnActivation()
     {
-        if (!isBoostActive)
-        {
-            StartCoroutine(ApplySpeedBoost());
-        }
-        remainingBoostTime = boostDuration;
+        StartCoroutine(ApplySpeedBoost());
+        StartCoroutine(ButtonCooldownRoutine());
         Debug.Log("8 Seconds Boost");
+        Debug.Log("8 Seconds Button Cooldown");
     }
 
     private IEnumerator ApplySpeedBoost()
     {
-        isBoostActive = true;
         float originalSpeed = playerController.moveSpeed;
         playerController.SetMoveSpeed(boostSpeed);
-        while (remainingBoostTime > 0)
-        {
-            remainingBoostTime -= Time.deltaTime;
-            yield return null;
-        }
+        Debug.Log("YOU ARE SPEED!!");
+        yield return new WaitForSeconds(boostDuration);
+        Debug.Log("YOU ARE SPEED NO LONGER");
         playerController.SetMoveSpeed(originalSpeed);
-        isBoostActive = false;
+    }
+    private IEnumerator ButtonCooldownRoutine()
+    {
+        speedBoostButton.interactable = false;
+        yield return new WaitForSeconds(boostDuration);
+        speedBoostButton.interactable = true;
     }
 
     //For powerups NOT FOR BUTTONS
@@ -46,12 +48,8 @@ public class Speed : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            if (!isBoostActive)
-            {
-                StartCoroutine(ApplySpeedBoost());
-            }
-            remainingBoostTime = boostDuration;
-            Destroy(gameObject); // Destroy the powerup after use
+            StartCoroutine(ApplySpeedBoost());
+            Destroy(gameObject);
         }
     }
 
