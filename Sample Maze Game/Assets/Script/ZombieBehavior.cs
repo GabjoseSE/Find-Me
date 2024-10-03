@@ -10,62 +10,32 @@ public class ZombieAI : MonoBehaviour
     public float attackCooldown = 3f;    // Time between attacks
 
     private int currentWaypoint = 0;
-    public NavMeshAgent agent;
-    public bool isChasingPlayer = false;
+    private NavMeshAgent agent;
+    private bool isChasingPlayer = false;
     private float lastAttackTime;
-    private Invisible playerInvisibleScript;
 
     void Start()
-{
-    agent = GetComponent<NavMeshAgent>();
-    playerInvisibleScript = player.GetComponent<Invisible>();
-
-    if (playerInvisibleScript == null)
     {
-        Debug.LogError("Invisible script not found on player!");
+        agent = GetComponent<NavMeshAgent>();
         PatrolToNextWaypoint();
-        return;
     }
-
-    
-    
-}
 
     void Update()
     {
-      
         // Distance to the player
         float distanceToPlayer = Vector3.Distance(player.position, transform.position);
 
-        if (playerInvisibleScript != null)
+        if (distanceToPlayer < detectionRange)
         {
-            if (distanceToPlayer < detectionRange && !playerInvisibleScript.isPlayerInvisible)
-            {
-                // If the player is within detection range, chase the player
-                isChasingPlayer = true;
-            }
-            else
-            {
-                // If the player is not detected or is invisible, stop chasing
-                isChasingPlayer = false;
-                agent.SetDestination(transform.position); // Stop chasing the player
-            }
+            // If the player is within detection range, chase the player
+            isChasingPlayer = true;
         }
         else
         {
-            // If the playerInvisibleScript is null, assume the player is always visible
-            if (distanceToPlayer < detectionRange)
-            {
-                // If the player is within detection range, chase the player
-                isChasingPlayer = true;
-            }
-            else
-            {
-                // If the player is not detected, stop chasing
-                isChasingPlayer = false;
-                agent.SetDestination(transform.position); // Stop chasing the player
-            }
+            // If the player is not detected, continue patrolling
+            isChasingPlayer = false;
         }
+
         if (isChasingPlayer)
         {
             // Chase the player
@@ -86,19 +56,12 @@ public class ZombieAI : MonoBehaviour
 
     // Patrol to the next waypoint
     void Patrol()
-{
-    if (agent != null && agent.isActiveAndEnabled)
     {
         if (!agent.pathPending && agent.remainingDistance < 0.5f)
         {
             PatrolToNextWaypoint();
         }
     }
-    else
-    {
-        Debug.LogError("NavMeshAgent is null or inactive!");
-    }
-}
 
     // Move to the next waypoint in the patrol route
     void PatrolToNextWaypoint()
@@ -111,7 +74,7 @@ public class ZombieAI : MonoBehaviour
     }
 
     // Chase the player
-    public void ChasePlayer()
+    void ChasePlayer()
     {
         agent.SetDestination(player.position);
     }
