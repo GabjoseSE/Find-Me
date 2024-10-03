@@ -9330,9 +9330,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0d845fc71fed594f8ea084b12db81e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCollider: {fileID: 1040286764}
-  enemyTag: Zombie
-  IgnoreCollisionDuration: 10
+  zombieBehaviour: {fileID: 0}
+  invisDetect: 0
+  invisAttack: 0
+  invisibilityDuration: 10
+  invisButton: {fileID: 1082472095}
 --- !u!114 &2064725996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9361,9 +9363,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49e15efd269f7b144af7e3b639a0cf74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zomBehaviour: {fileID: 4947410}
-  zombSpeed: 0
+  zombieAgent: {fileID: 0}
   freezeDuration: 10
+  freezeButton: {fileID: 1565671875}
 --- !u!1 &2081583852
 GameObject:
   m_ObjectHideFlags: 0
