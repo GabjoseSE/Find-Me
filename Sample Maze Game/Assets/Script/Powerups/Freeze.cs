@@ -1,36 +1,44 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Freeze : MonoBehaviour
 {
-    public ZombieAI zomBehaviour;
-    public float zombFreeze = 0f;
+    public NavMeshAgent zombieAgent;
     public float freezeDuration = 10f;
-    void Start()
-    {
-        if (zomBehaviour == null)
-        {
-            zomBehaviour = GameObject.FindWithTag("Zombie").GetComponent<ZombieAI>();
-        }
-    }
+    public Button freezeButton;
+
     public void OnActivation()
     {
-        StartCoroutine(ApplyFreeze());
+        StartCoroutine(FreezeZombie(zombieAgent));
+        StartCoroutine(ButtonCooldownRoutine());
+
     }
-    private IEnumerator ApplyFreeze()
+    private IEnumerator FreezeZombie(NavMeshAgent zombieAgent)
     {
-        float originalRadius = zomBehaviour.attackRange;
-        zomBehaviour.SetAttackRange(zombFreeze);
+        zombieAgent.isStopped = true;
+        Debug.Log("Zombie frozen!");
         yield return new WaitForSeconds(freezeDuration);
-        zomBehaviour.SetAttackRange(originalRadius);
+        zombieAgent.isStopped = false;
+        Debug.Log("Zombie unfrozen!");
     }
-    //For powerups not for button
+    private IEnumerator ButtonCooldownRoutine()
+    {
+        freezeButton.interactable = false;
+        yield return new WaitForSeconds(freezeDuration);
+        freezeButton.interactable = true;
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
-            StartCoroutine(ApplyFreeze());
+            NavMeshAgent zombieAgent = GetComponent<NavMeshAgent>();
+            if (zombieAgent != null)
+            {
+                StartCoroutine(FreezeZombie(zombieAgent));
+            }
             Destroy(gameObject);
         }
     }
