@@ -1927,7 +1927,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1704116549}
-  - component: {fileID: 1704116548}
   m_Layer: 0
   m_Name: CoinDisplay
   m_TagString: Untagged
@@ -1935,23 +1934,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1704116548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1704116547}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe81280b758cd654d94b31fbab37af75, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  coinsText: {fileID: 594968439}
-  powerUpPanels: []
-  confirmButtons: []
-  cancelButtons: []
-  username: 
 --- !u!4 &1704116549
 Transform:
   m_ObjectHideFlags: 0

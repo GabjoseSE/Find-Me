@@ -135,14 +135,6 @@ public class AuthManager : MonoBehaviour
                 Debug.Log("Login Success: " + loginResponse.message);
                 PlayerPrefs.SetString("LoggedInUser", username); // Save username to PlayerPrefs
                 
-                // Find the StoreManager and fetch coins
-                StoreManager storeManager = FindObjectOfType<StoreManager>();
-                if (storeManager != null)
-                {
-                    // Pass the username when calling GetCoinsFromDatabase
-                    yield return StartCoroutine(storeManager.GetCoinsFromDatabase(username));
-                }
-
                 // Load the next scene (e.g., the game scene)
                 SceneManager.LoadSceneAsync(2);
             }
