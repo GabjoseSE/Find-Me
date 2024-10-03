@@ -10,12 +10,16 @@ public class AuthManager : MonoBehaviour
     public InputField usernameInput;
     public InputField passwordInput;
     public InputField confirmPasswordInput;
-     public Text errorMessageText;
+    public Text errorMessageText;
+
+    
 
     // URL to your PHP files
-    private string signUpURL = "http://192.168.0.14/UnityFindME/add_player.php"; // Adjust according to your setup
-    private string loginURL = "http://192.168.0.14/UnityFindME/login_player.php?"; // You'll create this login PHP file
+    private string signUpURL = "http://192.168.1.248/UnityFindME/add_player.php"; // Adjust according to your setup
+    private string loginURL = "http://192.168.1.248/UnityFindME/login_player.php?"; // You'll create this login PHP file
+    private string getCoinsURL = "http://192.168.1.248/UnityFindME/get_coins.php"; // URL for getting coins
 
+    private int coins; // Variable to store the player's coins
     // Signup Button
     public void SignUp()
     {
@@ -96,60 +100,66 @@ public class AuthManager : MonoBehaviour
 
     // Coroutine for login
     private IEnumerator LoginUser(string username, string password)
+{
+    WWWForm form = new WWWForm();
+    form.AddField("username", username);
+    form.AddField("password", password);
+
+    using (UnityWebRequest www = UnityWebRequest.Post(loginURL, form))
     {
-        WWWForm form = new WWWForm();
-        form.AddField("username", username);
-        form.AddField("password", password);
+        yield return www.SendWebRequest();
 
-        using (UnityWebRequest www = UnityWebRequest.Post(loginURL, form))
+        if (www.result != UnityWebRequest.Result.Success)
         {
-            yield return www.SendWebRequest();
+            Debug.LogError("Login Error: " + www.error);
+            ShowErrorMessage("Login failed! Please check your username and password.");
+        }
+        else
+        {
+            string responseText = www.downloadHandler.text;
+            Debug.Log("Login Response: " + responseText);
 
-            if (www.result != UnityWebRequest.Result.Success)
+            LoginResponse loginResponse;
+            try
             {
-                ShowErrorMessage("Login failed! Please check your username and password.");
+                loginResponse = JsonUtility.FromJson<LoginResponse>(responseText);
+            }
+            catch (Exception e)
+            {
+                Debug.LogError("JSON Parsing Error: " + e.Message);
+                yield break; // Exit the coroutine if JSON parsing fails
+            }
+
+            if (loginResponse.status == "success")
+            {
+                Debug.Log("Login Success: " + loginResponse.message);
+                PlayerPrefs.SetString("LoggedInUser", username); // Save username to PlayerPrefs
+                
+                // Find the StoreManager and fetch coins
+                StoreManager storeManager = FindObjectOfType<StoreManager>();
+                if (storeManager != null)
+                {
+                    // Pass the username when calling GetCoinsFromDatabase
+                    yield return StartCoroutine(storeManager.GetCoinsFromDatabase(username));
+                }
+
+                // Load the next scene (e.g., the game scene)
+                SceneManager.LoadSceneAsync(2);
             }
             else
             {
-                string responseText = www.downloadHandler.text;
-                Debug.Log("Login Response: " + responseText);
-
-                try
-                {
-                    LoginResponse loginResponse = JsonUtility.FromJson<LoginResponse>(responseText);
-
-                    // Inside the LoginUser coroutine after a successful login
-                    if (loginResponse.status == "success")
-{
-    // Save the logged-in username for later use
-    PlayerPrefs.SetString("LoggedInUser", username); // Save username to PlayerPrefs
-
-    // Get the CoinManager and set the username
-    CoinManager coinManager = FindObjectOfType<CoinManager>();
-    if (coinManager != null)
-    {
-        coinManager.SetUsername(username); // Set the username in CoinManager
-    }
-
-    Debug.Log("Login Success! User: " + username);
-
-    // Load the next scene (e.g., the game scene)
-    SceneManager.LoadSceneAsync(2);
-}
-
-
-                    else
-                    {
-                        ShowErrorMessage(loginResponse.message);
-                    }
-                }
-                catch (Exception e)
-                {
-                    Debug.LogError("JSON Parsing Error: " + e.Message);
-                }
+                ShowErrorMessage(loginResponse.message);
             }
         }
     }
+}
+
+
+
+
+
+    
+
 
 
     private void ShowErrorMessage(string message)

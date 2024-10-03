@@ -8,16 +8,24 @@ public class CoinManager : MonoBehaviour
     public int coinCount = 0; // Total coins collected
     public Text coinText; // Reference to the UI Text to display the coin count
     public string username; // Username of the logged-in player
-    private string updateCoinsURL = "http://192.168.0.14/UnityFindME/update_coins.php"; // Change to your actual PHP URL
+    private string updateCoinsURL = "http://192.168.1.248/UnityFindME/update_coins.php"; // Change to your actual PHP URL
 
     private void Start()
     {
         username = PlayerPrefs.GetString("LoggedInUser", null); // Default to null if not set
+        if (!string.IsNullOrEmpty(username))
+        {
+            StartCoroutine(LoadCoinsFromDatabase(username)); // Load coins from the database
+        }
+        else
+        {
+            Debug.LogError("Username is not set! Cannot load coins.");
+        }
 
         UpdateCoinUI();
     }
 
-    // Function to update the coin count
+    // Function to update the coin count when a coin is collected
     public void CollectCoin()
     {
         coinCount++;
@@ -35,7 +43,51 @@ public class CoinManager : MonoBehaviour
 
     private void UpdateCoinUI()
     {
-        coinText.text = " " + coinCount.ToString();
+        coinText.text = "" + coinCount.ToString(); // Display updated coin count
+    }
+
+    // Coroutine to load the coin count from the database
+    private IEnumerator LoadCoinsFromDatabase(string username)
+    {
+        WWWForm form = new WWWForm();
+        form.AddField("username", username); // Add the player's username
+
+        using (UnityWebRequest www = UnityWebRequest.Post("http://192.168.1.248/UnityFindME/get_coins.php", form)) // Adjust URL
+        {
+            yield return www.SendWebRequest();
+
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.LogError("Error loading coins from database: " + www.error);
+            }
+            else
+            {
+                // Log the raw response from the server
+                string responseText = www.downloadHandler.text;
+                Debug.Log("Coins load response: " + responseText);
+
+                // Try to parse the JSON response
+                try
+                {
+                    CoinsResponse response = JsonUtility.FromJson<CoinsResponse>(responseText); // Adjust this for your response
+
+                    if (response.status == "success")
+                    {
+                        coinCount = response.coins; // Assign the loaded coin count
+                        UpdateCoinUI(); // Update the UI with the loaded coin count
+                        Debug.Log("Coins loaded successfully: " + coinCount);
+                    }
+                    else
+                    {
+                        Debug.LogError("Error loading coins: " + response.message);
+                    }
+                }
+                catch (System.Exception e)
+                {
+                    Debug.LogError("JSON parsing error: " + e.Message);
+                }
+            }
+        }
     }
 
     // Coroutine to update the coin count in the database
@@ -85,11 +137,19 @@ public class CoinManager : MonoBehaviour
         }
     }
 
+    // Method to set the coin count from other scripts
+    public void SetCoins(int coins)
+    {
+        coinCount = coins; // Update the local coin count
+        UpdateCoinUI(); // Update the UI to reflect the new coin count
+        Debug.Log("Coins set to: " + coinCount); // Log for debugging
+    }
+
     // Call this method to set the username
     public void SetUsername(string user)
-{
-    username = user;
-    Debug.Log("Username set to: " + username); // Log the username being set
+    {
+        username = user;
+        Debug.Log("Username set to: " + username); // Log the username being set
+    }
 }
 
-}

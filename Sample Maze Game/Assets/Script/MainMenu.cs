@@ -29,6 +29,7 @@ public class MainMenu : MonoBehaviour
     public void back()
     {
         SceneManager.LoadSceneAsync(2);
+        
         Debug.Log("Clicked back");
     }
     public void login()

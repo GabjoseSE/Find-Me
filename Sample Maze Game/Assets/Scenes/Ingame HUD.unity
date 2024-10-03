@@ -2191,6 +2191,8 @@ MonoBehaviour:
   detectionRange: 6
   attackRange: 2
   attackCooldown: 1
+  agent: {fileID: 0}
+  isChasingPlayer: 0
 --- !u!136 &382244249
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -7175,7 +7177,7 @@ GameObject:
   - component: {fileID: 1624896760}
   - component: {fileID: 1624896759}
   m_Layer: 5
-  m_Name: coins
+  m_Name: CoinIcon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
