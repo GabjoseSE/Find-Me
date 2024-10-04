@@ -9,20 +9,28 @@ public class Freeze : MonoBehaviour
     public NavMeshAgent zombieAgent;
     public float freezeDuration = 10f;
     public Button freezeButton;
+    Animator animator;
+
+    
 
     public void OnActivation()
     {
+
+        animator = GetComponent<Animator>();
         StartCoroutine(FreezeZombie(zombieAgent));
         StartCoroutine(ButtonCooldownRoutine());
+        
 
     }
     private IEnumerator FreezeZombie(NavMeshAgent zombieAgent)
     {
         zombieAgent.isStopped = true;
         Debug.Log("Zombie frozen!");
+        
         yield return new WaitForSeconds(freezeDuration);
         zombieAgent.isStopped = false;
         Debug.Log("Zombie unfrozen!");
+        
     }
     private IEnumerator ButtonCooldownRoutine()
     {
