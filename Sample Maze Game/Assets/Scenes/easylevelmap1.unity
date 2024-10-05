@@ -2360,7 +2360,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 73c8458b84b356544b6df81c79516a06, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &376742969
 GameObject:
@@ -5066,7 +5066,7 @@ MonoBehaviour:
   zombieBehaviour: {fileID: 0}
   invisDetect: 0
   invisAttack: 0
-  invisibilityDuration: 10
+  invisibilityDuration: 8
   invisButton: {fileID: 52337509}
 --- !u!95 &902875673
 Animator:
