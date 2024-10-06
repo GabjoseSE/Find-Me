@@ -152,4 +152,3 @@ public class CoinManager : MonoBehaviour
         Debug.Log("Username set to: " + username); // Log the username being set
     }
 }
-
