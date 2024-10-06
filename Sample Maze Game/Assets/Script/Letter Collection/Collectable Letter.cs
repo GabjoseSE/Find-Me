@@ -6,11 +6,15 @@ public class CollectableLetter : MonoBehaviour
 {
     public char letter;
     public WordManager wordManager;
-    private void OnTrigger(Collider other)
+    public void SetLetter(char letter)
+    {
+        this.letter = letter;
+    }
+    private void OnTrigger(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
-            wordManager.CollectedLetter(letter);
+            FindObjectOfType<WordManager>().CollectedLetter(letter);
             Destroy(gameObject);
         }
     }
