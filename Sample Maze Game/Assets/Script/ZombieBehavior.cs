@@ -99,14 +99,14 @@ public class ZombieAI : MonoBehaviour
     // Attack the player if within range
     void AttackPlayer()
     {
-        
-    
+
+
         if (Time.time - lastAttackTime > attackCooldown)
         {
             // Attack the player (this could be playing an animation or dealing damage)
             Debug.Log("Zombie attacks!");
             animator.SetBool("Attack", true);
-            
+
 
             // Reset attack timer
             lastAttackTime = Time.time;
