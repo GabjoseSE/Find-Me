@@ -19,7 +19,7 @@ public class AuthManager : MonoBehaviour
     // URL to your PHP files
     private string signUpURL = "http://192.168.1.248/UnityFindME/add_player.php"; // Adjust according to your setup
     private string loginURL = "http://192.168.1.248/UnityFindME/login_player.php?"; // You'll create this login PHP file
-    private string getCoinsURL = "http://192.168.1.248/UnityFindME/get_player_info.php"; // URL for getting coins
+    private string getCoinsURL = "http://192.168.1.248/UnityFindME/get_player_info.php"; 
 
     private int coins; // Variable to store the player's coins
     // Signup Button
@@ -179,7 +179,7 @@ public void OnLoginSuccess(int coins)
 
 private IEnumerator GetPlayerInfo(string username)
 {
-    while (true) // Continuous checking
+    while (true) 
     {
         using (UnityWebRequest www = UnityWebRequest.Get(getCoinsURL + "?username=" + username))
         {
@@ -197,10 +197,17 @@ private IEnumerator GetPlayerInfo(string username)
                 try
                 {
                     LoginResponse playerInfoResponse = JsonUtility.FromJson<LoginResponse>(responseText);
-                    
+
                     if (playerInfoResponse.status == "success")
                     {
-                        OnPlayerInfoUpdate(playerInfoResponse.player.coins);
+                        // Pass coins and power-ups to UI update
+                        OnPlayerInfoUpdate(
+                            playerInfoResponse.player.coins, 
+                            playerInfoResponse.player.powerups.freeze, 
+                            playerInfoResponse.player.powerups.speedup, 
+                            playerInfoResponse.player.powerups.invisibility, 
+                            playerInfoResponse.player.powerups.navigation
+                        );
                     }
                     else
                     {
@@ -218,14 +225,17 @@ private IEnumerator GetPlayerInfo(string username)
     }
 }
 
-private void OnPlayerInfoUpdate(int updatedCoins)
+private void OnPlayerInfoUpdate(int updatedCoins, int freeze, int speedup, int invisibility, int navigation)
 {
     CoinDisplay coinDisplay = FindObjectOfType<CoinDisplay>();  // Find the CoinDisplay in the scene
 
     if (coinDisplay != null)
     {
         Debug.Log("Updating coin display with updated value: " + updatedCoins);
-        coinDisplay.UpdateCoinDisplay(updatedCoins);  // Update the UI with the new coin count
+        coinDisplay.UpdateCoinDisplay(updatedCoins);  
+        
+        coinDisplay.UpdatePowerupDisplay(freeze, speedup, invisibility, navigation);
+
     }
     else
     {

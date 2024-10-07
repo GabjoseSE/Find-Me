@@ -10,17 +10,22 @@ public class ZombieAI : MonoBehaviour
     public float attackCooldown = 3f;    // Time between attacks
     public float patrolSpeed = 2f;       // Speed while patrolling
     public float chaseSpeed = 4f;        // Speed while chasing the player
+    public int damage = 1;               // Amount of damage zombie deals to player
 
     private int currentWaypoint = 0;
     private NavMeshAgent agent;
     private bool isChasingPlayer = false;
     private float lastAttackTime;
     private Animator animator;
+    private PlayerHealth playerHealth;   // Reference to player's health system
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+
+        playerHealth = player.GetComponent<PlayerHealth>();
+        playerHealth = FindObjectOfType<PlayerHealth>();
 
         // Set patrol speed and begin patrolling
         agent.speed = patrolSpeed;
@@ -49,10 +54,15 @@ public class ZombieAI : MonoBehaviour
 
         if (isChasingPlayer)
         {
-            // If within attack range, stop moving and attack
+            // If within attack range, attack the player continuously
             if (distanceToPlayer < attackRange)
             {
-                AttackPlayer();
+                // Attack the player every attack cooldown period
+                if (Time.time - lastAttackTime >= attackCooldown)
+                {
+                    AttackPlayer();
+                    lastAttackTime = Time.time; // Reset last attack time
+                }
                 animator.SetBool("Attack", true);
             }
             else
@@ -98,20 +108,14 @@ public class ZombieAI : MonoBehaviour
 
     // Attack the player if within range
     void AttackPlayer()
+{
+    if (playerHealth != null)
     {
-
-
-        if (Time.time - lastAttackTime > attackCooldown)
-        {
-            // Attack the player (this could be playing an animation or dealing damage)
-            Debug.Log("Zombie attacks!");
-            animator.SetBool("Attack", true);
-
-
-            // Reset attack timer
-            lastAttackTime = Time.time;
-        }
+        playerHealth.TakeDamage(damage);
+        Debug.Log("Zombie attacks! Player takes damage.");
     }
+}
+
 
     // Visualize detection and attack range in the editor
     private void OnDrawGizmosSelected()
