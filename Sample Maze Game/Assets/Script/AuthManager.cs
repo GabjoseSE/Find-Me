@@ -12,7 +12,7 @@ public class AuthManager : MonoBehaviour
     public InputField passwordInput;
     public InputField confirmPasswordInput;
     public Text errorMessageText;
-    public TextMeshProUGUI coinText; 
+    
 
     
 
@@ -170,6 +170,18 @@ public void OnLoginSuccess(int coins)
     {
         Debug.LogError("CoinDisplay not found in the scene.");
     }
+    
+    StoreManager storeManager = FindObjectOfType<StoreManager>();
+
+    if (storeManager != null)
+    {
+        Debug.Log("StoreManager found. Updating the UI...");
+        storeManager.UpdateCoinDisplay(coins);
+    }
+    else
+    {
+        Debug.LogError("StoreManager not found in the scene.");
+    }
 
     // Hide all canvases and show the main menu
     MainSceneManager mainSceneManager = FindObjectOfType<MainSceneManager>();
@@ -249,7 +261,20 @@ private void OnPlayerInfoUpdate(int updatedCoins, int freeze, int speedup, int i
     {
         Debug.LogError("CoinDisplay not found in the scene.");
     }
+
+    StoreManager storeManager = FindObjectOfType<StoreManager>();
+    if (storeManager != null)
+    {
+        Debug.Log("Updating StoreManager with new coin count: " + updatedCoins);
+        storeManager.UpdateCoinDisplay(updatedCoins);  // Update the StoreManager with the coin count
+    }
+    else
+    {
+        Debug.LogError("StoreManager not found in the scene.");
+    }
 }
+
+
 
 
     private void ShowErrorMessage(string message)
