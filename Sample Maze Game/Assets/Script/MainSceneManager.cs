@@ -13,7 +13,15 @@ public class MainSceneManager : MonoBehaviour
 
     private void Start()
     {
-        ShowLoginPage(); // Start with the login page
+        // Check if the user is already logged in (from previous scenes)
+        if (PlayerPrefs.GetInt("isLoggedIn", 0) == 1)
+        {
+            ShowMainMenu(); // Bypass login page
+        }
+        else
+        {
+            ShowLoginPage(); // Show login page as usual
+        }
     }
 
     // Show the login page
@@ -21,11 +29,14 @@ public class MainSceneManager : MonoBehaviour
     {
         HideAllCanvases();
         loginCanvas.SetActive(true);
+        Debug.Log("Showloginpage");
+
     }
     public void ShowDifficultyPage()
     {
         HideAllCanvases();
         difficultyCanvas.SetActive(true);
+        Debug.Log("ShowDifficultypage");
     }
 
 
@@ -34,6 +45,7 @@ public class MainSceneManager : MonoBehaviour
     {
         HideAllCanvases();
         aboutCanvas.SetActive(true);
+        Debug.Log("ShowAboutpage");
     }
 
     // Show the main menu
@@ -41,6 +53,7 @@ public class MainSceneManager : MonoBehaviour
     {
         HideAllCanvases();
         mainMenuCanvas.SetActive(true);
+        Debug.Log("ShowMainMenu");
     }
 
     // Show the store page
@@ -48,6 +61,7 @@ public class MainSceneManager : MonoBehaviour
     {
         HideAllCanvases();
         storeCanvas.SetActive(true);
+        Debug.Log("ShowStorepage");
     }
 
     // Show the options page
@@ -55,6 +69,7 @@ public class MainSceneManager : MonoBehaviour
     {
         HideAllCanvases();
         optionsCanvas.SetActive(true);
+        Debug.Log("ShowOptionspage");
     }
 
     // Hide all canvases

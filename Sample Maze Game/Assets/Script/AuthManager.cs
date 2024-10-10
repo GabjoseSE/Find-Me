@@ -20,8 +20,15 @@ public class AuthManager : MonoBehaviour
     private string signUpURL = "http://192.168.1.248/UnityFindME/add_player.php"; // Adjust according to your setup
     private string loginURL = "http://192.168.1.248/UnityFindME/login_player.php?"; // You'll create this login PHP file
     private string getCoinsURL = "http://192.168.1.248/UnityFindME/get_player_info.php"; 
-
-    private int coins; // Variable to store the player's coins
+    private void Start()
+    {
+        // Check if the player is already logged in
+        if (PlayerPrefs.GetInt("isLoggedIn", 0) == 1) // 0 means not logged in
+        {
+            string username = PlayerPrefs.GetString("LoggedInUser"); // Retrieve the username
+            StartCoroutine(GetPlayerInfo(username)); // Fetch player info from the database
+        }
+    }
     // Signup Button
     public void SignUp()
     {
@@ -81,7 +88,7 @@ public class AuthManager : MonoBehaviour
 
                 if (signUpResponse.status == "success")
                 {
-                    SceneManager.LoadSceneAsync(2); 
+                    SceneManager.LoadSceneAsync(0); 
                 }
                 else
                 {
@@ -127,7 +134,8 @@ public class AuthManager : MonoBehaviour
                 if (loginResponse.status == "success")
                 {
                     Debug.Log("Login Success: " + loginResponse.message);
-                    PlayerPrefs.SetString("LoggedInUser", username); // Save username to PlayerPrefs
+                    PlayerPrefs.SetInt("isLoggedIn", 1); // Mark the player as logged in
+                    PlayerPrefs.SetString("LoggedInUser", username); // Save the username
 
                     // Store the player coins
                     int playerCoins = loginResponse.player.coins;
@@ -150,7 +158,7 @@ public class AuthManager : MonoBehaviour
     }
 }
 public void OnLoginSuccess(int coins)
-{
+{ 
     CoinDisplay coinDisplay = FindObjectOfType<CoinDisplay>();
 
     if (coinDisplay != null)

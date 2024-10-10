@@ -46,7 +46,7 @@ public class CoinManager : MonoBehaviour
         coinText.text = "" + coinCount.ToString(); // Display updated coin count
     }
 
-    // Coroutine to load the coin count from the database
+   
     private IEnumerator LoadCoinsFromDatabase(string username)
     {
         WWWForm form = new WWWForm();
