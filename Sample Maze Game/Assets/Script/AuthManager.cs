@@ -16,9 +16,9 @@ public class AuthManager : MonoBehaviour
 
     
 
-    // URL to your PHP files
-    private string signUpURL = "http://192.168.1.248/UnityFindME/add_player.php"; // Adjust according to your setup
-    private string loginURL = "http://192.168.1.248/UnityFindME/login_player.php?"; // You'll create this login PHP file
+    // URL to PHP files
+    private string signUpURL = "http://192.168.1.248/UnityFindME/add_player.php"; 
+    private string loginURL = "http://192.168.1.248/UnityFindME/login_player.php?"; 
     private string getCoinsURL = "http://192.168.1.248/UnityFindME/get_player_info.php"; 
     private void Start()
     {
@@ -247,7 +247,7 @@ private IEnumerator GetPlayerInfo(string username)
 
 private void OnPlayerInfoUpdate(int updatedCoins, int freeze, int speedup, int invisibility, int navigation)
 {
-    CoinDisplay coinDisplay = FindObjectOfType<CoinDisplay>();  // Find the CoinDisplay in the scene
+    CoinDisplay coinDisplay = FindObjectOfType<CoinDisplay>();  
 
     if (coinDisplay != null)
     {

@@ -2096,7 +2096,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PlayerBody: {fileID: 1867491313}
   LockAxis: {x: 0, y: 0}
-  Sensivity: 40
+  Sensivity: 10
 --- !u!1 &331306706
 GameObject:
   m_ObjectHideFlags: 0
@@ -3807,6 +3807,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   coinCount: 0
+  coinAdd: 1
   coinText: {fileID: 2118830686}
   username: 
 --- !u!4 &603705650

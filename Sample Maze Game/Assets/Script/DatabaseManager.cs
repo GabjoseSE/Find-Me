@@ -40,7 +40,6 @@ public class DatabaseManager : MonoBehaviour
             else
             {
                 Debug.Log("Player Data: " + www.downloadHandler.text);
-                // Process the JSON data if necessary
             }
         }
     }

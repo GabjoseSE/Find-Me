@@ -7,9 +7,7 @@ public class LoginPasswordToggle : MonoBehaviour
 {
     
     public InputField passwordInputField;
-    
     public Button toggleButton0;
-
     public Sprite showPasswordIcon;   // Eye open icon
     public Sprite hidePasswordIcon;   // Eye closed icon
     private bool isPasswordVisible = false;
@@ -46,10 +44,6 @@ public class LoginPasswordToggle : MonoBehaviour
             toggleButton0.image.sprite = hidePasswordIcon;  // Change icon to eye closed
             
         }
-
-        // Force the InputField to update its text by "re-enabling" it
         passwordInputField.ForceLabelUpdate();
-        
-        
     }
 }

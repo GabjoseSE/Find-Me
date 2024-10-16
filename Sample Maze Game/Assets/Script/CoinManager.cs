@@ -6,10 +6,10 @@ using System.Collections;
 public class CoinManager : MonoBehaviour
 {
     public int coinCount = 0; // Total coins collected
+    public int coinAdd = 1;
     public Text coinText; // Reference to the UI Text to display the coin count
     public string username; // Username of the logged-in player
-    private string updateCoinsURL = "http://192.168.1.248/UnityFindME/update_coins.php"; // Change to your actual PHP URL
-
+    private string updateCoinsURL = "http://192.168.1.248/UnityFindME/update_coins.php"; 
     private void Start()
     {
         username = PlayerPrefs.GetString("LoggedInUser", null); // Default to null if not set
@@ -38,7 +38,7 @@ public class CoinManager : MonoBehaviour
             return; // Exit the method if the username is not set
         }
 
-        StartCoroutine(UpdateCoinsInDatabase(username, coinCount)); // Save the updated coin count to the database
+        StartCoroutine(UpdateCoinsInDatabase(username, coinAdd)); // Save the updated coin count to the database
     }
 
     private void UpdateCoinUI()
@@ -52,7 +52,7 @@ public class CoinManager : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("username", username); // Add the player's username
 
-        using (UnityWebRequest www = UnityWebRequest.Post("http://192.168.1.248/UnityFindME/get_coins.php", form)) // Adjust URL
+        using (UnityWebRequest www = UnityWebRequest.Post("http://192.168.1.248/UnityFindME/get_coins.php", form)) 
         {
             yield return www.SendWebRequest();
 
