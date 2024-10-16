@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Speed : MonoBehaviour
 {
-    public FirstPersonController playerController;
+    public PlayerMove playerController;
     public Button speedBoostButton;
     public float boostSpeed = 100f;
     public float boostDuration = 8f;
@@ -15,7 +15,7 @@ public class Speed : MonoBehaviour
     {
         if (playerController == null)
         {
-            playerController = GameObject.FindWithTag("Player").GetComponent<FirstPersonController>();
+            playerController = GameObject.FindWithTag("Player").GetComponent<PlayerMove>();
         }
     }
     public void OnActivation()
@@ -28,7 +28,7 @@ public class Speed : MonoBehaviour
 
     private IEnumerator ApplySpeedBoost()
     {
-        float originalSpeed = playerController.moveSpeed;
+        float originalSpeed = playerController.SpeedMove;
         playerController.SetMoveSpeed(boostSpeed);
         Debug.Log("YOU ARE SPEED!!");
         yield return new WaitForSeconds(boostDuration);
