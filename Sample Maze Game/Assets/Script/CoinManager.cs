@@ -15,7 +15,7 @@ public class CoinManager : MonoBehaviour
         username = PlayerPrefs.GetString("LoggedInUser", null); // Default to null if not set
         if (!string.IsNullOrEmpty(username))
         {
-            StartCoroutine(LoadCoinsFromDatabase(username)); // Load coins from the database
+            
         }
         else
         {
@@ -47,48 +47,7 @@ public class CoinManager : MonoBehaviour
     }
 
    
-    private IEnumerator LoadCoinsFromDatabase(string username)
-    {
-        WWWForm form = new WWWForm();
-        form.AddField("username", username); // Add the player's username
-
-        using (UnityWebRequest www = UnityWebRequest.Post("http://192.168.1.248/UnityFindME/get_coins.php", form)) 
-        {
-            yield return www.SendWebRequest();
-
-            if (www.result != UnityWebRequest.Result.Success)
-            {
-                Debug.LogError("Error loading coins from database: " + www.error);
-            }
-            else
-            {
-                // Log the raw response from the server
-                string responseText = www.downloadHandler.text;
-                Debug.Log("Coins load response: " + responseText);
-
-                // Try to parse the JSON response
-                try
-                {
-                    CoinsResponse response = JsonUtility.FromJson<CoinsResponse>(responseText); // Adjust this for your response
-
-                    if (response.status == "success")
-                    {
-                        coinCount = response.coins; // Assign the loaded coin count
-                        UpdateCoinUI(); // Update the UI with the loaded coin count
-                        Debug.Log("Coins loaded successfully: " + coinCount);
-                    }
-                    else
-                    {
-                        Debug.LogError("Error loading coins: " + response.message);
-                    }
-                }
-                catch (System.Exception e)
-                {
-                    Debug.LogError("JSON parsing error: " + e.Message);
-                }
-            }
-        }
-    }
+    
 
     // Coroutine to update the coin count in the database
     private IEnumerator UpdateCoinsInDatabase(string username, int coins)
