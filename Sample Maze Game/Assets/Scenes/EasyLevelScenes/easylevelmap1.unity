@@ -518,7 +518,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: 6b6c1aac2ae222e47a7dad755ffb8e32, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -1199,8 +1199,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -100, y: 537.5}
-  m_SizeDelta: {x: 165, y: 165}
+  m_AnchoredPosition: {x: -100, y: 545}
+  m_SizeDelta: {x: 150, y: 150}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &161197378
 MonoBehaviour:
@@ -1225,9 +1225,9 @@ MonoBehaviour:
   m_Colors:
     m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
-    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_PressedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_SelectedColor: {r: 1, g: 1, b: 1, a: 1}
+    m_DisabledColor: {r: 1, g: 1, b: 1, a: 0.5019608}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -1279,7 +1279,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: aa3b1d27463967b44a606ca9c7bb7431, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -5513,6 +5513,7 @@ MonoBehaviour:
   zombieAgent: {fileID: 1637014444}
   freezeDuration: 10
   freezeButton: {fileID: 2033818841}
+  cooldownImage: {fileID: 2033818842}
 --- !u!114 &902875671
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5525,10 +5526,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f865ad1cffb9d204ebdb7bdb037dd23c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerController: {fileID: 0}
+  playerController: {fileID: 1867491323}
   speedBoostButton: {fileID: 161197378}
   boostSpeed: 10
   boostDuration: 8
+  cooldownImage: {fileID: 161197379}
 --- !u!114 &902875672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5546,6 +5548,7 @@ MonoBehaviour:
   invisAttack: 0
   invisibilityDuration: 8
   invisButton: {fileID: 52337509}
+  cooldownImage: {fileID: 52337510}
 --- !u!95 &902875673
 Animator:
   serializedVersion: 5
@@ -13124,7 +13127,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 21300000, guid: a20a1a5679d38ab459c7cbdf7bbd104b, type: 3}
-  m_Type: 0
+  m_Type: 3
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4

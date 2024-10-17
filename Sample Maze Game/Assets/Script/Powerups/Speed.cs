@@ -11,12 +11,18 @@ public class Speed : MonoBehaviour
     public float boostDuration = 8f;
     private float remainingBoostTime;
 
+    //timer
+    public Image cooldownImage;
+
     void Start()
     {
         if (playerController == null)
         {
             playerController = GameObject.FindWithTag("Player").GetComponent<PlayerMove>();
         }
+
+        //timer
+        cooldownImage.fillAmount = 1;
     }
     public void OnActivation()
     {
@@ -38,8 +44,23 @@ public class Speed : MonoBehaviour
     private IEnumerator ButtonCooldownRoutine()
     {
         speedBoostButton.interactable = false;
-        yield return new WaitForSeconds(boostDuration);
+        float elapsedTime = 0f;
+
+        // **Highlighted: Start cooldown and update fill amount**
+        while (elapsedTime < boostDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            cooldownImage.fillAmount = elapsedTime / boostDuration; // **Highlighted: Updates the fill amount of the image**
+            yield return null;
+        }
+
         speedBoostButton.interactable = true;
+        cooldownImage.fillAmount = 1; // **Highlighted: Reset fill amount after cooldown**
+
+        //old code backup
+        /**speedBoostButton.interactable = false;
+        yield return new WaitForSeconds(boostDuration);
+        speedBoostButton.interactable = true;**/
     }
 
     //For powerups NOT FOR BUTTONS

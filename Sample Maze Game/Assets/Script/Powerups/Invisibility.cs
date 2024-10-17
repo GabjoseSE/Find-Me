@@ -10,6 +10,7 @@ public class Invisible : MonoBehaviour
     public float invisAttack = 0f;
     public float invisibilityDuration = 10f;
     public Button invisButton;
+    public Image cooldownImage;
 
     void Start()
     {
@@ -17,6 +18,7 @@ public class Invisible : MonoBehaviour
         {
             zombieBehaviour = GameObject.FindWithTag("Zombie").GetComponent<ZombieAI>();
         }
+        cooldownImage.fillAmount = 1;
     }
     public void OnActivation()
     {
@@ -40,8 +42,15 @@ public class Invisible : MonoBehaviour
     private IEnumerator ButtonCooldownRoutine()
     {
         invisButton.interactable = false;
-        yield return new WaitForSeconds(invisibilityDuration);
+        float elapsedTime = 0f;
+        while (elapsedTime < invisibilityDuration)
+        {
+            elapsedTime += Time.deltaTime;
+            cooldownImage.fillAmount = elapsedTime / invisibilityDuration;
+            yield return null;
+        }
         invisButton.interactable = true;
+        cooldownImage.fillAmount = 1;
     }
 
 
