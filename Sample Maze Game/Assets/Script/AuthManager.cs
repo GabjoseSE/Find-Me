@@ -8,6 +8,8 @@ using TMPro;
 
 public class AuthManager : MonoBehaviour
 {
+
+    public static AuthManager instance;
     public InputField usernameInput;
     public InputField passwordInput;
     public InputField confirmPasswordInput;
@@ -20,6 +22,21 @@ public class AuthManager : MonoBehaviour
     private string signUpURL = "http://192.168.1.248/UnityFindME/add_player.php"; 
     private string loginURL = "http://192.168.1.248/UnityFindME/login_player.php?"; 
     private string getCoinsURL = "http://192.168.1.248/UnityFindME/get_player_info.php"; 
+
+
+    private void Awake()
+    {
+        // Implement singleton pattern
+        if (instance == null)
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject); // Prevent this object from being destroyed on scene change
+        }
+        else
+        {
+            Destroy(gameObject); // Ensure that only one instance exists
+        }
+    }
     private void Start()
     {
         // Check if the player is already logged in
@@ -140,9 +157,19 @@ public class AuthManager : MonoBehaviour
                     // Store the player coins
                     int playerCoins = loginResponse.player.coins;
                     Debug.Log("Player Coins: " + playerCoins);
+                    int freeze = loginResponse.player.powerups.freeze;
+                    Debug.Log("Freeze count: " + freeze);
+                    int speedup = loginResponse.player.powerups.speedup;
+                    Debug.Log("speedup count: " + speedup);
+                    int invisibility = loginResponse.player.powerups.invisibility;
+                    Debug.Log("invisibility count: " + invisibility);
+                    int navigation = loginResponse.player.powerups.navigation;
+                    Debug.Log("navigation count: " + navigation);
 
+                    
+                    
                     // Now update the UI or other gameplay elements
-                    OnLoginSuccess(playerCoins);
+                    OnLoginSuccess(playerCoins, freeze,speedup,invisibility,navigation);
 
                 }
                 else
@@ -157,7 +184,7 @@ public class AuthManager : MonoBehaviour
         }
     }
 }
-public void OnLoginSuccess(int coins)
+public void OnLoginSuccess(int coins, int freeze, int speedup, int invisibility, int navigation)
 { 
     CoinDisplay coinDisplay = FindObjectOfType<CoinDisplay>();
 
@@ -228,6 +255,8 @@ private IEnumerator GetPlayerInfo(string username)
                             playerInfoResponse.player.powerups.invisibility, 
                             playerInfoResponse.player.powerups.navigation
                         );
+                        
+                        
                     }
                     else
                     {
@@ -241,19 +270,24 @@ private IEnumerator GetPlayerInfo(string username)
             }
         }
 
-        yield return new WaitForSeconds(5f); // Fetch every 5 seconds
+        yield return new WaitForSeconds(1f); 
     }
 }
 
 private void OnPlayerInfoUpdate(int updatedCoins, int freeze, int speedup, int invisibility, int navigation)
 {
+    PlayerPrefs.SetInt("Freeze", freeze);
+    PlayerPrefs.SetInt("SpeedUp", speedup);
+    PlayerPrefs.SetInt("Invisibility", invisibility);
+    PlayerPrefs.SetInt("Navigation", navigation);
+    PlayerPrefs.Save(); // Persist the changes
+    Debug.Log("Power-ups saved to PlayerPrefs");
     CoinDisplay coinDisplay = FindObjectOfType<CoinDisplay>();  
 
     if (coinDisplay != null)
     {
         Debug.Log("Updating coin display with updated value: " + updatedCoins);
         coinDisplay.UpdateCoinDisplay(updatedCoins);  
-        
         coinDisplay.UpdatePowerupDisplay(freeze, speedup, invisibility, navigation);
 
     }
@@ -287,14 +321,13 @@ private void OnPlayerInfoUpdate(int updatedCoins, int freeze, int speedup, int i
 [Serializable]
 public class Player
 {
-    public int player_id;  // Matches "player_id" in JSON
-    public string username;  // Matches "username" in JSON
-    public int coins;  // Matches "coins" in JSON
-
-    // Matches the nested "powerups" object in JSON
+    public int player_id;  
+    public string username;  
+    public int coins;  
+    
     public Powerups powerups;  
 
-    public string created_at;  // Matches "created_at" in JSON
+    public string created_at;  
 }
 
 [Serializable]
@@ -308,8 +341,8 @@ public class LoginResponse
 [Serializable]
 public class Powerups
 {
-    public int freeze;  // Matches "freeze" in JSON
-    public int speedup;  // Matches "speedup" in JSON
-    public int invisibility;  // Matches "invisibility" in JSON
-    public int navigation;  // Matches "navigation" in JSON
+    public int freeze;  
+    public int speedup; 
+    public int invisibility;  
+    public int navigation;  
 }
