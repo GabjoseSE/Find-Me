@@ -40,10 +40,6 @@ public class Freeze : MonoBehaviour
     {
         StartCoroutine(CheckAndActivateFreeze());
         animator = GetComponent<Animator>();
-        StartCoroutine(FreezeZombie(zombieAgent));
-        StartCoroutine(ButtonCooldownRoutine());
-
-
     }
 
     private IEnumerator CheckAndActivateFreeze()
