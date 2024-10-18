@@ -108,13 +108,13 @@ public class ZombieAI : MonoBehaviour
 
     // Attack the player if within range
     void AttackPlayer()
-{
-    if (playerHealth != null)
     {
-        playerHealth.TakeDamage(damage);
-        Debug.Log("Zombie attacks! Player takes damage.");
+        if (playerHealth != null)
+        {
+            playerHealth.TakeDamage(damage);
+            Debug.Log("Zombie attacks! Player takes damage.");
+        }
     }
-}
 
 
     // Visualize detection and attack range in the editor
@@ -129,7 +129,7 @@ public class ZombieAI : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, attackRange);
     }
 
-    // Setters for attack and detection range
+    // Setters for attack, detection range, and speed
     public void SetAttackRange(float newAttack)
     {
         attackRange = newAttack;
@@ -138,5 +138,10 @@ public class ZombieAI : MonoBehaviour
     public void SetDetectionRange(float newDetection)
     {
         detectionRange = newDetection;
+    }
+
+    public void SetSpeed(float newSpeed)
+    {
+        chaseSpeed = newSpeed;
     }
 }
