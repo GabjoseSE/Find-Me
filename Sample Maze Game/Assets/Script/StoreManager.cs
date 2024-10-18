@@ -35,7 +35,7 @@ public class StoreManager : MonoBehaviour
     }
 
     private IEnumerator LoadCoinsFromDatabase(string username)
-{
+    {
     WWWForm form = new WWWForm();
     form.AddField("username", username); 
 
