@@ -52,6 +52,10 @@ public class MainMenu : MonoBehaviour
     {
         PlayerPrefs.SetInt("isLoggedIn", 0); // Set login state to not logged in
         PlayerPrefs.DeleteKey("LoggedInUser");
+        PlayerPrefs.DeleteKey("freeze");
+        PlayerPrefs.DeleteKey("invisibility");
+        PlayerPrefs.DeleteKey("navigation");
+        PlayerPrefs.DeleteKey("speedup");
         Debug.Log("Logout, deleted username");
         SceneManager.LoadSceneAsync(0); // Replace 1 with the index of your login scene
     }

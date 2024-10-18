@@ -24,19 +24,28 @@ public class AuthManager : MonoBehaviour
     private string getCoinsURL = "http://192.168.1.248/UnityFindME/get_player_info.php"; 
 
 
-    private void Awake()
+    /*private void Awake()
     {
-        // Implement singleton pattern
-        if (instance == null)
+        // Check if the current scene is the login scene
+        if (SceneManager.GetActiveScene().name == "easylevelmap1") // Change "LoginScene" to the name of your scene
         {
-            instance = this;
-            DontDestroyOnLoad(gameObject); // Prevent this object from being destroyed on scene change
+            // Implement singleton pattern
+            if (instance == null)
+            {
+                instance = this;
+                DontDestroyOnLoad(gameObject); // Prevent this object from being destroyed on scene change
+            }
+            else
+            {
+                Destroy(gameObject); // Ensure that only one instance exists
+            }
         }
         else
         {
-            Destroy(gameObject); // Ensure that only one instance exists
+           
         }
-    }
+        
+    }*/
     private void Start()
     {
         // Check if the player is already logged in
