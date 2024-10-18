@@ -8,7 +8,7 @@ public class PlayerHealth : MonoBehaviour
     public int currentHealth = 2; // Current player's health (start with 3 hearts)
     public GameObject jumpscareImage; // Assign the jumpscare image here
     public AudioSource jumpscareSound;
-    
+
 
     public void Start()
     {
@@ -16,6 +16,7 @@ public class PlayerHealth : MonoBehaviour
         if (jumpscareImage != null)
         {
             jumpscareImage.SetActive(false); // Hide the jumpscare image at the start
+            Time.timeScale = 1;
         }
     }
 
@@ -30,14 +31,14 @@ public class PlayerHealth : MonoBehaviour
 
     // Call this function when the player loses a heart
     // Call this function when the player loses a heart
-public void LoseHeart()
-{
-    if (currentHealth > 0)
+    public void LoseHeart()
     {
-        currentHealth--; // Decrease health
-        UpdateHearts();  // Update the UI
+        if (currentHealth > 0)
+        {
+            currentHealth--; // Decrease health
+            UpdateHearts();  // Update the UI
+        }
     }
-}
 
 
     // Call this function when the player collects a heart
@@ -52,50 +53,51 @@ public void LoseHeart()
 
     // Call this when the player takes damage
     // Call this when the player takes damage
-public void TakeDamage(int damage)
-{
-    for (int i = 0; i < damage; i++)
+    public void TakeDamage(int damage)
     {
-        LoseHeart(); // Call LoseHeart for each point of damage
+        for (int i = 0; i < damage; i++)
+        {
+            LoseHeart(); // Call LoseHeart for each point of damage
+        }
+
+        Debug.Log($"Player takes damage. Current health: {currentHealth}");
+
+        // Check for death
+        if (currentHealth <= 0)
+        {
+            Debug.Log("Health is 0, calling Die() method.");
+            Die();
+        }
     }
 
-    Debug.Log($"Player takes damage. Current health: {currentHealth}");
-
-    // Check for death
-    if (currentHealth <= 0)
+    public void Die()
     {
-        Debug.Log("Health is 0, calling Die() method.");
-        Die();
-    }
-}
+        Debug.Log("Die() method called."); // Log when this method is called
 
-   public void Die()
-{
-    Debug.Log("Die() method called."); // Log when this method is called
+        // Show jumpscare image
+        if (jumpscareImage != null)
+        {
+            jumpscareImage.SetActive(true); // Show the jumpscare image
+            Time.timeScale = 0;
+            Debug.Log("Jumpscare image is now active.");
+        }
+        else
+        {
+            Debug.LogWarning("Jumpscare image is not assigned.");
+        }
 
-    // Show jumpscare image
-    if (jumpscareImage != null)
-    {
-        jumpscareImage.SetActive(true); // Show the jumpscare image
-        Debug.Log("Jumpscare image is now active.");
-    }
-    else
-    {
-        Debug.LogWarning("Jumpscare image is not assigned.");
-    }
+        // Play jumpscare sound
+        if (jumpscareSound != null)
+        {
+            jumpscareSound.Play(); // Play the sound
+            Debug.Log("Jumpscare sound is now playing.");
+        }
+        else
+        {
+            Debug.LogWarning("Jumpscare sound is not assigned.");
+        }
 
-    // Play jumpscare sound
-    if (jumpscareSound != null)
-    {
-        jumpscareSound.Play(); // Play the sound
-        Debug.Log("Jumpscare sound is now playing.");
+        Debug.Log("Player is dead!");
     }
-    else
-    {
-        Debug.LogWarning("Jumpscare sound is not assigned.");
-    }
-
-    Debug.Log("Player is dead!");
-}
 
 }
