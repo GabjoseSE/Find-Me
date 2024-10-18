@@ -6,10 +6,17 @@ public class PlayerHealth : MonoBehaviour
     public Image[] hearts; // Array to store heart images
     public int maxHealth = 5; // Maximum player health
     public int currentHealth = 2; // Current player's health (start with 3 hearts)
+    public GameObject jumpscareImage; // Assign the jumpscare image here
+    public AudioSource jumpscareSound;
+    
 
-    void Start()
+    public void Start()
     {
         UpdateHearts(); // Update the heart display based on the current health
+        if (jumpscareImage != null)
+        {
+            jumpscareImage.SetActive(false); // Hide the jumpscare image at the start
+        }
     }
 
     // Function to update hearts display
@@ -57,17 +64,38 @@ public void TakeDamage(int damage)
     // Check for death
     if (currentHealth <= 0)
     {
+        Debug.Log("Health is 0, calling Die() method.");
         Die();
     }
 }
 
+   public void Die()
+{
+    Debug.Log("Die() method called."); // Log when this method is called
 
-
-
-    void Die()
+    // Show jumpscare image
+    if (jumpscareImage != null)
     {
-        // Handle player death
-        Debug.Log("Player is dead!");
-        // Implement what happens when the player dies (restart level, show game over, etc.)
+        jumpscareImage.SetActive(true); // Show the jumpscare image
+        Debug.Log("Jumpscare image is now active.");
     }
+    else
+    {
+        Debug.LogWarning("Jumpscare image is not assigned.");
+    }
+
+    // Play jumpscare sound
+    if (jumpscareSound != null)
+    {
+        jumpscareSound.Play(); // Play the sound
+        Debug.Log("Jumpscare sound is now playing.");
+    }
+    else
+    {
+        Debug.LogWarning("Jumpscare sound is not assigned.");
+    }
+
+    Debug.Log("Player is dead!");
+}
+
 }
