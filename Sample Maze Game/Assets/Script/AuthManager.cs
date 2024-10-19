@@ -19,9 +19,9 @@ public class AuthManager : MonoBehaviour
     
 
     // URL to PHP files
-    private string signUpURL = "http://192.168.1.248/UnityFindME/add_player.php"; 
-    private string loginURL = "http://192.168.1.248/UnityFindME/login_player.php?"; 
-    private string getCoinsURL = "http://192.168.1.248/UnityFindME/get_player_info.php"; 
+    private string signUpURL = "http://192.168.43.237/UnityFindME/add_player.php"; 
+    private string loginURL = "http://192.168.43.237/UnityFindME/login_player.php?"; 
+    private string getCoinsURL = "http://192.168.43.237/UnityFindME/get_player_info.php"; 
 
 
     /*private void Awake()
