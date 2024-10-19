@@ -8,6 +8,9 @@ public class PlayerHealth : MonoBehaviour
     public int currentHealth = 2; // Current player's health (start with 3 hearts)
     public GameObject jumpscareImage; // Assign the jumpscare image here
     public AudioSource jumpscareSound;
+    public GameObject gameCanvas;
+    public GameObject pauseCanvas;
+    public GameObject powerupCanvas;
 
 
     public void Start()
@@ -16,6 +19,9 @@ public class PlayerHealth : MonoBehaviour
         if (jumpscareImage != null)
         {
             jumpscareImage.SetActive(false); // Hide the jumpscare image at the start
+            gameCanvas.SetActive(true);
+            pauseCanvas.SetActive(true);
+            powerupCanvas.SetActive(true);
             Time.timeScale = 1;
         }
     }
@@ -78,6 +84,9 @@ public class PlayerHealth : MonoBehaviour
         if (jumpscareImage != null)
         {
             jumpscareImage.SetActive(true); // Show the jumpscare image
+            gameCanvas.SetActive(false);
+            pauseCanvas.SetActive(false);
+            powerupCanvas.SetActive(false);
             Time.timeScale = 0;
             Debug.Log("Jumpscare image is now active.");
         }
