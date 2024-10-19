@@ -5487,6 +5487,9 @@ MonoBehaviour:
   currentHealth: 3
   jumpscareImage: {fileID: 906824449}
   jumpscareSound: {fileID: 1146533108}
+  gameCanvas: {fileID: 23704101}
+  pauseCanvas: {fileID: 331306706}
+  powerupCanvas: {fileID: 1672759705}
 --- !u!1001 &740426148
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -13454,6 +13457,9 @@ MonoBehaviour:
   currentHealth: 3
   jumpscareImage: {fileID: 0}
   jumpscareSound: {fileID: 1146533108}
+  gameCanvas: {fileID: 0}
+  pauseCanvas: {fileID: 0}
+  powerupCanvas: {fileID: 0}
 --- !u!114 &1867491322
 MonoBehaviour:
   m_ObjectHideFlags: 0
