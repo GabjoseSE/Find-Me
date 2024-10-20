@@ -9,7 +9,7 @@ public class CoinManager : MonoBehaviour
     public int coinAdd = 1;
     public Text coinText; // Reference to the UI Text to display the coin count
     public string username; // Username of the logged-in player
-    private string updateCoinsURL = "http://192.168.43.237/UnityFindME/update_coins.php";
+    private string updateCoinsURL = "http://192.168.1.12/UnityFindME/update_coins.php";
     private void Start()
     {
         username = PlayerPrefs.GetString("LoggedInUser", null); // Default to null if not set

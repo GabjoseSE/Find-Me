@@ -19,12 +19,12 @@ public class AuthManager : MonoBehaviour
     
 
     // URL to PHP files
-    private string signUpURL = "http://192.168.43.237/UnityFindME/add_player.php"; 
-    private string loginURL = "http://192.168.43.237/UnityFindME/login_player.php?"; 
-    private string getCoinsURL = "http://192.168.43.237/UnityFindME/get_player_info.php"; 
+    private string signUpURL = "http://192.168.1.12/UnityFindME/add_player.php"; 
+    private string loginURL = "http://192.168.1.12/UnityFindME/login_player.php?"; 
+    private string getCoinsURL = "http://192.168.1.12/UnityFindME/get_player_info.php"; 
 
 
-    /*private void Awake()
+    private void Awake()
     {
         // Check if the current scene is the login scene
         if (SceneManager.GetActiveScene().name == "easylevelmap1") // Change "LoginScene" to the name of your scene
@@ -45,7 +45,7 @@ public class AuthManager : MonoBehaviour
            
         }
         
-    }*/
+    }
     private void Start()
     {
         // Check if the player is already logged in
