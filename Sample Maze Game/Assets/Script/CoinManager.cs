@@ -9,13 +9,13 @@ public class CoinManager : MonoBehaviour
     public int coinAdd = 1;
     public Text coinText; // Reference to the UI Text to display the coin count
     public string username; // Username of the logged-in player
-    private string updateCoinsURL = "http://192.168.43.237/UnityFindME/update_coins.php"; 
+    private string updateCoinsURL = "http://192.168.43.237/UnityFindME/update_coins.php";
     private void Start()
     {
         username = PlayerPrefs.GetString("LoggedInUser", null); // Default to null if not set
         if (!string.IsNullOrEmpty(username))
         {
-            
+
         }
         else
         {
@@ -46,14 +46,14 @@ public class CoinManager : MonoBehaviour
         coinText.text = "" + coinCount.ToString(); // Display updated coin count
     }
 
-   
-    
+
+
 
     // Coroutine to update the coin count in the database
     private IEnumerator UpdateCoinsInDatabase(string username, int coins)
     {
         WWWForm form = new WWWForm();
-        
+
         // Log the username and coin count for debugging
         Debug.Log("Updating coins in the database for user: " + username + " with coin count: " + coins);
 
