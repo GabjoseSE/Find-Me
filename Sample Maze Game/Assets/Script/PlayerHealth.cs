@@ -1,29 +1,17 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerHealth : MonoBehaviour
 {
     public Image[] hearts; // Array to store heart images
     public int maxHealth = 5; // Maximum player health
     public int currentHealth = 2; // Current player's health (start with 3 hearts)
-    public GameObject jumpscareImage; // Assign the jumpscare image here
-    public AudioSource jumpscareSound;
-    public GameObject gameCanvas;
-    public GameObject pauseCanvas;
-    public GameObject powerupCanvas;
 
 
     public void Start()
     {
         UpdateHearts(); // Update the heart display based on the current health
-        if (jumpscareImage != null)
-        {
-            jumpscareImage.SetActive(false); // Hide the jumpscare image at the start
-            gameCanvas.SetActive(true);
-            pauseCanvas.SetActive(true);
-            powerupCanvas.SetActive(true);
-            Time.timeScale = 1;
-        }
     }
 
     // Function to update hearts display
@@ -72,41 +60,7 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth <= 0)
         {
             Debug.Log("Health is 0, calling Die() method.");
-            Die();
+            SceneManager.LoadSceneAsync(19);
         }
     }
-
-    public void Die()
-    {
-        Debug.Log("Die() method called."); // Log when this method is called
-
-        // Show jumpscare image
-        if (jumpscareImage != null)
-        {
-            jumpscareImage.SetActive(true); // Show the jumpscare image
-            gameCanvas.SetActive(false);
-            pauseCanvas.SetActive(false);
-            powerupCanvas.SetActive(false);
-            Time.timeScale = 0;
-            Debug.Log("Jumpscare image is now active.");
-        }
-        else
-        {
-            Debug.LogWarning("Jumpscare image is not assigned.");
-        }
-
-        // Play jumpscare sound
-        if (jumpscareSound != null)
-        {
-            jumpscareSound.Play(); // Play the sound
-            Debug.Log("Jumpscare sound is now playing.");
-        }
-        else
-        {
-            Debug.LogWarning("Jumpscare sound is not assigned.");
-        }
-
-        Debug.Log("Player is dead!");
-    }
-
 }
