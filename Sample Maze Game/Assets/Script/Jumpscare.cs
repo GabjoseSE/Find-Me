@@ -11,6 +11,7 @@ public class Jumpscare : MonoBehaviour
     public CanvasGroup fadeCanvasGroup; // Canvas Group for fade effect
     public float fadeDuration = 1f;
 
+
     void Start()
     {
         fadeCanvasGroup.alpha = 1f;
@@ -48,5 +49,6 @@ public class Jumpscare : MonoBehaviour
             yield return null;
         }
         fadeCanvasGroup.alpha = endAlpha;
+
     }
 }
