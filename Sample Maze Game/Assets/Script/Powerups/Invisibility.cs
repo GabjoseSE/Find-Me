@@ -43,7 +43,7 @@ public class Invisible : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("username", username);  
 
-        using (UnityWebRequest www = UnityWebRequest.Post("http://192.168.43.237/UnityFindME/invisibility.php", form))
+        using (UnityWebRequest www = UnityWebRequest.Post("http://192.168.1.12/UnityFindME/invisibility.php", form))
         {
             yield return www.SendWebRequest();
 

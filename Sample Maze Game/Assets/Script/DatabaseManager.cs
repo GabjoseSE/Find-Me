@@ -11,7 +11,7 @@ public class DatabaseManager : MonoBehaviour
         form.AddField("username", username);
         form.AddField("password", password);
 
-        using (UnityWebRequest www = UnityWebRequest.Post("http://192.168.43.237/UnityFindME/add_player.php", form))
+        using (UnityWebRequest www = UnityWebRequest.Post("http://192.168.1.12/UnityFindME/add_player.php", form))
         {
             yield return www.SendWebRequest();
 
@@ -29,7 +29,7 @@ public class DatabaseManager : MonoBehaviour
     // Fetch player data by username
     public IEnumerator GetPlayerData(string username)
     {
-        using (UnityWebRequest www = UnityWebRequest.Get("http://192.168.43.237/UnityFindME/get_player.php?username=" + username))
+        using (UnityWebRequest www = UnityWebRequest.Get("http://192.168.1.12/UnityFindME/get_player.php?username=" + username))
         {
             yield return www.SendWebRequest();
 
