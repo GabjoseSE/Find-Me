@@ -200,6 +200,7 @@ GameObject:
   - component: {fileID: 2173388877964122687}
   - component: {fileID: 4165155528924131061}
   - component: {fileID: 5940425921394606801}
+  - component: {fileID: 8146607516928147791}
   m_Layer: 0
   m_Name: Exit Portal
   m_TagString: Untagged
@@ -286,7 +287,24 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74da44f420f38f3489f8b07284c4019c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  exit: {fileID: 968252739625128691}
+  exitObject: {fileID: 0}
+--- !u!114 &8146607516928147791
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2507773346937655072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: bcbbcc0274a7b2d4882ad89853e22750, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 0
 --- !u!1 &3985220104443350185
 GameObject:
   m_ObjectHideFlags: 0
