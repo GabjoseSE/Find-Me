@@ -11,14 +11,14 @@ public class Jumpscare : MonoBehaviour
     public VideoPlayer currentVideo;
     public VideoPlayer nextVideo;
     public CanvasGroup fadeCanvasGroup;    // Canvas Group for fade effect between videos
-    public CanvasGroup textCanvasGroup;    // Canvas Group for TextMeshPro text
-    public TextMeshProUGUI transitionText; // TextMeshPro text element
+    public CanvasGroup imageCanvasGroup;   // Canvas Group for the Image
+    public Image transitionImage;          // UI Image that will fade in
     public float fadeDuration = 1f;        // Fade duration
 
     void Start()
     {
         fadeCanvasGroup.alpha = 1f;
-        textCanvasGroup.alpha = 0f;        // Make sure the text is hidden initially
+        imageCanvasGroup.alpha = 0f;        // Make sure the image is hidden initially
         currentVideo.loopPointReached += EndReached;
         currentVideo.Play();                // Play the first video
     }
@@ -41,13 +41,13 @@ public class Jumpscare : MonoBehaviour
         // Fade in the next video
         yield return StartCoroutine(FadeCanvasGroup(fadeCanvasGroup, 0f, 1f));
 
-        // ** Now fade in the TMP text **
-        yield return StartCoroutine(FadeCanvasGroup(textCanvasGroup, 0f, 1f));
+        // ** Now fade in the Image **
+        yield return StartCoroutine(FadeCanvasGroup(imageCanvasGroup, 0f, 1f));
 
-        // Wait for a few seconds to display the text (adjust delay as needed)
+        // Wait for a few seconds to display the image (adjust delay as needed)
         yield return new WaitForSeconds(3f);
 
-        // Fade out the next video and TMP text
+        // Fade out the next video and the Image
         yield return StartCoroutine(FadeCanvasGroup(fadeCanvasGroup, 1f, 0f));
 
         // Load the next scene after the fade-out
