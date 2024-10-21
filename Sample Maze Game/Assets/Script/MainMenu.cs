@@ -65,25 +65,34 @@ public class MainMenu : MonoBehaviour
     }
 
     IEnumerator LoadSceneAsync(string sceneName)
+{
+    // Activate the loading screen before starting the scene load
+    loadingScreen.SetActive(true);
+
+    // Begin loading the scene asynchronously
+    AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
+
+    // Ensure the scene doesn't activate immediately when loading completes
+    operation.allowSceneActivation = false;
+
+    // Optionally: You can show the loading progress here if desired
+    while (operation.progress < 0.9f) // Scene is considered loaded at 0.9f progress
     {
-        // Activate the loading screen
-        loadingScreen.SetActive(true);
-
-        // Begin loading the scene asynchronously
-        AsyncOperation operation = SceneManager.LoadSceneAsync(sceneName);
-
-        // While the scene is loading, update the progress bar
-        while (!operation.isDone)
-        {
-            // Optionally, you can display the loading progress (ranges from 0.0 to 1.0)
-            float progress = Mathf.Clamp01(operation.progress / 0.9f);
-            
-
-            // Yield the frame to allow loading to proceed
-            yield return null;
-        }
-
-        // Deactivate the loading screen once the scene is loaded
-        loadingScreen.SetActive(false);
+        // Optionally, update a progress bar here (if you have one)
+        yield return null;
     }
+
+    // Once the scene is fully loaded (reaches 90%), wait for a brief moment
+    yield return new WaitForSeconds(1); // Optional: extra time to keep loading screen visible
+
+    // Allow the scene to activate (this will switch to the new scene)
+    operation.allowSceneActivation = true;
+
+    // Wait for one more frame to ensure the new scene has fully activated
+    yield return null;
+
+    // Deactivate the loading screen after the new scene has fully activated
+    loadingScreen.SetActive(false);
+}
+
 }

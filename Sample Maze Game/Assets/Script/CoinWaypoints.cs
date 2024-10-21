@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DiamondWaypoints : MonoBehaviour
+public class CoinWaypoints : MonoBehaviour
 {
-    public GameObject diamond;
+    public GameObject coins;
     public Transform[] waypoints;
     public int numberOfObjectsToSpawn = 4;
     private List<Transform> availableWaypoints;
@@ -15,10 +15,10 @@ public class DiamondWaypoints : MonoBehaviour
             Debug.LogError("Not enough waypoints available for spawning!");
             return;
         }
-        spawnDiamond();
+        spawnCoin();
     }
 
-    void spawnDiamond()
+    void spawnCoin()
     {
         availableWaypoints = new List<Transform>(waypoints);
         for (int i = 0; i < numberOfObjectsToSpawn; i++)
@@ -28,7 +28,7 @@ public class DiamondWaypoints : MonoBehaviour
             Transform spawnPoint = availableWaypoints[randomIndex];
 
             // Spawn the object at the random waypoint
-            Instantiate(diamond, spawnPoint.position, spawnPoint.rotation);
+            Instantiate(coins, spawnPoint.position, spawnPoint.rotation);
 
             // Remove the used waypoint from the list so it's not reused
             availableWaypoints.RemoveAt(randomIndex);
