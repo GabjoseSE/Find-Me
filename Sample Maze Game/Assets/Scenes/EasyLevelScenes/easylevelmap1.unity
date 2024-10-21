@@ -2978,7 +2978,7 @@ Canvas:
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
   m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 7
+  m_AdditionalShaderChannelsFlag: 31
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 0
@@ -5784,11 +5784,6 @@ MonoBehaviour:
   - {fileID: 146484100}
   maxHealth: 5
   currentHealth: 3
-  jumpscareImage: {fileID: 906824449}
-  jumpscareSound: {fileID: 1146533108}
-  gameCanvas: {fileID: 23704101}
-  pauseCanvas: {fileID: 331306706}
-  powerupCanvas: {fileID: 1672759705}
 --- !u!1001 &740426148
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9646,7 +9641,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1334543803
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14049,11 +14044,6 @@ MonoBehaviour:
   hearts: []
   maxHealth: 5
   currentHealth: 3
-  jumpscareImage: {fileID: 0}
-  jumpscareSound: {fileID: 1146533108}
-  gameCanvas: {fileID: 0}
-  pauseCanvas: {fileID: 0}
-  powerupCanvas: {fileID: 0}
 --- !u!114 &1867491322
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15570,6 +15560,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ef7c8e81239b6e4494fd219fec16038, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  loadingScreen: {fileID: 0}
 --- !u!4 &2133415523
 Transform:
   m_ObjectHideFlags: 0
