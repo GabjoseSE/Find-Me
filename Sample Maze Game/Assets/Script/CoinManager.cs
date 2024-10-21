@@ -5,6 +5,9 @@ using System.Collections;
 
 public class CoinManager : MonoBehaviour
 {
+    public AudioClip collectSound;
+    private AudioSource audioSource;
+    public Coin coinScript;
     public int coinCount = 0; // Total coins collected
     public int coinAdd = 1;
     public Text coinText; // Reference to the UI Text to display the coin count
@@ -12,6 +15,7 @@ public class CoinManager : MonoBehaviour
     private string updateCoinsURL = "http://192.168.1.12/UnityFindME/update_coins.php";
     private void Start()
     {
+        audioSource = GetComponent<AudioSource>();
         username = PlayerPrefs.GetString("LoggedInUser", null); // Default to null if not set
         if (!string.IsNullOrEmpty(username))
         {
@@ -28,6 +32,7 @@ public class CoinManager : MonoBehaviour
     // Function to update the coin count when a coin is collected
     public void CollectCoin()
     {
+        PlayCollectSound();
         coinCount++;
         UpdateCoinUI();
 
@@ -109,5 +114,12 @@ public class CoinManager : MonoBehaviour
     {
         username = user;
         Debug.Log("Username set to: " + username); // Log the username being set
+    }
+    private void PlayCollectSound()
+    {
+        if (audioSource != null && collectSound != null)
+        {
+            audioSource.PlayOneShot(collectSound);
+        }
     }
 }
