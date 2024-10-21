@@ -4,11 +4,11 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.Video;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class Diamond : MonoBehaviour
 {
-    public GameObject rawImage;
-    public VideoPlayer youWin;
+    public Exit exitScript;
     public AudioClip collectSound;
     private AudioSource audioSource;
     public TextMeshProUGUI diamondCounterText;
@@ -17,8 +17,6 @@ public class Diamond : MonoBehaviour
 
     void Start()
     {
-        youWin.gameObject.SetActive(false);
-        rawImage.SetActive(false);
         audioSource = GetComponent<AudioSource>();
         updateDiamondCollection();
     }
@@ -32,11 +30,8 @@ public class Diamond : MonoBehaviour
         //win condition
         if (diamondCollected >= totalObjectsToCollect)
         {
-            rawImage.SetActive(true);
-            youWin.gameObject.SetActive(true);
-            youWin.Play();
-            Time.timeScale = 0;
-            Debug.Log("u win bruh");
+            Debug.Log("you win");
+            exitScript.whenAllDiaCollected();
         }
     }
     private void PlayCollectSound()
@@ -51,4 +46,5 @@ public class Diamond : MonoBehaviour
     {
         diamondCounterText.text = diamondCollected + "/" + totalObjectsToCollect;
     }
+
 }
