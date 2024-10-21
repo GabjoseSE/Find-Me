@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class Diamond : MonoBehaviour
 {
+    public Exit exitScript;
     public AudioClip collectSound;
     private AudioSource audioSource;
     public TextMeshProUGUI diamondCounterText;
@@ -29,8 +30,8 @@ public class Diamond : MonoBehaviour
         //win condition
         if (diamondCollected >= totalObjectsToCollect)
         {
-            SceneManager.LoadSceneAsync(20);
-            Debug.Log("u win bruh");
+            Debug.Log("you win");
+            exitScript.whenAllDiaCollected();
         }
     }
     private void PlayCollectSound()
