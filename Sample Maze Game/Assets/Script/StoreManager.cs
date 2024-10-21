@@ -103,6 +103,7 @@ public class StoreManager : MonoBehaviour
     // Coroutine to handle buying power-ups
     private IEnumerator BuyPowerUp(string powerup, int price)
 {
+    username = PlayerPrefs.GetString("LoggedInUser", null); 
     if (coinCount >= price)
     {
         // Deduct coins
