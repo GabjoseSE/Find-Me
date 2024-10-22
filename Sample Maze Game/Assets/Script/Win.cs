@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Video;
+using UnityEngine.SceneManagement;
 
 public class Win : MonoBehaviour
 {
     public CanvasGroup fadeCanvasGroup;        // The CanvasGroup used for fading the entire scene
     public VideoPlayer videoPlayer;            // The VideoPlayer component for playing the video
     public Image imageToFade;                  // Image component to fade in alongside the video
-    public float fadeDuration = 1.5f;          // Duration of the fade-in effect
+    public float fadeDuration = 1.5f;          // Duration of the fade-in and fade-out effects
     public float imageDelay = 2f;              // Delay before the image starts fading in
 
     private void Start()
@@ -17,6 +18,9 @@ public class Win : MonoBehaviour
         // Start with the video and scene fully transparent
         fadeCanvasGroup.alpha = 0f; // Set to 0 for a fade-in effect
         videoPlayer.Play(); // Start playing the video (if auto-play is disabled in VideoPlayer settings)
+
+        // Subscribe to the loopPointReached event
+        videoPlayer.loopPointReached += OnVideoEnd;
 
         // Start the fade-in coroutine
         StartCoroutine(FadeInSceneWithVideo());
@@ -64,5 +68,30 @@ public class Win : MonoBehaviour
         // Ensure the image is fully visible at the end
         imageColor.a = 1;
         imageToFade.color = imageColor;
+    }
+
+    private void OnVideoEnd(VideoPlayer vp)
+    {
+        // Start fading out and loading the next scene when the video ends
+        StartCoroutine(FadeOutAndLoadNextScene());
+    }
+
+    private IEnumerator FadeOutAndLoadNextScene()
+    {
+        float elapsedTime = 0f;
+
+        // Gradually decrease the alpha from 1 to 0 to make the scene fade out
+        while (elapsedTime < fadeDuration)
+        {
+            fadeCanvasGroup.alpha = Mathf.Lerp(1f, 0f, elapsedTime / fadeDuration);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+
+        // Ensure the canvas is fully transparent
+        fadeCanvasGroup.alpha = 0f;
+
+        // Load the next scene
+        SceneManager.LoadSceneAsync(0);
     }
 }
