@@ -41,7 +41,7 @@ public class Speed : MonoBehaviour
     {
         // Call the PHP backend to check and deduct speedup power-up
         WWWForm form = new WWWForm();
-        form.AddField("username", username);  
+        form.AddField("username", username);
 
         using (UnityWebRequest www = UnityWebRequest.Post("http://192.168.1.12/UnityFindME/speedup.php", form))
         {
@@ -60,11 +60,11 @@ public class Speed : MonoBehaviour
                 if (speedupResponse.status == "success")
                 {
                     // Activate speedup effect
-                    
+
                     StartCoroutine(ApplySpeedBoost());
                     StartCoroutine(ButtonCooldownRoutine());
                     Debug.Log("8 Seconds Boost");
-            Debug.Log("8 Seconds Button Cooldown");
+                    Debug.Log("8 Seconds Button Cooldown");
                     Debug.Log("Speedup activated, remaining count: " + speedupResponse.speedup_count);
                 }
                 else
@@ -107,16 +107,6 @@ public class Speed : MonoBehaviour
         speedBoostButton.interactable = true;**/
     }
 
-    //For powerups NOT FOR BUTTONS
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            StartCoroutine(ApplySpeedBoost());
-            Destroy(gameObject);
-        }
-    }
     [System.Serializable]
     public class SpeedupResponse
     {

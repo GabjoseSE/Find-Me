@@ -46,7 +46,7 @@ public class Freeze : MonoBehaviour
     {
         // Call the PHP backend to check and deduct freeze
         WWWForm form = new WWWForm();
-        form.AddField("username", username);  
+        form.AddField("username", username);
 
         using (UnityWebRequest www = UnityWebRequest.Post("http://192.168.1.12/UnityFindME/freeze.php", form))
         {
@@ -115,18 +115,6 @@ public class Freeze : MonoBehaviour
         }
         freezeButton.interactable = true;
         cooldownImage.fillAmount = 1;
-    }
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.CompareTag("Player"))
-        {
-            NavMeshAgent zombieAgent = GetComponent<NavMeshAgent>();
-            if (zombieAgent != null)
-            {
-                StartCoroutine(FreezeZombie(zombieAgent));
-            }
-            Destroy(gameObject);
-        }
     }
 
     [System.Serializable]

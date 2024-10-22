@@ -41,7 +41,7 @@ public class Invisible : MonoBehaviour
     {
         // Call the PHP backend to check and deduct invisibility power-up
         WWWForm form = new WWWForm();
-        form.AddField("username", username);  
+        form.AddField("username", username);
 
         using (UnityWebRequest www = UnityWebRequest.Post("http://192.168.1.12/UnityFindME/invisibility.php", form))
         {
@@ -102,16 +102,6 @@ public class Invisible : MonoBehaviour
 
         invisButton.interactable = true;
         cooldownImage.fillAmount = 1;
-    }
-
-    // For when picking up a power-up, NOT for buttons
-    public void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            StartCoroutine(ActivateInvisibility());
-            Debug.Log("YOU ARE NOW INVISIBLE!!!");
-        }
     }
 
     [System.Serializable]
