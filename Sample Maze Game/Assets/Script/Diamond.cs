@@ -11,6 +11,7 @@ public class Diamond : MonoBehaviour
     public Exit exitScript;
     public AudioClip collectSound;
     private AudioSource audioSource;
+    public AudioSource activateExitSource;
     public TextMeshProUGUI diamondCounterText;
     private int diamondCollected = 0;
     public int totalObjectsToCollect = 4;
@@ -30,6 +31,7 @@ public class Diamond : MonoBehaviour
         //win condition
         if (diamondCollected >= totalObjectsToCollect)
         {
+            activateExitSource.Play();
             Debug.Log("you win");
             exitScript.whenAllDiaCollected();
         }
