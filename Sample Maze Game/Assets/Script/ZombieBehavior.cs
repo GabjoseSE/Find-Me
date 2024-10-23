@@ -19,7 +19,9 @@ public class ZombieAI : MonoBehaviour
     private bool isChasingPlayer = false;
     private float lastAttackTime;
     private Animator animator;
-    private PlayerHealth playerHealth;   // Reference to player's health system
+    private PlayerHealth playerHealth;   
+    private TakeDamageScript damageEffectScript;  // Reference to damage effect script
+
 
     void Start()
     {
@@ -28,7 +30,7 @@ public class ZombieAI : MonoBehaviour
 
         playerHealth = player.GetComponent<PlayerHealth>();
         playerHealth = FindObjectOfType<PlayerHealth>();
-
+        damageEffectScript = player.GetComponent<TakeDamageScript>();
         // Set patrol speed and begin patrolling
         agent.speed = patrolSpeed;
         PatrolToNextWaypoint();
@@ -116,6 +118,11 @@ public class ZombieAI : MonoBehaviour
         {
             playerHealth.TakeDamage(damage);
             Debug.Log("Zombie attacks! Player takes damage.");
+
+            if (damageEffectScript != null)
+        {
+            damageEffectScript.TakeDamage();
+        }
         }
     }
 
