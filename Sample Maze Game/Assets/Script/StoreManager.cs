@@ -7,8 +7,8 @@ public class StoreManager : MonoBehaviour
 {
     public int coinCount;
     public string username; // Username of the logged-in player
-    private string updateCoinsURL = "http://192.168.1.12/UnityFindME/update_coins_store.php"; 
-    private string buyPowerUpURL = "http://192.168.1.12/UnityFindME/buy_powerup.php"; 
+    private string updateCoinsURL = "http://192.168.1.248/UnityFindME/update_coins_store.php"; 
+    private string buyPowerUpURL = "http://192.168.1.248/UnityFindME/buy_powerup.php"; 
 
     // Prices for each power-up
     private int freezePrice = 20;
@@ -40,7 +40,7 @@ public class StoreManager : MonoBehaviour
     WWWForm form = new WWWForm();
     form.AddField("username", username); 
 
-    using (UnityWebRequest www = UnityWebRequest.Post("http://192.168.1.12/UnityFindME/get_coins.php", form)) // Adjust URL
+    using (UnityWebRequest www = UnityWebRequest.Post("http://192.168.1.248/UnityFindME/get_coins.php", form)) // Adjust URL
     {
         yield return www.SendWebRequest();
 

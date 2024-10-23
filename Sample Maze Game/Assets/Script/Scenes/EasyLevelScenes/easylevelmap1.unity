@@ -3388,7 +3388,7 @@ MonoBehaviour:
       colorBlindnessType: 0
       colorBlindnessStrength: 1
   m_Resources: {fileID: 11400000, guid: d82512f9c8e5d4a4d938b575d47f88d4, type: 2}
-  m_ShowToolkit: 0
+  m_ShowToolkit: 1
   m_ShowCustomSorter: 0
   breakBeforeColorGrading: 0
   m_BeforeTransparentBundles: []
@@ -4549,6 +4549,10 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1939171412930672981, guid: f4d3358954e7cf5458646181614bbf62,
         type: 3}
       insertIndex: -1
+      addedObject: {fileID: 1473459721}
+    - targetCorrespondingSourceObject: {fileID: 1939171412930672981, guid: f4d3358954e7cf5458646181614bbf62,
+        type: 3}
+      insertIndex: -1
       addedObject: {fileID: 1181544129}
     - targetCorrespondingSourceObject: {fileID: 1939171412930672981, guid: f4d3358954e7cf5458646181614bbf62,
         type: 3}
@@ -4599,6 +4603,10 @@ PrefabInstance:
         type: 3}
       insertIndex: -1
       addedObject: {fileID: 1867491324}
+    - targetCorrespondingSourceObject: {fileID: 2898676738937588697, guid: f4d3358954e7cf5458646181614bbf62,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1867491325}
   m_SourcePrefab: {fileID: 100100000, guid: f4d3358954e7cf5458646181614bbf62, type: 3}
 --- !u!1 &446308112
 GameObject:
@@ -8223,9 +8231,9 @@ Light:
   m_Type: 0
   m_Shape: 0
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 5.34
-  m_Range: 18.35
-  m_SpotAngle: 99
+  m_Intensity: 3
+  m_Range: 17.37
+  m_SpotAngle: 97.6
   m_InnerSpotAngle: 21.80208
   m_CookieSize: 10
   m_Shadows:
@@ -8599,8 +8607,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49e15efd269f7b144af7e3b639a0cf74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zombieBehaviour: {fileID: 0}
-  zombieAgent: {fileID: 1637014444}
+  zombieBehaviours:
+  - {fileID: 1637014442}
+  - {fileID: 686547721}
+  zombieAgents:
+  - {fileID: 1637014444}
+  - {fileID: 686547723}
   freezeDuration: 10
   freezeButton: {fileID: 2033818841}
   invisDetect: 0
@@ -8635,10 +8647,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0d845fc71fed594f8ea084b12db81e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  zombieBehaviour: {fileID: 1637014442}
+  zombieBehaviour:
+  - {fileID: 1637014442}
+  - {fileID: 686547721}
   invisDetect: 0
   invisAttack: 0
-  invisibilityDuration: 8
+  invisibilityDuration: 10
   invisButton: {fileID: 52337509}
   cooldownImage: {fileID: 52337510}
 --- !u!95 &902875673
@@ -11411,12 +11425,12 @@ GameObject:
   - component: {fileID: 1181544129}
   - component: {fileID: 1181544130}
   m_Layer: 3
-  m_Name: post processing
+  m_Name: VignetteEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1181544129
 Transform:
   m_ObjectHideFlags: 0
@@ -14159,6 +14173,55 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 987134174}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1473459720
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1473459721}
+  - component: {fileID: 1473459722}
+  m_Layer: 3
+  m_Name: DamageEffect
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1473459721
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473459720}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.0000000074487616, y: -0, z: -0.00008726679, w: 1}
+  m_LocalPosition: {x: -4.48, y: 6.4800005, z: 3.1618888}
+  m_LocalScale: {x: 1.4336917, y: 1.2763242, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1867491313}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1473459722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1473459720}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sharedProfile: {fileID: 11400000, guid: e2d91751658ed7a439d91bc4a2cfd2a8, type: 2}
+  isGlobal: 1
+  blendDistance: 0
+  weight: 1
+  priority: 1
 --- !u!1 &1476503588
 GameObject:
   m_ObjectHideFlags: 0
@@ -15695,7 +15758,7 @@ MonoBehaviour:
   damage: 1
   ZombieDetectionAudioSource: {fileID: 1637014446}
   ZombieDetectionClip: {fileID: 8300000, guid: 150d1067e17a0974884e294cd43ab193, type: 3}
-  ZombieDetectionVolume: 1
+  ZombieDetectionVolume: 0.5
 --- !u!136 &1637014443
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -15787,8 +15850,8 @@ AudioSource:
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
+  BypassListenerEffects: 1
+  BypassReverbZones: 1
   rolloffCustomCurve:
     serializedVersion: 2
     m_Curve:
@@ -18339,6 +18402,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1867491325
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1867491312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 021c56a1aeae4ee49be3ffaf649eeae8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  intensity: 1
+  fadeSpeed: 0.5
+  targetVolume: {fileID: 1473459722}
 --- !u!1 &1871133824
 GameObject:
   m_ObjectHideFlags: 0

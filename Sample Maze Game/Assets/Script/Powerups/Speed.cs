@@ -43,7 +43,7 @@ public class Speed : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("username", username);
 
-        using (UnityWebRequest www = UnityWebRequest.Post("http://192.168.1.12/UnityFindME/speedup.php", form))
+        using (UnityWebRequest www = UnityWebRequest.Post("http://192.168.1.248/UnityFindME/speedup.php", form))
         {
             yield return www.SendWebRequest();
 

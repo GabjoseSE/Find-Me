@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.UI;
@@ -6,8 +7,8 @@ using UnityEngine.Networking;
 
 public class Freeze : MonoBehaviour
 {
-    public ZombieAI zombieBehaviour;
-    public NavMeshAgent zombieAgent;
+    public ZombieAI[] zombieBehaviours; // Array of ZombieAI
+    public NavMeshAgent[] zombieAgents; // Array of NavMeshAgents
     public float freezeDuration = 10f;
     public Button freezeButton;
     public float invisDetect = 0f;
@@ -18,7 +19,6 @@ public class Freeze : MonoBehaviour
 
     void Start()
     {
-
         // Retrieve the logged-in username from PlayerPrefs
         username = PlayerPrefs.GetString("LoggedInUser", null);
 
@@ -27,14 +27,20 @@ public class Freeze : MonoBehaviour
             Debug.LogError("No logged-in user found");
         }
 
-        if (zombieBehaviour == null)
+        if (zombieBehaviours == null || zombieBehaviours.Length == 0)
         {
-            zombieBehaviour = GameObject.FindWithTag("Zombie").GetComponent<ZombieAI>();
+            // Find all zombies with the ZombieAI component
+            zombieBehaviours = GameObject.FindObjectsOfType<ZombieAI>();
         }
+
+        if (zombieAgents == null || zombieAgents.Length == 0)
+        {
+            // Find all zombies with the NavMeshAgent component
+            zombieAgents = GameObject.FindObjectsOfType<NavMeshAgent>();
+        }
+
         cooldownImage.fillAmount = 1;
     }
-
-
 
     public void OnActivation()
     {
@@ -48,7 +54,7 @@ public class Freeze : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("username", username);
 
-        using (UnityWebRequest www = UnityWebRequest.Post("http://192.168.1.12/UnityFindME/freeze.php", form))
+        using (UnityWebRequest www = UnityWebRequest.Post("http://192.168.1.248/UnityFindME/freeze.php", form))
         {
             yield return www.SendWebRequest();
 
@@ -68,9 +74,9 @@ public class Freeze : MonoBehaviour
 
                     if (freezeResponse.status == "success")
                     {
-                        // Activate freeze effect
+                        // Activate freeze effect for all zombies
                         animator = GetComponent<Animator>();
-                        StartCoroutine(FreezeZombie(zombieAgent));
+                        StartCoroutine(FreezeZombies());
                         StartCoroutine(ButtonCooldownRoutine());
                         Debug.Log("Freeze activated, remaining count: " + freezeResponse.freeze_count);
                     }
@@ -87,22 +93,43 @@ public class Freeze : MonoBehaviour
             }
         }
     }
-    private IEnumerator FreezeZombie(NavMeshAgent zombieAgent)
+
+    private IEnumerator FreezeZombies()
     {
-        float originalDetect = zombieBehaviour.detectionRange;
-        float originalAttack = zombieBehaviour.attackRange;
-        zombieBehaviour.SetAttackRange(invisAttack);
-        zombieBehaviour.SetDetectionRange(invisDetect);
-        zombieAgent.isStopped = true;
-        Debug.Log("Zombie frozen!");
+        List<float> originalDetectRanges = new List<float>();
+        List<float> originalAttackRanges = new List<float>();
+
+        // Freeze all zombies
+        for (int i = 0; i < zombieBehaviours.Length; i++)
+        {
+            ZombieAI zombieBehaviour = zombieBehaviours[i];
+            NavMeshAgent zombieAgent = zombieAgents[i];
+
+            // Save original detection and attack ranges
+            originalDetectRanges.Add(zombieBehaviour.detectionRange);
+            originalAttackRanges.Add(zombieBehaviour.attackRange);
+
+            // Set zombie AI to freeze mode
+            zombieBehaviour.SetAttackRange(invisAttack);
+            zombieBehaviour.SetDetectionRange(invisDetect);
+            zombieAgent.isStopped = true;
+        }
+
+        Debug.Log("All zombies frozen!");
 
         yield return new WaitForSeconds(freezeDuration);
-        zombieBehaviour.SetAttackRange(originalAttack);
-        zombieBehaviour.SetDetectionRange(originalDetect);
-        zombieAgent.isStopped = false;
-        Debug.Log("Zombie unfrozen!");
 
+        Debug.Log("All zombies unfrozen!");
+
+        // Restore original detection and attack ranges for all zombies
+        for (int i = 0; i < zombieBehaviours.Length; i++)
+        {
+            zombieBehaviours[i].SetAttackRange(originalAttackRanges[i]);
+            zombieBehaviours[i].SetDetectionRange(originalDetectRanges[i]);
+            zombieAgents[i].isStopped = false;
+        }
     }
+
     private IEnumerator ButtonCooldownRoutine()
     {
         freezeButton.interactable = false;
@@ -110,7 +137,7 @@ public class Freeze : MonoBehaviour
         while (elapsedTime < freezeDuration)
         {
             elapsedTime += Time.deltaTime;
-            cooldownImage.fillAmount = elapsedTime / freezeDuration; // **Highlighted: Updates the fill amount of the image**
+            cooldownImage.fillAmount = elapsedTime / freezeDuration; // Updates the fill amount of the image
             yield return null;
         }
         freezeButton.interactable = true;

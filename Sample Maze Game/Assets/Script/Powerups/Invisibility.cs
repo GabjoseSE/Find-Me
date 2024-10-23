@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
@@ -6,7 +7,7 @@ using UnityEngine.AI;
 
 public class Invisible : MonoBehaviour
 {
-    public ZombieAI zombieBehaviour;
+    public ZombieAI[] zombieBehaviour;
     public float invisDetect = 0f;
     public float invisAttack = 0f;
     public float invisibilityDuration = 10f;
@@ -24,9 +25,9 @@ public class Invisible : MonoBehaviour
             Debug.LogError("No logged-in user found");
         }
 
-        if (zombieBehaviour == null)
+        if (zombieBehaviour == null|| zombieBehaviour.Length == 0)
         {
-            zombieBehaviour = GameObject.FindWithTag("Zombie").GetComponent<ZombieAI>();
+            zombieBehaviour = GameObject.FindObjectsOfType<ZombieAI>();
         }
 
         cooldownImage.fillAmount = 1;
@@ -43,7 +44,7 @@ public class Invisible : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("username", username);
 
-        using (UnityWebRequest www = UnityWebRequest.Post("http://192.168.1.12/UnityFindME/invisibility.php", form))
+        using (UnityWebRequest www = UnityWebRequest.Post("http://192.168.1.248/UnityFindME/invisibility.php", form))
         {
             yield return www.SendWebRequest();
 
@@ -75,17 +76,32 @@ public class Invisible : MonoBehaviour
 
     private IEnumerator ActivateInvisibility()
     {
-        float originalDetect = zombieBehaviour.detectionRange;
-        float originalAttack = zombieBehaviour.attackRange;
-        zombieBehaviour.SetAttackRange(invisAttack);
-        zombieBehaviour.SetDetectionRange(invisDetect);
+        // Save original detection and attack ranges for all zombies
+        List<float> originalDetectRanges = new List<float>();
+        List<float> originalAttackRanges = new List<float>();
+
+        foreach (ZombieAI zombie in zombieBehaviour)
+        {
+            originalDetectRanges.Add(zombie.detectionRange);
+            originalAttackRanges.Add(zombie.attackRange);
+
+            // Set zombie AI to invisibility mode
+            zombie.SetAttackRange(invisAttack);
+            zombie.SetDetectionRange(invisDetect);
+        }
+
         Debug.Log("You are now Invisible");
 
         yield return new WaitForSeconds(invisibilityDuration);
 
         Debug.Log("You are no longer Invisible");
-        zombieBehaviour.SetAttackRange(originalAttack);
-        zombieBehaviour.SetDetectionRange(originalDetect);
+
+        // Restore original detection and attack ranges for all zombies
+        for (int i = 0; i < zombieBehaviour.Length; i++)
+        {
+            zombieBehaviour[i].SetAttackRange(originalAttackRanges[i]);
+            zombieBehaviour[i].SetDetectionRange(originalDetectRanges[i]);
+        }
     }
 
     private IEnumerator ButtonCooldownRoutine()

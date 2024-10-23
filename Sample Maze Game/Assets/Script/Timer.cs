@@ -5,7 +5,7 @@ using TMPro;
 
 public class Timer : MonoBehaviour
 {
-    public ZombieAI zombieBehaviour;
+    public ZombieAI[] zombieBehaviour;
     [SerializeField] TextMeshProUGUI timerText;
     [SerializeField] float remainingTime;
     public float terrorDetect = 100f;
@@ -21,8 +21,11 @@ public class Timer : MonoBehaviour
         {
             remainingTime = 0;
             timerText.color = Color.red;
-            zombieBehaviour.SetDetectionRange(terrorDetect);
-            zombieBehaviour.SetSpeed(terrorSpeed);
+            foreach (ZombieAI zombie in zombieBehaviour)
+            {
+                zombie.SetDetectionRange(terrorDetect);
+                zombie.SetSpeed(terrorSpeed);
+            }
         }
         int minutes = Mathf.FloorToInt(remainingTime / 60);
         int seconds = Mathf.FloorToInt(remainingTime % 60);

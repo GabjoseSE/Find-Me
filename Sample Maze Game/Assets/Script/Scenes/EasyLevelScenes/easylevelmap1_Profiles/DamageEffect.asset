@@ -24,8 +24,8 @@ MonoBehaviour:
     value: {fileID: 0}
     defaultState: 1
   tonemapper:
-    overrideState: 0
-    value: 0
+    overrideState: 1
+    value: 2
   toneCurveToeStrength:
     overrideState: 0
     value: 0
@@ -52,17 +52,17 @@ MonoBehaviour:
     overrideState: 0
     value: 1
   temperature:
-    overrideState: 0
-    value: 0
+    overrideState: 1
+    value: -9
   tint:
     overrideState: 0
-    value: 0
+    value: -45
   colorFilter:
-    overrideState: 0
-    value: {r: 1, g: 1, b: 1, a: 1}
+    overrideState: 1
+    value: {r: 0.87602353, g: 0.88589793, b: 0.9622642, a: 1}
   hueShift:
     overrideState: 0
-    value: 0
+    value: 69
   saturation:
     overrideState: 0
     value: 0
@@ -70,8 +70,8 @@ MonoBehaviour:
     overrideState: 0
     value: 0
   postExposure:
-    overrideState: 0
-    value: 0
+    overrideState: 1
+    value: -3
   contrast:
     overrideState: 0
     value: 0
@@ -1372,14 +1372,14 @@ MonoBehaviour:
     overrideState: 1
     value: 1
   focusDistance:
-    overrideState: 0
-    value: 10
+    overrideState: 1
+    value: 2.35
   aperture:
     overrideState: 0
-    value: 5.6
+    value: 3.6
   focalLength:
     overrideState: 0
-    value: 50
+    value: 1
   kernelSize:
     overrideState: 0
     value: 1
@@ -1418,13 +1418,13 @@ MonoBehaviour:
     overrideState: 1
     value: 1
   intensity:
-    overrideState: 0
-    value: 0
+    overrideState: 1
+    value: 3.88
   threshold:
-    overrideState: 0
-    value: 1
+    overrideState: 1
+    value: 1.44
   softKnee:
-    overrideState: 0
+    overrideState: 1
     value: 0.5
   clamp:
     overrideState: 0
@@ -1468,11 +1468,11 @@ MonoBehaviour:
     overrideState: 0
     value: 1
   intensity:
-    overrideState: 0
-    value: 0
+    overrideState: 1
+    value: 0.127
   size:
-    overrideState: 0
-    value: 1
+    overrideState: 1
+    value: 0.3
   lumContrib:
-    overrideState: 0
-    value: 0.8
+    overrideState: 1
+    value: 0
