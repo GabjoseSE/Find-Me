@@ -1,51 +1,102 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.Networking;
+using UnityEngine.UI; // Needed for Button
+using UnityEngine.AI; // Needed for NavMesh
 
-public class Navigation : MonoBehaviour
+public class NavigationGuide : MonoBehaviour
 {
-    public GameObject player;            // Reference to the player GameObject
-    public GameObject exitObject;            // The exitObject GameObject you want to navigate to
-    public LineRenderer lineRenderer;    // LineRenderer component to draw the line
-    public Button navButton;        // The UI Button that triggers navigation
-    public float moveSpeed = 5f;         // Player movement speed
+    public Transform player;             // The player object
+    public Transform exit;               // The exit object (target)
+    public LineRenderer lineRenderer;    // The LineRenderer component
+    public float heightOffset = 0.5f;    // Height offset for the line
+    public float pointRemoveDistance = 0.5f;  // Distance threshold for removing passed points
 
-    private bool isNavigating = false;   // To check if navigation is active
+    private NavMeshPath path;            // NavMeshPath to calculate pathfinding
+    private List<Vector3> pathPoints = new List<Vector3>();  // List to store points along the path
+    private bool isPathActive = false;   // To track if the path is active
+
+    public Button activateButton;         // Reference to the UI Button
 
     void Start()
     {
-        // Add the button listener
-        navButton.onClick.AddListener(StartNavigation);
+        path = new NavMeshPath();  // Initialize NavMeshPath
+        lineRenderer.useWorldSpace = true;  // Make sure LineRenderer is in world space
 
-        // Make sure LineRenderer has 2 positions to start with
-        lineRenderer.positionCount = 2;
+        // Add listener to the button
+        if (activateButton != null)
+        {
+            activateButton.onClick.AddListener(ActivatePath);
+        }
     }
 
     void Update()
     {
-        if (isNavigating)
+        // Only update path if it is active
+        if (isPathActive)
         {
-            // Draw the line from player to exitObject
-            lineRenderer.SetPosition(0, player.transform.position);
-            lineRenderer.SetPosition(1, exitObject.transform.position);
+            // Update path from player to exit
+            UpdatePath();
 
-            // Move the player toward the exitObject if navigation is active
-            player.transform.position = Vector3.MoveTowards(player.transform.position, exitObject.transform.position, moveSpeed * Time.deltaTime);
+            // Update the line renderer based on the path points
+            UpdateLineRenderer();
 
-            // Stop navigation if player reaches the exitObject
-            if (Vector3.Distance(player.transform.position, exitObject.transform.position) < 0.1f)
+            // Remove points that the player has passed
+            RemovePassedPoints();
+        }
+    }
+
+    // Activates the path
+    public void ActivatePath()
+    {
+        isPathActive = true; // Set the path as active
+        UpdatePath(); // Update the path immediately
+
+        // Disable the button to make it uninteractable
+        if (activateButton != null)
+        {
+            activateButton.interactable = false; // Disable the button
+        }
+    }
+
+    // Updates the path using Unity's NavMesh
+    void UpdatePath()
+    {
+        if (NavMesh.CalculatePath(player.position, exit.position, NavMesh.AllAreas, path))
+        {
+            // Clear the old path points
+            pathPoints.Clear();
+
+            // Add the new points from the NavMesh path
+            foreach (Vector3 point in path.corners)
             {
-                isNavigating = false;
-                lineRenderer.enabled = false;  // Hide the line after reaching the exitObject
+                // Add a height offset so the line appears above the ground
+                Vector3 adjustedPoint = point;
+                adjustedPoint.y += heightOffset;
+                pathPoints.Add(adjustedPoint);
             }
         }
     }
 
-    void StartNavigation()
+    // Updates the LineRenderer based on the current path points
+    void UpdateLineRenderer()
     {
-        isNavigating = true;
-        lineRenderer.enabled = true;  // Enable the line renderer
+        lineRenderer.positionCount = pathPoints.Count;
+        for (int i = 0; i < pathPoints.Count; i++)
+        {
+            lineRenderer.SetPosition(i, pathPoints[i]);
+        }
+    }
+
+    // Removes points from the path if the player has passed them
+    void RemovePassedPoints()
+    {
+        for (int i = pathPoints.Count - 1; i >= 0; i--)
+        {
+            if (Vector3.Distance(player.position, pathPoints[i]) < pointRemoveDistance)
+            {
+                pathPoints.RemoveAt(i);
+            }
+        }
     }
 }
