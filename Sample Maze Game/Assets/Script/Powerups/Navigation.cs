@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI; // Needed for Button
 using UnityEngine.AI; // Needed for NavMesh
+using UnityEngine.Networking;
 
 public class NavigationGuide : MonoBehaviour
 {
@@ -17,12 +18,18 @@ public class NavigationGuide : MonoBehaviour
     private bool isPathActive = false;   // To track if the path is active
 
     public Button activateButton;         // Reference to the UI Button
+    private string username;
 
     void Start()
     {
         path = new NavMeshPath();  // Initialize NavMeshPath
         lineRenderer.useWorldSpace = true;  // Make sure LineRenderer is in world space
+        username = PlayerPrefs.GetString("LoggedInUser", null);
 
+        if (string.IsNullOrEmpty(username))
+        {
+            Debug.LogError("No logged-in user found");
+        }
         // Add listener to the button
         if (activateButton != null)
         {
@@ -45,6 +52,10 @@ public class NavigationGuide : MonoBehaviour
             RemovePassedPoints();
         }
     }
+    public void OnActivation()
+    {
+        StartCoroutine(CheckAndActivateNavigation());
+    }
 
     // Activates the path
     public void ActivatePath()
@@ -56,6 +67,46 @@ public class NavigationGuide : MonoBehaviour
         if (activateButton != null)
         {
             activateButton.interactable = false; // Disable the button
+        }
+    }
+    private IEnumerator CheckAndActivateNavigation()
+    {
+        // Call the PHP backend to check and deduct navigation power-up
+        WWWForm form = new WWWForm();
+        form.AddField("username", username);
+
+        using (UnityWebRequest www = UnityWebRequest.Post("http://192.168.1.248/UnityFindME/navigation.php", form))
+        {
+            yield return www.SendWebRequest();
+
+            if (www.result == UnityWebRequest.Result.ConnectionError || www.result == UnityWebRequest.Result.ProtocolError)
+            {
+                Debug.LogError("Network/Protocol Error: " + www.error);
+            }
+            else
+            {
+                string response = www.downloadHandler.text;
+                Debug.Log("Server response: " + response);
+
+                try
+                {
+                    NavigationResponse navResponse = JsonUtility.FromJson<NavigationResponse>(response);
+
+                    if (navResponse.status == "success")
+                    {
+                        isPathActive = true;
+                        Debug.Log("Navigation activated, remaining count: " + navResponse.navigation_count);
+                    }
+                    else
+                    {
+                        Debug.LogError("Error from server: " + navResponse.message);
+                    }
+                }
+                catch (System.Exception ex)
+                {
+                    Debug.LogError("JSON parse error: " + ex.Message);
+                }
+            }
         }
     }
 
@@ -98,5 +149,12 @@ public class NavigationGuide : MonoBehaviour
                 pathPoints.RemoveAt(i);
             }
         }
+    }
+    [System.Serializable]
+    public class NavigationResponse
+    {
+        public string status;
+        public string message;
+        public int navigation_count;
     }
 }

@@ -10792,7 +10792,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1060762854}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 902875674}
+        m_TargetAssemblyTypeName: NavigationGuide, Assembly-CSharp
+        m_MethodName: OnActivation
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1060762854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12663,7 +12675,7 @@ MonoBehaviour:
   - {fileID: 574827555}
   - {fileID: 1254248872}
   - {fileID: 1916219267}
-  numberOfObjectsToSpawn: 15
+  numberOfObjectsToSpawn: 5
 --- !u!1 &1214170942
 GameObject:
   m_ObjectHideFlags: 0
@@ -19811,7 +19823,7 @@ MonoBehaviour:
   collectSound: {fileID: 8300000, guid: 2d4167e0d4895ab41bb1fc88e1a97cb1, type: 3}
   activateExitSource: {fileID: 1202046265}
   diamondCounterText: {fileID: 929950898}
-  totalObjectsToCollect: 15
+  totalObjectsToCollect: 5
 --- !u!4 &1937030081
 Transform:
   m_ObjectHideFlags: 0
@@ -21268,7 +21280,7 @@ LineRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
+      key0: {r: 1, g: 0, b: 0, a: 1}
       key1: {r: 1, g: 1, b: 1, a: 1}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
@@ -21293,7 +21305,7 @@ LineRenderer:
       atime6: 0
       atime7: 0
       m_Mode: 0
-      m_ColorSpace: -1
+      m_ColorSpace: 0
       m_NumColorKeys: 2
       m_NumAlphaKeys: 2
     numCornerVertices: 0
