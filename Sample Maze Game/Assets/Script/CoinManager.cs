@@ -2,6 +2,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Networking;
 using System.Collections;
+using TMPro;
 
 public class CoinManager : MonoBehaviour
 {
@@ -10,7 +11,7 @@ public class CoinManager : MonoBehaviour
     public Coin coinScript;
     public int coinCount = 0; // Total coins collected
     public int coinAdd = 1;
-    public Text coinText; // Reference to the UI Text to display the coin count
+    public TextMeshProUGUI coinText; // Reference to the UI Text to display the coin count
     public string username; // Username of the logged-in player
     private string updateCoinsURL = "http://192.168.1.248/UnityFindME/update_coins.php";
     private void Start()
