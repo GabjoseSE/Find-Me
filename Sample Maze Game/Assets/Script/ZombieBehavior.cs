@@ -12,8 +12,10 @@ public class ZombieAI : MonoBehaviour
     public float chaseSpeed = 4f;        // Speed while chasing the player
     public int damage = 1;               // Amount of damage zombie deals to player
     public AudioClip ZombieDetectionSound; // Assign the footstep sound clip in inspector
+    public AudioClip[] AttackingSounds;
     public AudioSource audioSource; // Assign in inspector
     public float ZombieDetectionVolume = 0.5f;
+    public float AttackingVolume = 0.3f;
     private int currentWaypoint = 0;
     private NavMeshAgent agent;
     private bool isChasingPlayer = false;
@@ -127,6 +129,7 @@ public class ZombieAI : MonoBehaviour
         if (playerHealth != null)
         {
             playerHealth.TakeDamage(damage);
+            PlayRandomClip();
             Debug.Log("Zombie attacks! Player takes damage.");
 
             if (damageEffectScript != null)
@@ -169,6 +172,18 @@ public class ZombieAI : MonoBehaviour
         if (audioSource != null && ZombieDetectionSound != null)
         {
             audioSource.PlayOneShot(ZombieDetectionSound, ZombieDetectionVolume);
+        }
+    }
+    public void PlayRandomClip()
+    {
+        if (AttackingSounds.Length > 0)
+        {
+            int randomIndex = Random.Range(0, AttackingSounds.Length); // Choose a random index
+            audioSource.PlayOneShot(AttackingSounds[randomIndex], AttackingVolume); // Play the selected clip
+        }
+        else
+        {
+            Debug.LogWarning("No audio clips assigned!");
         }
     }
 }

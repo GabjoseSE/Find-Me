@@ -10,6 +10,9 @@ public class PlayerHealth : MonoBehaviour
 
     public AudioClip collectSound;
     public AudioClip lastHeartSound;
+    public AudioClip[] GettingAttackedSounds; // Array of sound clips
+    public float GettingAttackedVolume = 0.7f;
+
     private AudioSource audioSource;
     public float LastHeartSoundVolume = 0.5f;
     private bool hasPlayedLastHeartSound = false;
@@ -69,6 +72,7 @@ public class PlayerHealth : MonoBehaviour
         for (int i = 0; i < damage; i++)
         {
             LoseHeart(); // Call LoseHeart for each point of damage
+            PlayRandomClip();
         }
 
         Debug.Log($"Player takes damage. Current health: {currentHealth}");
@@ -92,6 +96,18 @@ public class PlayerHealth : MonoBehaviour
         if (audioSource != null && lastHeartSound != null)
         {
             audioSource.PlayOneShot(lastHeartSound,LastHeartSoundVolume);
+        }
+    }
+    public void PlayRandomClip()
+    {
+        if (GettingAttackedSounds.Length > 0)
+        {
+            int randomIndex = Random.Range(0, GettingAttackedSounds.Length); // Choose a random index
+            audioSource.PlayOneShot(GettingAttackedSounds[randomIndex],GettingAttackedVolume); // Play the selected clip
+        }
+        else  
+        {
+            Debug.LogWarning("No audio clips assigned!");
         }
     }
 }
