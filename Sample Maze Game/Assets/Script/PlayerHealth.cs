@@ -10,6 +10,7 @@ public class PlayerHealth : MonoBehaviour
 
     public AudioClip collectSound;
     public AudioClip lastHeartSound;
+    public AudioSource lastHeartSource;
     public AudioClip[] GettingAttackedSounds; // Array of sound clips
     public float GettingAttackedVolume = 0.7f;
 
@@ -19,6 +20,7 @@ public class PlayerHealth : MonoBehaviour
 
     public void Start()
     {
+        lastHeartSource = GetComponent<AudioSource>();
         audioSource = GetComponent<AudioSource>();
         UpdateHearts(); // Update the heart display based on the current health
     }
@@ -31,18 +33,23 @@ public class PlayerHealth : MonoBehaviour
             hearts[i].enabled = (i < currentHealth); // Show or hide heart
         }
 
-        if (currentHealth == 1 && !hasPlayedLastHeartSound) 
+        if (currentHealth == 1 && !hasPlayedLastHeartSound)
         {
-        PlayLastHeartSound(); 
-        hasPlayedLastHeartSound = true;
+            lastHeartSource.clip = lastHeartSound;
+            lastHeartSource.loop = true;
+            lastHeartSource.volume = LastHeartSoundVolume;
+            lastHeartSource.Play();
+            hasPlayedLastHeartSound = true;
         }
-        else if (currentHealth > 1)
+        else if (currentHealth > 1 && hasPlayedLastHeartSound)
         {
-            hasPlayedLastHeartSound = false; 
+            lastHeartSource.loop = false;
+            lastHeartSource.Stop();
+            hasPlayedLastHeartSound = false;
         }
     }
 
-    
+
     // Call this function when the player loses a heart
     public void LoseHeart()
     {
@@ -65,7 +72,7 @@ public class PlayerHealth : MonoBehaviour
         }
     }
 
-    
+
     // Call this when the player takes damage
     public void TakeDamage(int damage)
     {
@@ -91,21 +98,14 @@ public class PlayerHealth : MonoBehaviour
             audioSource.PlayOneShot(collectSound);
         }
     }
-    private void PlayLastHeartSound()
-    {
-        if (audioSource != null && lastHeartSound != null)
-        {
-            audioSource.PlayOneShot(lastHeartSound,LastHeartSoundVolume);
-        }
-    }
     public void PlayRandomClip()
     {
         if (GettingAttackedSounds.Length > 0)
         {
             int randomIndex = Random.Range(0, GettingAttackedSounds.Length); // Choose a random index
-            audioSource.PlayOneShot(GettingAttackedSounds[randomIndex],GettingAttackedVolume); // Play the selected clip
+            audioSource.PlayOneShot(GettingAttackedSounds[randomIndex], GettingAttackedVolume); // Play the selected clip
         }
-        else  
+        else
         {
             Debug.LogWarning("No audio clips assigned!");
         }
