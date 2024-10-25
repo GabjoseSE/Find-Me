@@ -88,7 +88,7 @@ public class PlayerHealth : MonoBehaviour
         if (currentHealth <= 0)
         {
             Debug.Log("Health is 0, calling Die() method.");
-            SceneManager.LoadSceneAsync(19);
+            SceneManager.LoadSceneAsync(16);
         }
     }
     private void PlayCollectSound()
