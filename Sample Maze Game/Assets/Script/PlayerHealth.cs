@@ -11,6 +11,8 @@ public class PlayerHealth : MonoBehaviour
     public AudioClip collectSound;
     public AudioClip lastHeartSound;
     private AudioSource audioSource;
+    public float LastHeartSoundVolume = 0.5f;
+    private bool hasPlayedLastHeartSound = false;
 
     public void Start()
     {
@@ -26,9 +28,14 @@ public class PlayerHealth : MonoBehaviour
             hearts[i].enabled = (i < currentHealth); // Show or hide heart
         }
 
-        if (currentHealth == 1)
+        if (currentHealth == 1 && !hasPlayedLastHeartSound) 
         {
         PlayLastHeartSound(); 
+        hasPlayedLastHeartSound = true;
+        }
+        else if (currentHealth > 1)
+        {
+            hasPlayedLastHeartSound = false; 
         }
     }
 
@@ -84,7 +91,7 @@ public class PlayerHealth : MonoBehaviour
     {
         if (audioSource != null && lastHeartSound != null)
         {
-            audioSource.PlayOneShot(lastHeartSound);
+            audioSource.PlayOneShot(lastHeartSound,LastHeartSoundVolume);
         }
     }
 }
