@@ -11,8 +11,8 @@ public class ZombieAI : MonoBehaviour
     public float patrolSpeed = 2f;       // Speed while patrolling
     public float chaseSpeed = 4f;        // Speed while chasing the player
     public int damage = 1;               // Amount of damage zombie deals to player
-    public AudioSource ZombieDetectionAudioSource; // Assign in inspector
-    public AudioClip ZombieDetectionClip; // Assign the footstep sound clip in inspector
+    public AudioClip ZombieDetectionSound; // Assign the footstep sound clip in inspector
+    public AudioSource audioSource; // Assign in inspector
     public float ZombieDetectionVolume = 0.5f;
     private int currentWaypoint = 0;
     private NavMeshAgent agent;
@@ -21,12 +21,14 @@ public class ZombieAI : MonoBehaviour
     private Animator animator;
     private PlayerHealth playerHealth;   
     private TakeDamageScript damageEffectScript;  // Reference to damage effect script
+    private bool hasPlayedDetectionSound = false;
 
 
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        audioSource = GetComponent<AudioSource>();
 
         playerHealth = player.GetComponent<PlayerHealth>();
         playerHealth = FindObjectOfType<PlayerHealth>();
@@ -47,7 +49,13 @@ public class ZombieAI : MonoBehaviour
             isChasingPlayer = true;
             agent.speed = chaseSpeed;   // Increase speed when chasing
             animator.SetBool("Run", true);
-            ZombieDetectionAudioSource.PlayOneShot(ZombieDetectionClip, ZombieDetectionVolume);
+            
+            // Play the zombie detection sound only once
+            if (!hasPlayedDetectionSound)
+            {
+                PlayZombieDetectionSound();
+                hasPlayedDetectionSound = true; // Mark the sound as played
+            }
         }
         else
         {
@@ -55,6 +63,7 @@ public class ZombieAI : MonoBehaviour
             isChasingPlayer = false;
             agent.speed = patrolSpeed;  // Revert to patrol speed
             animator.SetBool("Run", false);
+            hasPlayedDetectionSound = false;
         }
 
         if (isChasingPlayer)
@@ -153,5 +162,12 @@ public class ZombieAI : MonoBehaviour
     public void SetSpeed(float newSpeed)
     {
         chaseSpeed = newSpeed;
+    }
+    private void PlayZombieDetectionSound()
+    {
+        if (audioSource != null && ZombieDetectionSound != null)
+        {
+            audioSource.PlayOneShot(ZombieDetectionSound, ZombieDetectionVolume);
+        }
     }
 }

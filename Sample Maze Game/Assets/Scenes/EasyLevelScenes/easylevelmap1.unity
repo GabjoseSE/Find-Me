@@ -6904,8 +6904,9 @@ MonoBehaviour:
   patrolSpeed: 1
   chaseSpeed: 4
   damage: 1
-  ZombieDetectionAudioSource: {fileID: 1637014446}
-  ZombieDetectionClip: {fileID: 8300000, guid: 150d1067e17a0974884e294cd43ab193, type: 3}
+  ZombieDetectionSound: {fileID: 8300000, guid: 150d1067e17a0974884e294cd43ab193,
+    type: 3}
+  audioSource: {fileID: 0}
   ZombieDetectionVolume: 0.5
 --- !u!136 &686547722
 CapsuleCollider:
@@ -7091,8 +7092,8 @@ MonoBehaviour:
   patrolSpeed: 1
   chaseSpeed: 4
   damage: 1
-  ZombieDetectionAudioSource: {fileID: 686547725}
-  ZombieDetectionClip: {fileID: 8300000, guid: 180af0d6c68179d47889209478762052, type: 3}
+  ZombieDetectionSound: {fileID: 0}
+  audioSource: {fileID: 0}
   ZombieDetectionVolume: 0.5
 --- !u!1 &693732728
 GameObject:
@@ -16320,8 +16321,9 @@ MonoBehaviour:
   patrolSpeed: 1
   chaseSpeed: 4
   damage: 1
-  ZombieDetectionAudioSource: {fileID: 1637014446}
-  ZombieDetectionClip: {fileID: 8300000, guid: 150d1067e17a0974884e294cd43ab193, type: 3}
+  ZombieDetectionSound: {fileID: 8300000, guid: 150d1067e17a0974884e294cd43ab193,
+    type: 3}
+  audioSource: {fileID: 0}
   ZombieDetectionVolume: 0.5
 --- !u!136 &1637014443
 CapsuleCollider:
