@@ -3516,7 +3516,7 @@ MonoBehaviour:
   - {fileID: 1637014442}
   - {fileID: 686547721}
   timerText: {fileID: 269774807}
-  remainingTime: 180
+  remainingTime: 300
   terrorDetect: 1000
   terrorSpeed: 20
 --- !u!114 &269774807
@@ -7305,7 +7305,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.4
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -8203,7 +8203,10 @@ MonoBehaviour:
   damage: 1
   ZombieDetectionSound: {fileID: 8300000, guid: 150d1067e17a0974884e294cd43ab193,
     type: 3}
-  AttackingSounds: []
+  AttackingSounds:
+  - {fileID: 8300000, guid: d33098121fa72424cbb437b07887e194, type: 3}
+  - {fileID: 8300000, guid: dcfa599170b6c064c9f487982ed80049, type: 3}
+  - {fileID: 8300000, guid: b53e23a55d405c540ba9e57c3b365e7d, type: 3}
   audioSource: {fileID: 0}
   ZombieDetectionVolume: 0.5
   AttackingVolume: 0.3
@@ -8724,12 +8727,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 719547797}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 12.8218355, y: 17.571234, z: 16.75541}
+  m_LocalRotation: {x: -0, y: -0, z: -4.5474735e-13, w: 1}
+  m_LocalPosition: {x: -4.774391, y: 16.441565, z: 1.1535616}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 843147907}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &719547800
 MonoBehaviour:
@@ -8867,17 +8870,17 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: a82fb22a6ce034345a77b3dcacc4791f,
         type: 3}
       propertyPath: m_LocalScale.x
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a82fb22a6ce034345a77b3dcacc4791f,
         type: 3}
       propertyPath: m_LocalScale.y
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a82fb22a6ce034345a77b3dcacc4791f,
         type: 3}
       propertyPath: m_LocalScale.z
-      value: 2
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a82fb22a6ce034345a77b3dcacc4791f,
         type: 3}
@@ -9964,7 +9967,6 @@ Transform:
   - {fileID: 1781993140}
   - {fileID: 125081212}
   - {fileID: 146484102}
-  - {fileID: 719547799}
   m_Father: {fileID: 23704102}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &847552651
@@ -10001,9 +10003,9 @@ RectTransform:
   m_Father: {fileID: 331306710}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 102.4, y: -145.3}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -884.4, y: -63.3}
+  m_SizeDelta: {x: -1820, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &847552653
 MonoBehaviour:
@@ -13412,7 +13414,7 @@ Transform:
   m_GameObject: {fileID: 1115690277}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -4.5474735e-13, w: 1}
-  m_LocalPosition: {x: 0, y: 0.79, z: -0}
+  m_LocalPosition: {x: 0, y: 0.79, z: 0}
   m_LocalScale: {x: 1.27, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -24926,6 +24928,7 @@ SceneRoots:
   - {fileID: 603705650}
   - {fileID: 1749410765}
   - {fileID: 1510271706}
+  - {fileID: 719547799}
   - {fileID: 255922151}
   - {fileID: 2133415523}
   - {fileID: 2094541051}
