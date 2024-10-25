@@ -13,7 +13,7 @@ public class Freeze : MonoBehaviour
     public Button freezeButton;
     public float invisDetect = 0f;
     public float invisAttack = 0f;
-    Animator animator;
+    private List<Animator> zombieAnimators = new List<Animator>();
     public Image cooldownImage;
     private string username;
 
@@ -39,13 +39,23 @@ public class Freeze : MonoBehaviour
             zombieAgents = GameObject.FindObjectsOfType<NavMeshAgent>();
         }
 
+        //Find and store all the Animators in the zombies
+        foreach (var zombieBehaviour in zombieBehaviours)
+        {
+            Animator anim = zombieBehaviour.GetComponent<Animator>();
+            if (anim != null)
+            {
+                zombieAnimators.Add(anim);
+            }
+        }
+
         cooldownImage.fillAmount = 1;
     }
 
     public void OnActivation()
     {
         StartCoroutine(CheckAndActivateFreeze());
-        animator = GetComponent<Animator>();
+        
     }
 
     private IEnumerator CheckAndActivateFreeze()
@@ -75,7 +85,6 @@ public class Freeze : MonoBehaviour
                     if (freezeResponse.status == "success")
                     {
                         // Activate freeze effect for all zombies
-                        animator = GetComponent<Animator>();
                         StartCoroutine(FreezeZombies());
                         StartCoroutine(ButtonCooldownRoutine());
                         Debug.Log("Freeze activated, remaining count: " + freezeResponse.freeze_count);
@@ -98,16 +107,24 @@ public class Freeze : MonoBehaviour
     {
         List<float> originalDetectRanges = new List<float>();
         List<float> originalAttackRanges = new List<float>();
+        List<float> originalAnimatorSpeeds = new List<float>();
 
         // Freeze all zombies
         for (int i = 0; i < zombieBehaviours.Length; i++)
         {
             ZombieAI zombieBehaviour = zombieBehaviours[i];
             NavMeshAgent zombieAgent = zombieAgents[i];
+            Animator zombieAnimator = zombieAnimators[i];
 
             // Save original detection and attack ranges
             originalDetectRanges.Add(zombieBehaviour.detectionRange);
             originalAttackRanges.Add(zombieBehaviour.attackRange);
+
+            if (zombieAnimator != null)
+            {
+                originalAnimatorSpeeds.Add(zombieAnimator.speed);
+                zombieAnimator.speed = 0; // Freeze animation
+            }
 
             // Set zombie AI to freeze mode
             zombieBehaviour.SetAttackRange(invisAttack);
@@ -127,6 +144,11 @@ public class Freeze : MonoBehaviour
             zombieBehaviours[i].SetAttackRange(originalAttackRanges[i]);
             zombieBehaviours[i].SetDetectionRange(originalDetectRanges[i]);
             zombieAgents[i].isStopped = false;
+
+            if (zombieAnimators[i] != null)
+            {
+                zombieAnimators[i].speed = originalAnimatorSpeeds[i];
+            }
         }
     }
 

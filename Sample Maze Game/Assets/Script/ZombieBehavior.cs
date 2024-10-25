@@ -28,6 +28,7 @@ public class ZombieAI : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        
         audioSource = GetComponent<AudioSource>();
 
         playerHealth = player.GetComponent<PlayerHealth>();
