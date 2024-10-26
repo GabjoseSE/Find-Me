@@ -1230,20 +1230,20 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 107815076}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -1.6875388e-12, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1430488857}
   - {fileID: 2107175244}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 425407211}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
-  m_Pivot: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 959.99994, y: 443.60193}
+  m_SizeDelta: {x: 1920, y: 887.2038}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &110915774
 GameObject:
   m_ObjectHideFlags: 0
@@ -6262,6 +6262,7 @@ RectTransform:
   - {fileID: 1096293786}
   - {fileID: 1691069293}
   - {fileID: 459499001}
+  - {fileID: 107815080}
   m_Father: {fileID: 1305261297}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
@@ -20847,6 +20848,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49e15efd269f7b144af7e3b639a0cf74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invisBTN: {fileID: 1048037537}
   zombieBehaviours:
   - {fileID: 1006594512}
   - {fileID: 538320058}
@@ -20870,6 +20872,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0d845fc71fed594f8ea084b12db81e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  freezeBTN: {fileID: 1675613237}
   zombieBehaviour:
   - {fileID: 1006594512}
   - {fileID: 538320058}
@@ -33164,19 +33167,18 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1579782058}
-  - {fileID: 1924216829}
+  - {fileID: 1209070443}
+  - {fileID: 1236966743}
   - {fileID: 298399553}
   - {fileID: 249304640}
   - {fileID: 236421980}
-  - {fileID: 1236966743}
-  - {fileID: 1209070443}
   - {fileID: 854819865}
   - {fileID: 1288032289}
   - {fileID: 2050090020}
   - {fileID: 1450616472}
   - {fileID: 1344596160}
   - {fileID: 405086738}
-  - {fileID: 107815080}
   - {fileID: 199752170}
   - {fileID: 702554747}
   - {fileID: 982032850}
+  - {fileID: 1924216829}
