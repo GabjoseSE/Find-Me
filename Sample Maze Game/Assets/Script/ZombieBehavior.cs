@@ -21,7 +21,7 @@ public class ZombieAI : MonoBehaviour
     private bool isChasingPlayer = false;
     private float lastAttackTime;
     private Animator animator;
-    private PlayerHealth playerHealth;
+    private PlayerHealth playerHealth;   
     private TakeDamageScript damageEffectScript;  // Reference to damage effect script
     private bool hasPlayedDetectionSound = false;
 
@@ -30,7 +30,7 @@ public class ZombieAI : MonoBehaviour
     {
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-
+        
         audioSource = GetComponent<AudioSource>();
 
         playerHealth = player.GetComponent<PlayerHealth>();
@@ -52,7 +52,7 @@ public class ZombieAI : MonoBehaviour
             isChasingPlayer = true;
             agent.speed = chaseSpeed;   // Increase speed when chasing
             animator.SetBool("Run", true);
-
+            
             // Play the zombie detection sound only once
             if (!hasPlayedDetectionSound)
             {
@@ -133,9 +133,9 @@ public class ZombieAI : MonoBehaviour
             Debug.Log("Zombie attacks! Player takes damage.");
 
             if (damageEffectScript != null)
-            {
-                damageEffectScript.TakeDamage();
-            }
+        {
+            damageEffectScript.TakeDamage();
+        }
         }
     }
 
@@ -166,14 +166,6 @@ public class ZombieAI : MonoBehaviour
     public void SetSpeed(float newSpeed)
     {
         chaseSpeed = newSpeed;
-    }
-    public void invisDetection(float newInvisDetect)
-    {
-        detectionRange = newInvisDetect;
-    }
-    public void invisAttackRange(float newInvisAttack)
-    {
-        attackRange = newInvisAttack;
     }
     private void PlayZombieDetectionSound()
     {

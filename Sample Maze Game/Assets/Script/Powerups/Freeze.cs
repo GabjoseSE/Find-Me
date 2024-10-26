@@ -7,6 +7,7 @@ using UnityEngine.Networking;
 
 public class Freeze : MonoBehaviour
 {
+    public Button invisBTN;
     public ZombieAI[] zombieBehaviours; // Array of ZombieAI
     public NavMeshAgent[] zombieAgents; // Array of NavMeshAgents
     public float freezeDuration = 10f;
@@ -55,7 +56,7 @@ public class Freeze : MonoBehaviour
     public void OnActivation()
     {
         StartCoroutine(CheckAndActivateFreeze());
-        
+
     }
 
     private IEnumerator CheckAndActivateFreeze()
@@ -131,12 +132,14 @@ public class Freeze : MonoBehaviour
             zombieBehaviour.SetDetectionRange(invisDetect);
             zombieAgent.isStopped = true;
         }
+        invisBTN.interactable = false;
 
         Debug.Log("All zombies frozen!");
 
         yield return new WaitForSeconds(freezeDuration);
 
         Debug.Log("All zombies unfrozen!");
+        invisBTN.interactable = true;
 
         // Restore original detection and attack ranges for all zombies
         for (int i = 0; i < zombieBehaviours.Length; i++)
