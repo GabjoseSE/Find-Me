@@ -25,7 +25,7 @@ public class Invisible : MonoBehaviour
             Debug.LogError("No logged-in user found");
         }
 
-        if (zombieBehaviour == null|| zombieBehaviour.Length == 0)
+        if (zombieBehaviour == null || zombieBehaviour.Length == 0)
         {
             zombieBehaviour = GameObject.FindObjectsOfType<ZombieAI>();
         }
@@ -86,8 +86,8 @@ public class Invisible : MonoBehaviour
             originalAttackRanges.Add(zombie.attackRange);
 
             // Set zombie AI to invisibility mode
-            zombie.SetAttackRange(invisAttack);
-            zombie.SetDetectionRange(invisDetect);
+            zombie.invisAttackRange(invisAttack);
+            zombie.invisDetection(invisDetect);
         }
 
         Debug.Log("You are now Invisible");
@@ -99,8 +99,8 @@ public class Invisible : MonoBehaviour
         // Restore original detection and attack ranges for all zombies
         for (int i = 0; i < zombieBehaviour.Length; i++)
         {
-            zombieBehaviour[i].SetAttackRange(originalAttackRanges[i]);
-            zombieBehaviour[i].SetDetectionRange(originalDetectRanges[i]);
+            zombieBehaviour[i].invisAttackRange(originalAttackRanges[i]);
+            zombieBehaviour[i].invisDetection(originalDetectRanges[i]);
         }
     }
 
