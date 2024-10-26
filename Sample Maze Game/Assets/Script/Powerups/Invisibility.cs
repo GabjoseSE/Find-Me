@@ -7,6 +7,7 @@ using UnityEngine.AI;
 
 public class Invisible : MonoBehaviour
 {
+    public Button freezeBTN;
     public ZombieAI[] zombieBehaviour;
     public float invisDetect = 0f;
     public float invisAttack = 0f;
@@ -25,7 +26,7 @@ public class Invisible : MonoBehaviour
             Debug.LogError("No logged-in user found");
         }
 
-        if (zombieBehaviour == null|| zombieBehaviour.Length == 0)
+        if (zombieBehaviour == null || zombieBehaviour.Length == 0)
         {
             zombieBehaviour = GameObject.FindObjectsOfType<ZombieAI>();
         }
@@ -89,11 +90,13 @@ public class Invisible : MonoBehaviour
             zombie.SetAttackRange(invisAttack);
             zombie.SetDetectionRange(invisDetect);
         }
+        freezeBTN.interactable = false;
 
         Debug.Log("You are now Invisible");
 
         yield return new WaitForSeconds(invisibilityDuration);
 
+        freezeBTN.interactable = true;
         Debug.Log("You are no longer Invisible");
 
         // Restore original detection and attack ranges for all zombies
