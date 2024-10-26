@@ -819,6 +819,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49e15efd269f7b144af7e3b639a0cf74, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  invisBTN: {fileID: 11115150}
   zombieBehaviours:
   - {fileID: 1936709525}
   - {fileID: 1783074754}
@@ -842,6 +843,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0d845fc71fed594f8ea084b12db81e3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  freezeBTN: {fileID: 1786799425}
   zombieBehaviour:
   - {fileID: 1936709525}
   - {fileID: 1783074754}
@@ -9272,7 +9274,7 @@ PrefabInstance:
     - target: {fileID: 1939171412930672981, guid: f4d3358954e7cf5458646181614bbf62,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -26.98
+      value: -36.7
       objectReference: {fileID: 0}
     - target: {fileID: 1939171412930672981, guid: f4d3358954e7cf5458646181614bbf62,
         type: 3}
@@ -9282,7 +9284,7 @@ PrefabInstance:
     - target: {fileID: 1939171412930672981, guid: f4d3358954e7cf5458646181614bbf62,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -15.11
+      value: -24.7
       objectReference: {fileID: 0}
     - target: {fileID: 1939171412930672981, guid: f4d3358954e7cf5458646181614bbf62,
         type: 3}
@@ -12025,7 +12027,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 499ab7d4e7a2fdf48b951371098d97ef,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15.76
+      value: -29.4
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 499ab7d4e7a2fdf48b951371098d97ef,
         type: 3}
@@ -12035,7 +12037,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 499ab7d4e7a2fdf48b951371098d97ef,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.75
+      value: -11.2
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 499ab7d4e7a2fdf48b951371098d97ef,
         type: 3}
