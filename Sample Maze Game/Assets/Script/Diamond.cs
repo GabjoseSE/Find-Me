@@ -11,7 +11,7 @@ public class Diamond : MonoBehaviour
     public Exit exitScript;
     public AudioClip collectSound;
     private AudioSource audioSource;
-    public float DiamondCollectionVolume = 0.5f;
+    public float DiamondCollectionVolume = 0.3f;
     public AudioSource activateExitSource;
     public TextMeshProUGUI diamondCounterText;
     private int diamondCollected = 0;
