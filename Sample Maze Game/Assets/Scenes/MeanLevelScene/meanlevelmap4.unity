@@ -29432,7 +29432,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 499ab7d4e7a2fdf48b951371098d97ef,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -15.76
+      value: -1.7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 499ab7d4e7a2fdf48b951371098d97ef,
         type: 3}
@@ -29442,7 +29442,7 @@ PrefabInstance:
     - target: {fileID: -8679921383154817045, guid: 499ab7d4e7a2fdf48b951371098d97ef,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -6.75
+      value: 24.7
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 499ab7d4e7a2fdf48b951371098d97ef,
         type: 3}
@@ -33393,7 +33393,7 @@ MonoBehaviour:
   - {fileID: 1391585849}
   - {fileID: 1131303224}
   - {fileID: 219738012}
-  numberOfObjectsToSpawn: 5
+  numberOfObjectsToSpawn: 10
 --- !u!1 &1558685286
 GameObject:
   m_ObjectHideFlags: 0
@@ -37781,7 +37781,7 @@ MonoBehaviour:
   - {fileID: 1150220782}
   - {fileID: 630165488}
   timerText: {fileID: 1729232587}
-  remainingTime: 300
+  remainingTime: 600
   terrorDetect: 1000
   terrorSpeed: 20
 --- !u!114 &1729232587
@@ -41405,7 +41405,7 @@ MonoBehaviour:
   collectSound: {fileID: 8300000, guid: 2d4167e0d4895ab41bb1fc88e1a97cb1, type: 3}
   activateExitSource: {fileID: 1535036008}
   diamondCounterText: {fileID: 2050096433}
-  totalObjectsToCollect: 5
+  totalObjectsToCollect: 10
 --- !u!4 &1908654257
 Transform:
   m_ObjectHideFlags: 0
