@@ -16701,7 +16701,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 88d7428591a168e408170865b5f68387, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 0.175
+  m_Volume: 1
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -45115,7 +45115,7 @@ MonoBehaviour:
   - {fileID: 1030590059}
   - {fileID: 1993054971}
   timerText: {fileID: 1847936525}
-  remainingTime: 300
+  remainingTime: 900
   terrorDetect: 1000
   terrorSpeed: 20
 --- !u!114 &1847936525

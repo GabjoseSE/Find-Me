@@ -5,8 +5,8 @@ using System.Collections;
 public class MainMenu : MonoBehaviour
 {
     private string[] easyLevelMaps = { "easylevelmap1","easylevelmap2","easylevelmap3","easylevelmap4","easylevelmap5"};
-    private string[] meanLevelMaps = { "meanlevelmap1", "meanlevelmap2", "meanlevelmap3", "meanlevelmap4", "meanlevelmap5" };
-    private string[] hardLevelMaps = { "hardlevelmap1", "hardlevelmap2", "hardlevelmap3", "hardlevelmap4", "hardlevelmap5" };
+    private string[] meanLevelMaps = { "meanlevelmap2", "meanlevelmap3", "meanlevelmap4", "meanlevel map 5" };
+    private string[] hardLevelMaps = { "hardlevelmap1", "hardlevelmap2", "hardlevelmap3"};
 
     public GameObject loadingScreen; // Loading screen UI reference
     
