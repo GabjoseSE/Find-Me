@@ -92,7 +92,7 @@ public class NavigationGuide : MonoBehaviour
                 {
                     NavigationResponse navResponse = JsonUtility.FromJson<NavigationResponse>(response);
 
-                    if (navResponse.status == "success" && navResponse.navigation_count > 0)
+                    if (navResponse.status == "success")
                     {
                         ActivatePath();
                         isPathActive = true;
