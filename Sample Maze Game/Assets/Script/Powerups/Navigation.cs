@@ -33,7 +33,7 @@ public class NavigationGuide : MonoBehaviour
         // Add listener to the button
         if (activateButton != null)
         {
-            activateButton.onClick.AddListener(ActivatePath);
+            activateButton.onClick.AddListener(OnActivation);
         }
     }
 
@@ -92,8 +92,9 @@ public class NavigationGuide : MonoBehaviour
                 {
                     NavigationResponse navResponse = JsonUtility.FromJson<NavigationResponse>(response);
 
-                    if (navResponse.status == "success")
+                    if (navResponse.status == "success" && navResponse.navigation_count > 0)
                     {
+                        ActivatePath();
                         isPathActive = true;
                         Debug.Log("Navigation activated, remaining count: " + navResponse.navigation_count);
                     }
