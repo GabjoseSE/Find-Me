@@ -65,7 +65,7 @@ public class Freeze : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("username", username);
 
-        using (UnityWebRequest www = UnityWebRequest.Post("http://192.168.1.248/UnityFindME/freeze.php", form))
+        using (UnityWebRequest www = UnityWebRequest.Post("http://192.168.41.90/UnityFindME/freeze.php", form))
         {
             yield return www.SendWebRequest();
 

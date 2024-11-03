@@ -13,7 +13,7 @@ public class CoinManager : MonoBehaviour
     public int coinAdd = 1;
     public TextMeshProUGUI coinText; // Reference to the UI Text to display the coin count
     public string username; // Username of the logged-in player
-    private string updateCoinsURL = "http://192.168.1.248/UnityFindME/update_coins.php";
+    private string updateCoinsURL = "http://192.168.41.90/UnityFindME/update_coins.php";
     private void Start()
     {
         audioSource = GetComponent<AudioSource>();

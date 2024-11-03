@@ -75,7 +75,7 @@ public class NavigationGuide : MonoBehaviour
         WWWForm form = new WWWForm();
         form.AddField("username", username);
 
-        using (UnityWebRequest www = UnityWebRequest.Post("http://192.168.1.248/UnityFindME/navigation.php", form))
+        using (UnityWebRequest www = UnityWebRequest.Post("http://192.168.41.90/UnityFindME/navigation.php", form))
         {
             yield return www.SendWebRequest();
 
