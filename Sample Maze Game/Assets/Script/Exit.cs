@@ -24,7 +24,7 @@ public class Exit : MonoBehaviour
     {
         if (other.CompareTag("Player") && exitObject.activeInHierarchy)
         {
-            SceneManager.LoadSceneAsync(17);
+            SceneManager.LoadSceneAsync(15);
             Debug.Log("u win bruh");
         }
     }
